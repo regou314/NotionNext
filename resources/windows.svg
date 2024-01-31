@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="48px" height="46.55255px" viewBox="0 0 48 46.55255" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <g id="windows">
+    <path d="M22.813 22.125L0 22.125L0 0L22.813 0L22.813 22.125Z" id="形状" fill="#F25022" stroke="none" />
+    <path d="M48 22.125L25.187 22.125L25.187 0L48 0L48 22.125Z" id="形状" fill="#7FBA00" stroke="none" />
+    <path d="M22.813 46.5525L0 46.5525L0 24.4275L22.813 24.4275L22.813 46.5525Z" id="形状" fill="#00A4EF" stroke="none" />
+    <path d="M48 46.5525L25.187 46.5525L25.187 24.4275L48 24.4275L48 46.5525Z" id="形状" fill="#FFB900" stroke="none" />
+  </g>
+</svg>

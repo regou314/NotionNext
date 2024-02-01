@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="17501963-269c-4b90-99f0-198f3454f3f8" name="Changes" comment="1.修复package" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="5" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2bjNn6dB2jxpX7NfRPFbqPj5o7Z" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "run.code.analysis.last.selected.profile": "pProject Default"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Project\web\NotionNext\NotionNext" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="17501963-269c-4b90-99f0-198f3454f3f8" name="Changes" comment="" />
+      <created>1706724691756</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1706724691756</updated>
+    </task>
+    <task id="LOCAL-00001" summary="1.删除NotionNext&#10;2.改为普通html">
+      <option name="closed" value="true" />
+      <created>1706724943356</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1706724943356</updated>
+    </task>
+    <task id="LOCAL-00002" summary="1.修复div缺失">
+      <option name="closed" value="true" />
+      <created>1706753598553</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1706753598553</updated>
+    </task>
+    <task id="LOCAL-00003" summary="1.htm改为html">
+      <option name="closed" value="true" />
+      <created>1706758347987</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1706758347987</updated>
+    </task>
+    <task id="LOCAL-00004" summary="1.去除Dockerfile Dockerfile 是一个用于定义和构建 Docker 镜像的文本文件。它包含一系列指令和参数，用来描述构建过程中的操作步骤、依赖关系和配置项，并最终生成一个可用的、自包含的 Docker 镜像。">
+      <option name="closed" value="true" />
+      <created>1706759403216</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1706759403216</updated>
+    </task>
+    <task id="LOCAL-00005" summary="1.添加package.json">
+      <option name="closed" value="true" />
+      <created>1706759800350</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1706759800350</updated>
+    </task>
+    <task id="LOCAL-00006" summary="1.初始化package.json">
+      <option name="closed" value="true" />
+      <created>1706760328023</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1706760328023</updated>
+    </task>
+    <task id="LOCAL-00007" summary="1.修复package.json">
+      <option name="closed" value="true" />
+      <created>1706760622474</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1706760622474</updated>
+    </task>
+    <task id="LOCAL-00008" summary="1.修复package.json">
+      <option name="closed" value="true" />
+      <created>1706760794541</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1706760794541</updated>
+    </task>
+    <task id="LOCAL-00009" summary="1.添加vercel">
+      <option name="closed" value="true" />
+      <created>1706761645331</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1706761645331</updated>
+    </task>
+    <task id="LOCAL-00010" summary="1.修复vercel">
+      <option name="closed" value="true" />
+      <created>1706761985436</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1706761985436</updated>
+    </task>
+    <task id="LOCAL-00011" summary="1.修复vercel2">
+      <option name="closed" value="true" />
+      <created>1706762105588</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1706762105588</updated>
+    </task>
+    <task id="LOCAL-00012" summary="1.修复vercel3">
+      <option name="closed" value="true" />
+      <created>1706762165070</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1706762165070</updated>
+    </task>
+    <task id="LOCAL-00013" summary="1.修复vercel4">
+      <option name="closed" value="true" />
+      <created>1706762203164</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1706762203164</updated>
+    </task>
+    <task id="LOCAL-00014" summary="1.修复vercel5">
+      <option name="closed" value="true" />
+      <created>1706762719256</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1706762719256</updated>
+    </task>
+    <task id="LOCAL-00015" summary="1.修复vercel6">
+      <option name="closed" value="true" />
+      <created>1706762818937</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1706762818937</updated>
+    </task>
+    <task id="LOCAL-00016" summary="1.修复scripts">
+      <option name="closed" value="true" />
+      <created>1706763062935</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1706763062935</updated>
+    </task>
+    <task id="LOCAL-00017" summary="1.修复scripts post-build">
+      <option name="closed" value="true" />
+      <created>1706763218514</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1706763218514</updated>
+    </task>
+    <task id="LOCAL-00018" summary="1.修复scripts devDependencies">
+      <option name="closed" value="true" />
+      <created>1706763346868</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1706763346868</updated>
+    </task>
+    <task id="LOCAL-00019" summary="1.修复vercel 10">
+      <option name="closed" value="true" />
+      <created>1706765011108</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1706765011108</updated>
+    </task>
+    <task id="LOCAL-00020" summary="1.修复vercel 11">
+      <option name="closed" value="true" />
+      <created>1706771247310</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1706771247310</updated>
+    </task>
+    <task id="LOCAL-00021" summary="1.修复vercel 12">
+      <option name="closed" value="true" />
+      <created>1706771323653</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1706771323653</updated>
+    </task>
+    <task id="LOCAL-00022" summary="1.修复vercel 13">
+      <option name="closed" value="true" />
+      <created>1706771393157</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1706771393157</updated>
+    </task>
+    <task id="LOCAL-00023" summary="1.修复vercel 14">
+      <option name="closed" value="true" />
+      <created>1706771457991</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1706771457991</updated>
+    </task>
+    <task id="LOCAL-00024" summary="1.修复vercel 15">
+      <option name="closed" value="true" />
+      <created>1706771660077</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1706771660077</updated>
+    </task>
+    <task id="LOCAL-00025" summary="1.修复package">
+      <option name="closed" value="true" />
+      <created>1706771758335</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1706771758335</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="1.删除NotionNext&#10;2.改为普通html" />
+    <MESSAGE value="1.修复div缺失" />
+    <MESSAGE value="1.htm改为html" />
+    <MESSAGE value="1.去除Dockerfile Dockerfile 是一个用于定义和构建 Docker 镜像的文本文件。它包含一系列指令和参数，用来描述构建过程中的操作步骤、依赖关系和配置项，并最终生成一个可用的、自包含的 Docker 镜像。" />
+    <MESSAGE value="1.添加package.json" />
+    <MESSAGE value="1.初始化package.json" />
+    <MESSAGE value="1.修复package.json" />
+    <MESSAGE value="1.添加vercel" />
+    <MESSAGE value="1.修复vercel" />
+    <MESSAGE value="1.修复vercel2" />
+    <MESSAGE value="1.修复vercel3" />
+    <MESSAGE value="1.修复vercel4" />
+    <MESSAGE value="1.修复vercel5" />
+    <MESSAGE value="1.修复vercel6" />
+    <MESSAGE value="1.修复scripts" />
+    <MESSAGE value="1.修复scripts post-build" />
+    <MESSAGE value="1.修复scripts devDependencies" />
+    <MESSAGE value="1.修复vercel 10" />
+    <MESSAGE value="1.修复vercel 11" />
+    <MESSAGE value="1.修复vercel 12" />
+    <MESSAGE value="1.修复vercel 13" />
+    <MESSAGE value="1.修复vercel 14" />
+    <MESSAGE value="1.修复vercel 15" />
+    <MESSAGE value="1.修复package" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.修复package" />
+  </component>
+</project>

@@ -6,6 +6,7 @@
     "dev": "",
     "build": "",
     "start": "",
+    "post-build": "",
     "export": "",
     "bundle-report": "ANALYZE=true yarn build"
   },

@@ -1,4 +1,23 @@
 {
-  "version": 2
+  "version": 2,
+  "builds": [
+    { "src": "*.html"}
+  ]
+}
+/*{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "headers": []
 }
 
+在这个示例配置中，我们假设你的静态 HTML 文件的后缀名为 .html。如果你使用不同的后缀名，请相应地更改 *.html 部分。
+
+此示例配置文件具有以下作用：
+
+"version": 2：指定 vercel.json 的版本。
+"builds"：指定应如何构建项目。
+{ "src": "*.html", "use": "@vercel/static" }：将所有 HTML 文件作为静态文件部署。
+"routes"：指定 URL 路由规则。
+{ "src": "/(.*)", "dest": "/$1.html" }：将所有请求重定向到对应的 HTML 文件。
+{ "src": "/(.*)", "status": 404, "headers": {"cache-control": "max-age=0"} }：对于找不到的页面，返回 404 状态码。
+*/

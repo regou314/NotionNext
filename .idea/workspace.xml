@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="17501963-269c-4b90-99f0-198f3454f3f8" name="Changes" comment="1.修复package3">
-      <change beforePath="$PROJECT_DIR$/vercel.json" beforeDir="false" afterPath="$PROJECT_DIR$/vercel.json" afterDir="false" />
+    <list default="true" id="17501963-269c-4b90-99f0-198f3454f3f8" name="Changes" comment="1.修复package6">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -276,7 +277,23 @@
       <option name="project" value="LOCAL" />
       <updated>1706771955124</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="1.修复package5">
+      <option name="closed" value="true" />
+      <created>1706772086786</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1706772086786</updated>
+    </task>
+    <task id="LOCAL-00029" summary="1.修复package6">
+      <option name="closed" value="true" />
+      <created>1706772114782</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1706772114782</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -291,8 +308,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.修复div缺失" />
-    <MESSAGE value="1.htm改为html" />
     <MESSAGE value="1.去除Dockerfile Dockerfile 是一个用于定义和构建 Docker 镜像的文本文件。它包含一系列指令和参数，用来描述构建过程中的操作步骤、依赖关系和配置项，并最终生成一个可用的、自包含的 Docker 镜像。" />
     <MESSAGE value="1.添加package.json" />
     <MESSAGE value="1.初始化package.json" />
@@ -316,6 +331,8 @@
     <MESSAGE value="1.修复package" />
     <MESSAGE value="1.修复package2" />
     <MESSAGE value="1.修复package3" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.修复package3" />
+    <MESSAGE value="1.修复package5" />
+    <MESSAGE value="1.修复package6" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.修复package6" />
   </component>
 </project>

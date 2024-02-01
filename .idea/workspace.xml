@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="17501963-269c-4b90-99f0-198f3454f3f8" name="Changes" comment="1.修改视频高度和对齐方式">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="17501963-269c-4b90-99f0-198f3454f3f8" name="Changes" comment="1.修改视频宽度为1080">
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -341,7 +340,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706784883921</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="1.修改视频宽度为1080">
+      <option name="closed" value="true" />
+      <created>1706785204450</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1706785204450</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -356,7 +363,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.修复vercel2" />
     <MESSAGE value="1.修复vercel3" />
     <MESSAGE value="1.修复vercel4" />
     <MESSAGE value="1.修复vercel5" />
@@ -381,6 +387,7 @@
     <MESSAGE value="1.修改视频宽度" />
     <MESSAGE value="1.修改视频高度" />
     <MESSAGE value="1.修改视频高度和对齐方式" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.修改视频高度和对齐方式" />
+    <MESSAGE value="1.修改视频宽度为1080" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.修改视频宽度为1080" />
   </component>
 </project>

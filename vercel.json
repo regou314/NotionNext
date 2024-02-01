@@ -1,6 +1,6 @@
 {
   "version": 2,
   "builds": [
-    { "src": "*.html"}
+    { "src": "*.html", "use": "@vercel/static" }
   ]
 }

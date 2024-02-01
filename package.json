@@ -1,0 +1,11 @@
+{
+  "name": "your-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {},
+  "author": "Your Name",
+  "license": "MIT"
+}

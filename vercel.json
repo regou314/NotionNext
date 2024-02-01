@@ -1,5 +1,8 @@
 {
   "version": 2,
+  "builds": [
+    { "src": "*.htm", "use": "@vercel" }
+  ],
   "routes": [
     { "src": "/(.*)", "dest": "/$1.html" },
     { "src": "/(.*)", "status": 404, "headers": {"cache-control": "max-age=0"} }

@@ -18,6 +18,20 @@
         .bottom-link {color:#999;}
 
     </style>
+    <!--<style>
+        iframe {
+  width: 50%;
+  height: 60%;
+
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  width: 50%;
+  height: 100%;
+}
+    </style>-->
 </head>
 <body>
 <nav class="navbar navbar-default invert-buttons">
@@ -76,7 +90,7 @@
             </div>
         </div>
     </div>
-    <div class="container dual-screen">
+    <div class="container wrapper">
         <!--  <div class="row">
              <picture class="bigger">
                   <source type="image/webp"
@@ -90,7 +104,9 @@
                   <img src="./resources/site_large-small.png" crossorigin="anonymous" alt="悬浮捷径SoftCircle记账">
               </picture>
          </div>-->
-        <iframe    height="720" width="75%" src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+        <iframe  src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1"
+                 class="video"  scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"
+         > </iframe>
 
     </div>
     <div class="container features">
@@ -233,72 +249,101 @@
     </footer>
 </div>
 <script type="application/javascript">
+    // 获取元素
+    const wrapper = document.querySelector('.wrapper');
+    const iframe = document.querySelector('.video');
 
-    function isClientMarket(market) {
-        const url = window.location.href;
-        return url.indexOf('mk=' + market) >= 0;
+    // 视频宽高比例
+    const ratio = 16 / 9;
+
+    // 监听wrapper大小变化
+    wrapper.addEventListener('resize', setIframeHeight);
+
+    // 设置初次iframe高度
+    setIframeHeight();
+
+    function setIframeHeight() {
+
+      // 获取wrapper实际宽度
+      const width = wrapper.offsetWidth;
+
+      // 根据宽高比例计算高度
+      const height = width / ratio;
+
+      // 设置iframe高度
+      iframe.style.height = height + 'px';
+
+iframe.style.position = 'relative';
+iframe.style.left = '50%';
+iframe.style.transform = 'translateX(-50%)';
     }
 
-    function isAndroidQianji() {
-        const ua = navigator.userAgent.toLowerCase();
-        return ua.indexOf('qjclient=qianji;') > -1;
-    }
 
-    function isIphoneQianji() {
-        const ua = navigator.userAgent.toLowerCase();
-        return ua.indexOf('qjclient=qianji;os=2') > -1;
-    }
+        function isClientMarket(market) {
+            const url = window.location.href;
+            return url.indexOf('mk=' + market) >= 0;
+        }
 
-    function isAndroid() {
-        const ua = navigator.userAgent.toLowerCase();
-        return ua.indexOf('android') > -1;
-    }
+        function isAndroidQianji() {
+            const ua = navigator.userAgent.toLowerCase();
+            return ua.indexOf('qjclient=qianji;') > -1;
+        }
 
-    function isMacSafari() {
-        const ua = navigator.userAgent.toLowerCase();
-        return ua.indexOf("safari") > -1;
-    }
+        function isIphoneQianji() {
+            const ua = navigator.userAgent.toLowerCase();
+            return ua.indexOf('qjclient=qianji;os=2') > -1;
+        }
 
-    function isIphone() {
-        const ua = navigator.userAgent.toLowerCase();
-        return ua.indexOf("iphone") > -1 || ua.indexOf('ipad') > -1;
-    }
+        function isAndroid() {
+            const ua = navigator.userAgent.toLowerCase();
+            return ua.indexOf('android') > -1;
+        }
 
-    /**
-     * 根据应用市场控制下载按钮，避免被谷歌认为是诱导下载
-     * @type {HTMLElement}
-     */
-    const btnAndroid = document.getElementById("btn-download-guanwang");
-    const btnAndroidHD = document.getElementById("btn-download-androidhd");
-    const btnAndroidWatch = document.getElementById("btn-download-andwatch");
-    const btnGoogle = document.getElementById("btn-download-google");
-    if (isClientMarket('huawei') || isClientMarket('huaweihd')) {
-    } else if (isAndroidQianji()) {
-        /* 悬浮捷径SoftCircle Android 内置网页内打开 */
-        btnAndroid.style.display = "none";
-        btnAndroidHD.style.display = "none";
-        btnGoogle.style.display = "table";
-    } else if (isAndroid()) {
-        /* Android 网页打开 */
-        btnAndroid.style.display = "table";
-        btnAndroidHD.style.display = "table";
-        btnAndroidWatch.style.display = "table";
-    } else if (isIphoneQianji()) {
-        /* 悬浮捷径SoftCircle iOS 内置网页打开 */
-        console.log('is-iphone');
-        btnGoogle.style.display = "none";
-    } else if (isIphone()) {
-        btnAndroid.style.display = "table";
-        btnAndroidHD.style.display = "table";
-        btnAndroidWatch.style.display = "table";
-        btnGoogle.style.display = "table";
-    } else {
-        console.log("最后 自定义");
-        btnAndroid.style.display = "table";
-        btnAndroidHD.style.display = "table";
-        btnAndroidWatch.style.display = "table";
-        btnGoogle.style.display = "table";
-    }
+        function isMacSafari() {
+            const ua = navigator.userAgent.toLowerCase();
+            return ua.indexOf("safari") > -1;
+        }
+
+        function isIphone() {
+            const ua = navigator.userAgent.toLowerCase();
+            return ua.indexOf("iphone") > -1 || ua.indexOf('ipad') > -1;
+        }
+
+        /**
+         * 根据应用市场控制下载按钮，避免被谷歌认为是诱导下载
+         * @type {HTMLElement}
+         */
+        const btnAndroid = document.getElementById("btn-download-guanwang");
+        const btnAndroidHD = document.getElementById("btn-download-androidhd");
+        const btnAndroidWatch = document.getElementById("btn-download-andwatch");
+        const btnGoogle = document.getElementById("btn-download-google");
+        if (isClientMarket('huawei') || isClientMarket('huaweihd')) {
+        } else if (isAndroidQianji()) {
+            /* 悬浮捷径SoftCircle Android 内置网页内打开 */
+            btnAndroid.style.display = "none";
+            btnAndroidHD.style.display = "none";
+            btnGoogle.style.display = "table";
+        } else if (isAndroid()) {
+            /* Android 网页打开 */
+            btnAndroid.style.display = "table";
+            btnAndroidHD.style.display = "table";
+            btnAndroidWatch.style.display = "table";
+        } else if (isIphoneQianji()) {
+            /* 悬浮捷径SoftCircle iOS 内置网页打开 */
+            console.log('is-iphone');
+            btnGoogle.style.display = "none";
+        } else if (isIphone()) {
+            btnAndroid.style.display = "table";
+            btnAndroidHD.style.display = "table";
+            btnAndroidWatch.style.display = "table";
+            btnGoogle.style.display = "table";
+        } else {
+            console.log("最后 自定义");
+            btnAndroid.style.display = "table";
+            btnAndroidHD.style.display = "table";
+            btnAndroidWatch.style.display = "table";
+            btnGoogle.style.display = "table";
+        }
 </script>
 <!-- container-fluid -->
 <script src="https://cdn.staticfile.org/jquery/1.12.4/jquery.min.js"

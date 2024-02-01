@@ -11,6 +11,7 @@
     "bundle-report": "ANALYZE=true yarn build"
   },
   "dependencies": {},
+  "devDependencies": {},
   "author": "Your Name",
   "license": "MIT"
 }

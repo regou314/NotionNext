@@ -3,15 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "",
-    "build": "",
-    "start": "",
-    "post-build": "",
-    "export": "",
-    "bundle-report": "ANALYZE=true yarn build"
+    "start": "node index.js"
   },
   "dependencies": {},
-  "devDependencies": {},
   "author": "Your Name",
   "license": "MIT"
 }

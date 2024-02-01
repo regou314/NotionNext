@@ -3,11 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "post-build": "next-sitemap --config next-sitemap.config.js",
-    "export": "next build && next-sitemap --config next-sitemap.config.js && next export",
+    "export": "",
     "bundle-report": "ANALYZE=true yarn build"
   },
   "dependencies": {},

@@ -1,3 +1,7 @@
 {
-  "version": 2
+  "version": 2,
+  "routes": [
+    { "src": "/(.*)", "dest": "/$1.html" },
+    { "src": "/(.*)", "status": 404, "headers": {"cache-control": "max-age=0"} }
+  ]
 }

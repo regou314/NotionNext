@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="17501963-269c-4b90-99f0-198f3454f3f8" name="Changes" comment="1.添加独立开发前线" />
+    <list default="true" id="17501963-269c-4b90-99f0-198f3454f3f8" name="Changes" comment="1.添加W2solo">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -362,7 +365,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706844610641</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="1.添加W2solo">
+      <option name="closed" value="true" />
+      <created>1706845412126</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1706845412126</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -377,7 +388,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.修复vercel5" />
     <MESSAGE value="1.修复vercel6" />
     <MESSAGE value="1.修复scripts" />
     <MESSAGE value="1.修复scripts post-build" />
@@ -402,6 +412,7 @@
     <MESSAGE value="1.修改视频宽度为1080" />
     <MESSAGE value="1.添加神器集友情链接" />
     <MESSAGE value="1.添加独立开发前线" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.添加独立开发前线" />
+    <MESSAGE value="1.添加W2solo" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.添加W2solo" />
   </component>
 </project>

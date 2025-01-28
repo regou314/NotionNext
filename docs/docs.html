@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文档中心</title>
+    <!-- 预加载关键资源 -->
+    <link rel="preload" href="https://cdn.staticfile.org/bootstrap/5.3.2/css/bootstrap.min.css" as="style">
+    <link rel="preload" href="https://cdn.staticfile.org/bootstrap/5.3.2/js/bootstrap.bundle.min.js" as="script">
+    <link rel="preload" href="js/app.js" as="script">
+    
+    <!-- 异步加载非关键CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/5.3.2/css/bootstrap.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/11.9.0/styles/default.min.css" media="print" onload="this.media='all'">
+    
+    <!-- 内联关键CSS -->
+    <style>
+        .sidebar{position:fixed;top:0;bottom:0;left:0;z-index:100;padding:72px 0 0;box-shadow:inset -1px 0 0 rgba(0,0,0,.1);background-color:#f8f9fa}.sidebar-sticky{height:calc(100vh - 72px);overflow-x:hidden;overflow-y:auto}.nav-link{font-weight:500;color:#333}.nav-link:hover{color:#007bff}.main-content{padding-top:72px}@media (max-width:767.98px){.sidebar{position:static;padding-top:0}.sidebar-sticky{height:auto}.main-content{padding-top:56px}}.navbar{position:fixed;top:0;width:100%;z-index:1000;background-color:#fff;box-shadow:0 2px 4px rgba(0,0,0,.1);min-height:56px}
+        /* 目录折叠相关样式 */
+        .page-nav{position:fixed;top:72px;width:16.666667%;border-left:1px solid #e5e5e5;padding-left:1rem}
+        .page-nav .nav-link{padding:0.25rem 0;font-size:0.875rem;color:#6c757d}
+        .page-nav .nav-link:hover{color:#007bff;text-decoration:none}
+        .page-nav .nav-link.active{color:#007bff;font-weight:500}
+        .page-nav .nav-item{padding-left:1rem}
+        .page-nav h1{display:none}
+        .page-nav h2{font-size:1rem;margin:1rem 0 0.5rem}
+        .page-nav h3,.page-nav h4,.page-nav h5,.page-nav h6{font-size:0.875rem;margin:0.25rem 0}
+        /* 目录折叠相关样式 */
+        .parent-menu{display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+        .menu-indicator{font-size:12px;transition:transform 0.3s ease}
+        .submenu{overflow:hidden;transition:max-height 0.3s ease-out}
+        /* 文章内容样式 */
+        #content{max-width:800px;margin:0 auto;padding:2rem 1rem;line-height:1.7;color:#2c3e50;font-size:16px}
+        #content h1,#content h2,#content h3,#content h4,#content h5,#content h6{margin-top:2.5rem;margin-bottom:1.2rem;font-weight:600;line-height:1.25;color:#1a202c}
+        #content h1{font-size:2.2rem;padding-bottom:0.5em;border-bottom:1px solid #eaecef}
+        #content h2{font-size:1.65rem;padding-bottom:0.3em;border-bottom:1px solid #eaecef}
+        #content h3{font-size:1.35rem}
+        #content h4{font-size:1.15rem}
+        #content p{margin:1.2rem 0;line-height:1.8;text-align:justify}
+        #content ul,#content ol{padding-left:2em;margin:1.2rem 0;line-height:1.7}
+        #content li{margin:0.5rem 0}
+        #content code{padding:0.2em 0.4em;margin:0;font-size:0.9em;background-color:#f6f8fa;border-radius:3px;font-family:SFMono-Regular,Consolas,"Liberation Mono",Menlo,monospace}
+        #content pre{margin:1.2rem 0;padding:1rem;background-color:#f6f8fa;border-radius:6px;overflow:auto}
+        #content pre code{padding:0;background-color:transparent}
+        #content blockquote{margin:1.2rem 0;padding:0.8rem 1rem;color:#6a737d;border-left:0.25rem solid #dfe2e5;background-color:#f8f9fa}
+        #content img{max-width:100%;height:auto;display:block;margin:1.5rem auto}
+        #content table{border-collapse:collapse;margin:1.2rem 0;display:block;overflow-x:auto;width:100%}
+        #content table th,#content table td{padding:0.8em 1em;border:1px solid #dfe2e5;min-width:100px}
+        #content table tr{background-color:#fff;border-top:1px solid #c6cbd1}
+        #content table tr:nth-child(2n){background-color:#f8f9fa}
+        #content hr{height:0.25em;padding:0;margin:2rem 0;background-color:#e1e4e8;border:0}
+        /* 页内导航样式优化 */
+        .page-nav{position:fixed;top:72px;right:0;width:16.666667%;padding-left:1rem;padding-right:1rem;border-left:1px solid #eaecef;height:calc(100vh - 72px);overflow-y:auto}
+        .page-nav .nav-link{padding:0.25rem 0;font-size:0.875rem;color:#6c757d;text-decoration:none;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+        .page-nav .nav-link:hover{color:#007bff}
+        .page-nav .nav-link.active{color:#007bff;font-weight:500}
+        .page-nav .nav-item{padding-left:1rem}
+        .page-nav h2{font-size:1rem;margin:1rem 0 0.5rem;color:#2c3e50;font-weight:500}
+        .page-nav h3,.page-nav h4,.page-nav h5,.page-nav h6{font-size:0.875rem;margin:0.25rem 0;color:#6c757d}
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">文档中心</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-3 col-lg-2 d-md-block sidebar collapse">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column" id="sidebar-menu">
+                        <!-- 目录将通过JavaScript动态生成 -->
+                    </ul>
+                </div>
+            </nav>
+
+            <main class="col-md-9 ms-sm-auto col-lg-8 px-md-4 main-content">
+                <div id="content">
+                    <!-- 文档内容将通过JavaScript动态加载 -->
+                </div>
+            </main>
+            <nav class="col-lg-2 d-none d-lg-block">
+                <div class="page-nav" style="position: fixed; top: 72px; width: 16.666667%;">
+                    <div id="page-menu" class="nav flex-column">
+                        <!-- 页内导航将通过JavaScript动态生成 -->
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <!-- 异步加载JavaScript -->
+    <script src="https://cdn.staticfile.org/bootstrap/5.3.2/js/bootstrap.bundle.min.js" defer></script>
+    <script src="https://cdn.staticfile.org/marked/11.1.1/marked.min.js" defer></script>
+    <script src="https://cdn.staticfile.org/highlight.js/11.9.0/highlight.min.js" defer></script>
+    <script src="js/app.js" defer></script>
+</body>
+</html>

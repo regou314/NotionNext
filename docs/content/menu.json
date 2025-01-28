@@ -1,0 +1,105 @@
+{
+    "menu": [
+        {
+            "title": "快速开始",
+            "path": "quick-start.md"
+        },
+        {
+            "title": "悬浮菜单",
+            "children": [
+                {
+                    "title": "悬浮侧边栏",
+                    "children": [
+                        {
+                            "title": "AI大模型对话面板",
+                            "path": "basic/floating-menu.md"
+                        },
+                        {
+                            "title": "网页面板",
+                            "path": "basic/floating-menu.md"
+                        },
+                        {
+                            "title": "搜索面板",
+                            "path": "basic/shortcuts.md"
+                        },
+                        {
+                            "title": "动作触发面板",
+                            "path": "basic/shortcuts.md"
+                        }
+                    ]
+                },
+                {
+                    "title": "悬浮球",
+                    "children": [
+                        {
+                            "title": "点击展开菜单",
+                            "path": "basic/floating-menu.md"
+                        },
+                        {
+                            "title": "长按功能",
+                            "path": "basic/floating-menu.md"
+                        },
+                        {
+                            "title": "拖拽菜单",
+                            "path": "basic/shortcuts.md"
+                        },
+                        {
+                            "title": "甩动悬浮球屏幕自滚动",
+                            "path": "basic/shortcuts.md"
+                        },
+                        {
+                            "title": "快捷方式",
+                            "path": "basic/shortcuts.md"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "主页面板",
+            "children": [
+                        {
+                            "title": "AI大模型对话面板",
+                            "path": "basic/floating-menu.md"
+                        },
+                        {
+                            "title": "网页面板",
+                            "path": "basic/floating-menu.md"
+                        },
+                        {
+                            "title": "搜索面板",
+                            "path": "basic/shortcuts.md"
+                        },
+                        {
+                            "title": "动作触发面板",
+                            "path": "basic/shortcuts.md"
+                        }
+                    ]
+        },
+        {
+            "title": "系统菜单",
+            "children": [
+                        {
+                            "title": "通知栏菜单",
+                            "path": "basic/floating-menu.md"
+                        },
+                        {
+                            "title": "控制中心磁贴",
+                            "path": "basic/floating-menu.md"
+                        },
+                        {
+                            "title": "小部件菜单",
+                            "path": "basic/shortcuts.md"
+                        },
+                        {
+                            "title": "应用程序快捷菜单",
+                            "path": "basic/shortcuts.md"
+                        },
+                        {
+                            "title": "桌面快捷方式",
+                            "path": "basic/shortcuts.md"
+                        }
+                    ]
+        }
+    ]
+}

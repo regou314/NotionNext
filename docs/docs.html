@@ -15,7 +15,7 @@
     
     <!-- 内联关键CSS -->
     <style>
-        .sidebar{position:fixed;top:0;bottom:0;left:0;z-index:100;padding:72px 0 0;box-shadow:inset -1px 0 0 rgba(0,0,0,.1);background-color:#f8f9fa}.sidebar-sticky{height:calc(100vh - 72px);overflow-x:hidden;overflow-y:auto}.nav-link{font-weight:500;color:#333}.nav-link:hover{color:#007bff}.main-content{padding-top:72px}@media (max-width:767.98px){.sidebar{position:static;padding-top:0}.sidebar-sticky{height:auto}.main-content{padding-top:56px}}.navbar{position:fixed;top:0;width:100%;z-index:1000;background-color:#fff;box-shadow:0 2px 4px rgba(0,0,0,.1);min-height:56px}
+        .sidebar{position:fixed;top:0;bottom:0;left:0;z-index:100;padding:72px 0 0;box-shadow:inset -1px 0 0 rgba(0,0,0,.1);background-color:#f8f9fa}.sidebar-sticky{height:calc(100vh - 72px);overflow-x:hidden;overflow-y:auto}.nav-link{font-weight:500;color:#333}.nav-link:hover{color:#007bff}.main-content{padding-top:72px}@media (max-width:767.98px){.sidebar{position:fixed;top:56px;left:-100%;width:80%;height:calc(100vh - 56px);transition:left 0.3s ease-in-out;z-index:1050;background-color:#f8f9fa;padding-top:0}.sidebar.show{left:0}.sidebar-sticky{height:100%;overflow-y:auto}.main-content{padding-top:56px}}.navbar{position:fixed;top:0;width:100%;z-index:1000;background-color:#fff;box-shadow:0 2px 4px rgba(0,0,0,.1);min-height:56px}.navbar-toggler{padding:0.5rem;border:none;background:transparent;transition:transform 0.3s ease}.navbar-toggler:hover{transform:scale(1.1)}.navbar-toggler:focus{outline:none;box-shadow:none}.navbar-toggler-icon{width:1.5em;height:1.5em;background-size:contain;transition:opacity 0.3s ease}.navbar-toggler:hover .navbar-toggler-icon{opacity:0.7}
         /* 目录折叠相关样式 */
         .page-nav{position:fixed;top:72px;width:16.666667%;border-left:1px solid #e5e5e5;padding-left:1rem}
         .page-nav .nav-link{padding:0.25rem 0;font-size:0.875rem;color:#6c757d}
@@ -63,7 +63,7 @@
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">文档中心</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".sidebar">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>

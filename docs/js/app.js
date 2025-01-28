@@ -70,6 +70,13 @@ function generateMenu(menuItems, parent = document.getElementById('sidebar-menu'
             a.onclick = (e) => {
                 e.preventDefault();
                 loadContent(item.path);
+                // 在移动端视图下收起导航栏
+                if (window.innerWidth < 768) {
+                    const sidebar = document.querySelector('.sidebar');
+                    if (sidebar.classList.contains('show')) {
+                        bootstrap.Collapse.getInstance(sidebar).hide();
+                    }
+                }
             };
             li.appendChild(a);
         }
@@ -176,5 +183,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     // 添加滚动监听
     window.addEventListener('scroll', () => {
         requestAnimationFrame(updatePageNavActive);
+    });
+    
+    // 添加点击空白区域收起导航栏的功能
+    document.addEventListener('click', (e) => {
+        const sidebar = document.querySelector('.sidebar');
+        const navbarToggler = document.querySelector('.navbar-toggler');
+        
+        // 检查点击区域是否在导航栏和切换按钮之外
+        if (!sidebar.contains(e.target) && !navbarToggler.contains(e.target) && sidebar.classList.contains('show')) {
+            // 收起导航栏
+            sidebar.classList.remove('show');
+        }
     });
 });

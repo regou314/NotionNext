@@ -140,8 +140,20 @@ async function loadContent(path) {
         if (!response.ok) throw new Error('文档加载失败');
         
         const markdown = await response.text();
-        const html = marked.parse(markdown);
+        // 配置marked以处理相对链接
+        marked.use({
+            renderer: {
+                link(href, title, text) {
+                    if (href && !href.startsWith('http') && !href.startsWith('#')) {
+                        // 处理相对路径链接
+                        return `<a href="#${href}" onclick="event.preventDefault(); loadContent('${href}');">${text}</a>`;
+                    }
+                    return `<a href="${href}"${title ? ` title="${title}"` : ''}>${text}</a>`;
+                }
+            }
+        });
         
+        const html = marked.parse(markdown);
         document.getElementById('content').innerHTML = html;
         
         // 为标题添加ID
@@ -160,6 +172,12 @@ async function loadContent(path) {
         // 更新URL hash
         window.location.hash = path;
         
+        // 滚动到文档顶部
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+        
         // 初始更新导航激活状态
         updatePageNavActive();
     } catch (error) {
@@ -177,7 +195,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     generateMenu(config.menu);
     
     // 根据URL hash加载初始内容
-    const initialPath = window.location.hash.slice(1) || config.menu[0].path;
+    const initialPath = window.location.hash.slice(1) || 'quick-start.md';
     loadContent(initialPath);
     
     // 添加滚动监听

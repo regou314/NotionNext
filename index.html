@@ -16,22 +16,35 @@
     <style>
         .out-link {color:#444;}
         .bottom-link {color:#999;}
-
+        
+        /* 添加二维码悬浮框样式 */
+        .qr-hover {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .qr-hover .qr-image {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .qr-hover:hover .qr-image {
+            display: block;
+        }
+        
+        .qr-image img {
+            width: 150px;
+            height: 150px;
+        }
     </style>
-    <!--<style>
-        iframe {
-  width: 50%;
-  height: 60%;
-
-  position: fixed;
-
-  top: 0;
-  left: 0;
-
-  width: 50%;
-  height: 100%;
-}
-    </style>-->
 </head>
 <body>
 <nav class="navbar navbar-default invert-buttons">
@@ -55,11 +68,33 @@
 
         </div>
 
+        <!-- 替换原有的导航栏链接 -->
         <div class="collapse navbar-collapse" id="navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="./docs/docs.html" target="_blank">用户指南</a></li>
-                <li><a href="https://support.qq.com/product/412760"
-                       target="_blank">建议与反馈社区</a></li>
+                <li>
+                    <a href="./docs/docs.html" target="_blank">用户指南</a>
+                </li>
+                <li class="qr-hover">
+                    <a href="https://www.xiaohongshu.com/user/profile/5d1c7b270000000012036a83" target="_blank">小红书</a>
+                    <div class="qr-image">
+                        <img src="./resources/qr_xiaohongshu.jpg" alt="小红书二维码">
+                    </div>
+                </li>
+                <li class="qr-hover">
+                    <a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=Mzg5MjY3OTk0OQ==" target="_blank">公众号</a>
+                    <div class="qr-image">
+                        <img src="./resources/qr_wechat.jpg" alt="公众号二维码">
+                    </div>
+                </li>
+                <li class="qr-hover">
+                    <a href="https://qm.qq.com/q/GK2KWKgeK4" target="_blank">QQ群</a>
+                    <div class="qr-image">
+                        <img src="./resources/qr_qq.jpg" alt="QQ群二维码">
+                    </div>
+                </li>
+                <li>
+                    <a href="https://support.qq.com/product/412760" target="_blank">兔小巢</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -69,20 +104,19 @@
         <div class="row">
             <div class="col-xs-12">
                 <h1 id="title">安卓系统的hao123</h1>
-                <p id="subtitle">可小窗启动任意小程序、一步、网址、文件、图片等任意位置</p>
-
+                <p id="subtitle">全局负一屏：悬浮AI面板(免费)、悬浮浏览器、悬浮搜索面板、悬浮自动化面板 <br> 悬浮球：可小窗启动任意小程序、一步、网址、文件、图片等任意位置 <br> 系统菜单：所有快捷方式和内置功能都支持添加到通知栏、磁贴、小部件、桌面等快捷方式中</p>
                 <!--默认下载地址-->
                 <a href="https://sj.qq.com/appdetail/com.rsyuan.softcircle"
                    class="app-store"
                    target="_blank" id="btn-download-guanwang" style="display:none;">
                     <img alt='Android 手机' class="app-store-logo" src='./resources/android.svg'/>
                     应用宝下载</a>
-                <a href="https://www.coolapk.com/apk/77703"
+                <a href="https://www.pgyer.com/softcircle"
                    class="app-store" target="_blank" id="btn-download-androidhd"
                    style="display:none;">
                     <img alt='Android 平板' class="app-store-logo"
                          src='./resources/android.svg'/>
-                    酷安下载</a>
+                    蒲公英下载</a>
                 <a href='market://details?id=com.rsyuan.softcircle' id="btn-download-google"
                    class="app-store" target="_blank" >
                     <img alt='Google Play' class="app-store-logo" src='./resources/googleplay.svg'/>
@@ -198,11 +232,11 @@
             <div class="col-xs-12 feature-line"></div>
         </div>
     </div> <!-- features -->
-    <div class="container comments" style="margin-top: 40px;">
+    <!-- <div class="container comments" style="margin-top: 40px;">
         <h2>用户评价</h2>
         <br/>
         <br/>
-    </div>
+    </div> -->
     <hr>
     <div class="container">
         <h5>友情链接：</h5>

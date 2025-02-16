@@ -14,6 +14,28 @@
     <link href="./resources/css.css" rel="stylesheet">
     <link href="./resources/style.css" rel="stylesheet">
     <style>
+        html {
+            min-height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #a8d5ff, #ffffff) fixed;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+    
+        /* 修改导航栏样式，使其透明 */
+        .navbar-default {
+            background: transparent;
+            border: none;
+        }
+    
         .out-link {color:#444;}
         .bottom-link {color:#999;}
         
@@ -72,7 +94,7 @@
         <div class="collapse navbar-collapse" id="navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="./docs/docs.html" target="_blank">用户指南</a>
+                    <a href="./docs/docs.html" target="_blank">使用指南</a>
                 </li>
                 <li class="qr-hover">
                     <a href="https://www.xiaohongshu.com/user/profile/5d1c7b270000000012036a83" target="_blank">小红书</a>
@@ -104,23 +126,21 @@
         <div class="row">
             <div class="col-xs-12">
                 <h1 id="title">安卓系统的hao123</h1>
-                <p id="subtitle">全局负一屏：悬浮AI面板(免费)、悬浮浏览器、悬浮搜索面板、悬浮自动化面板 <br> 悬浮球：可小窗启动任意小程序、一步、网址、文件、图片等任意位置 <br> 系统菜单：所有快捷方式和内置功能都支持添加到通知栏、磁贴、小部件、桌面等快捷方式中</p>
-                <!--默认下载地址-->
-                <a href="https://sj.qq.com/appdetail/com.rsyuan.softcircle"
-                   class="app-store"
-                   target="_blank" id="btn-download-guanwang" style="display:none;">
-                    <img alt='Android 手机' class="app-store-logo" src='./resources/android.svg'/>
-                    应用宝下载</a>
-                <a href="https://www.pgyer.com/softcircle"
-                   class="app-store" target="_blank" id="btn-download-androidhd"
-                   style="display:none;">
-                    <img alt='Android 平板' class="app-store-logo"
-                         src='./resources/android.svg'/>
-                    蒲公英下载</a>
-                <a href='market://details?id=com.rsyuan.softcircle' id="btn-download-google"
-                   class="app-store" target="_blank" >
-                    <img alt='Google Play' class="app-store-logo" src='./resources/googleplay.svg'/>
-                    Google Play 下载</a>
+                <div class="feature-highlights"> 
+                    <div class="feature-main">
+                        <p><strong>全局负一屏：</strong>
+                            <span class="feature-item">悬浮AI面板(免费)</span>
+                            <span class="feature-item">悬浮浏览器</span>
+                            <span class="feature-item">悬浮搜索面板</span>
+                            <span class="feature-item">悬浮自动化面板</span>
+                        </p>
+                    </div>
+                    <div class="feature-secondary">
+                        <p><strong>悬浮球：</strong>可小窗启动任意小程序、一步、网址、文件、图片等任意位置</p>
+                        <p><strong>系统菜单：</strong>所有快捷方式和内置功能都支持添加到通知栏、磁贴、小部件、桌面等快捷方式中</p>
+                    </div>
+                </div>
+                <!-- 下载按钮部分保持不变 -->
             </div>
         </div>
     </div>

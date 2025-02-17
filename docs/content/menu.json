@@ -141,6 +141,14 @@
         {
             "title": "权限说明",
             "path": "basic/permission.md"
+        },
+        {
+            "title": "隐私政策",
+            "path": "basic/privacy_policy.md"
+        },
+        {
+            "title": "用户协议",
+            "path": "basic/user_agreement.md"
         }
     ]
 }

@@ -8,6 +8,6 @@
 
 **2.进入下图**
 
-![](https://cdn.nlark.com/yuque/0/2025/png/52604516/1737478185651-c4c11813-5dfb-44e4-b247-697295def7e2.png)
+![获取小程序原始ID示例](/resources/smallprogram.png)
 
 **3.将获取到的参数，填到「帐号原始ID」， 就可以添加到悬浮捷径SoftCircle了。**

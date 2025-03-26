@@ -66,6 +66,67 @@
             width: 150px;
             height: 150px;
         }
+        
+        /* 横向自滚动组件样式 */
+        .auto-scroll-container {
+            margin: 30px auto;
+            max-width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .scroll-wrapper {
+            width: 100%;
+            overflow: hidden;
+            padding: 20px 0;
+            position: relative;
+        }
+        
+        .scroll-content {
+            display: flex;
+            animation: scrollAnimation 30s linear infinite;
+            width: max-content;
+        }
+        
+        .scroll-item {
+            flex: 0 0 auto;
+            margin: 0 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .scroll-item img {
+            width: 200px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .scroll-caption {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #353535;
+        }
+        
+        .scroll-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        @keyframes scrollAnimation {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .scroll-item img {
+                width: 150px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -162,6 +223,71 @@
                  class="video"  scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"
          > </iframe>
 
+    </div>
+    
+    <!-- 横向自滚动组件 -->
+    <div class="container auto-scroll-container">
+        <div class="scroll-wrapper">
+            <div class="scroll-content">
+                <div class="scroll-item">
+                    <img src="./resources/img/shortcut/shortcut-onestep.png" alt="一步" crossorigin="anonymous">
+                    <div class="scroll-caption">一步直达</div>
+                </div>
+                <div class="scroll-item">
+                    <img src="./resources/img/shortcut/shortcut-widget.png" alt="小部件" crossorigin="anonymous">
+                    <div class="scroll-caption">小部件</div>
+                </div>
+                <div class="scroll-item">
+                    <img src="./resources/img/shortcut/shortcut-wxjs.png" alt="小程序" crossorigin="anonymous">
+                    <div class="scroll-caption">小程序</div>
+                </div>
+                <div class="scroll-item">
+                    <img src="./resources/img/shortcut/shortcut-func.png" alt="内置功能" crossorigin="anonymous">
+                    <div class="scroll-caption">内置功能</div>
+                </div>
+                <div class="scroll-item">
+                    <img src="./resources/img/shortcut/shortcut-local.png" alt="联系人、图片、文件" crossorigin="anonymous">
+                    <div class="scroll-caption">联系人、图片、文件</div>
+                </div>
+                <div class="scroll-item">
+                    <img src="./resources/img/shortcut/shortcut-web.png" alt="网站" crossorigin="anonymous">
+                    <div class="scroll-caption">网站</div>
+                </div>
+                <div class="scroll-item">
+                    <img src="./resources/img/shortcut/shortcut-app.png" alt="应用App" crossorigin="anonymous">
+                    <div class="scroll-caption">应用App</div>
+                </div>
+                <!-- 复制一组实现无缝滚动 -->
+                <div class="scroll-item">
+                    <img src="./resources/img/shortcut/shortcut-onestep.png" alt="一步" crossorigin="anonymous">
+                    <div class="scroll-caption">一步直达</div>
+                </div>
+                <div class="scroll-item">
+                    <img src="./resources/img/shortcut/shortcut-widget.png" alt="小部件" crossorigin="anonymous">
+                    <div class="scroll-caption">小部件</div>
+                </div>
+                <div class="scroll-item">
+                    <img src="./resources/img/shortcut/shortcut-wxjs.png" alt="小程序" crossorigin="anonymous">
+                    <div class="scroll-caption">小程序</div>
+                </div>
+                <div class="scroll-item">
+                    <img src="./resources/img/shortcut/shortcut-func.png" alt="内置功能" crossorigin="anonymous">
+                    <div class="scroll-caption">内置功能</div>
+                </div>
+                <div class="scroll-item">
+                    <img src="./resources/img/shortcut/shortcut-local.png" alt="联系人、图片、文件" crossorigin="anonymous">
+                    <div class="scroll-caption">联系人、图片、文件</div>
+                </div>
+                <div class="scroll-item">
+                    <img src="./resources/img/shortcut/shortcut-web.png" alt="网站" crossorigin="anonymous">
+                    <div class="scroll-caption">网站</div>
+                </div>
+                <div class="scroll-item">
+                    <img src="./resources/img/shortcut/shortcut-app.png" alt="应用App" crossorigin="anonymous">
+                    <div class="scroll-caption">应用App</div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="container features">
         <div class="row feature-row">

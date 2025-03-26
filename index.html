@@ -67,10 +67,44 @@
             height: 150px;
         }
         
+        /* 视频样式 */
+        .video {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            background-image: url('./resources/intr1.png');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        /* 添加伪元素作为视频封面 */
+        .video::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('./resources/intr1.png');
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            z-index: 1;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        /* 当视频加载完成后隐藏封面 */
+        .video-loaded::before {
+            opacity: 0;
+            z-index: -1;
+        }
+        
         /* 横向自滚动组件样式 */
         .auto-scroll-container {
-            margin: 30px auto;
-            max-width: 100%;
+            margin: 30px -15vw;
+            max-width: 130vw;
             overflow: hidden;
             position: relative;
         }
@@ -84,22 +118,26 @@
         
         .scroll-content {
             display: flex;
-            animation: scrollAnimation 30s linear infinite;
+            animation: scrollAnimation 35s linear infinite;
             width: max-content;
+            padding: 10px 0;
         }
         
         .scroll-item {
             flex: 0 0 auto;
-            margin: 0 15px;
+            margin: 0 20px;
             text-align: center;
             transition: transform 0.3s ease;
+            padding: 10px;
         }
         
         .scroll-item img {
-            width: 200px;
+            width: 260px;
             height: auto;
-            border-radius: 12px;
+            border-radius: 16px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 13px;
+            background-color: transparent;
         }
         
         .scroll-caption {
@@ -124,7 +162,21 @@
         /* 响应式调整 */
         @media (max-width: 768px) {
             .scroll-item img {
-                width: 150px;
+                width: 200px;
+            }
+            .scroll-item {
+                margin: 0 15px;
+                padding: 8px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .scroll-item img {
+                width: 160px;
+            }
+            .scroll-item {
+                margin: 0 10px;
+                padding: 5px;
             }
         }
     </style>
@@ -219,12 +271,38 @@
                   <img src="./resources/site_large-small.png" crossorigin="anonymous" alt="悬浮捷径SoftCircle记账">
               </picture>
          </div>-->
-        <iframe  src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1"
-                 class="video"  scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"
-         > </iframe>
-
     </div>
-    
+    </div>
+    <div class="container features">
+        <div class="row feature-row">
+            <div class="col-xs-12 col-sm-5 description">
+                <h2>简约而不简单</h2>
+                <hr class="separator blue">
+                <p>超多捷径、快捷功能 <br> 设计巧妙、操作有趣 <br> 简约强大、不占内存</p>
+            </div>
+            <div class="col-xs-12 col-sm-offset-1 col-sm-6 screen">
+                <iframe src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1&high_quality=1&danmaku=0" class="video" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="width:100%;"> </iframe>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 feature-line"></div>
+        </div>
+        <div class="row feature-row">
+            <div class="col-xs-12 col-sm-5 col-sm-push-7 description">
+                <h2>一步直达</h2>
+                <hr class="separator red">
+                
+                <p>多类型捷径、小程序、网站、联系人、图片、文件的直达，均支持自定义 <br>
+                    甚至可以直达指定QQ号的好友与群 <br>
+                    丰富的内置功能与自动化模拟手势</p>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-sm-pull-5 screen">
+                <picture>
+                    <img src="./resources/intr2.png" crossorigin="anonymous">
+                </picture>
+            </div>
+        </div>
+
     <!-- 横向自滚动组件 -->
     <div class="container auto-scroll-container">
         <div class="scroll-wrapper">
@@ -288,35 +366,7 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="container features">
-        <div class="row feature-row">
-            <div class="col-xs-12 col-sm-5 description">
-                <h2>简约而不简单</h2>
-                <hr class="separator blue">
-                <p>超多捷径、快捷功能 <br> 设计巧妙、操作有趣 <br> 简约强大、不占内存</p>
-            </div>
-            <div class="col-xs-12 col-sm-offset-1 col-sm-6 screen">
-                <picture>
-                    <img src="./resources/intr1.png" crossorigin="anonymous">
-                </picture>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 feature-line"></div>
-        </div>
-        <div class="row feature-row">
-            <div class="col-xs-12 col-sm-5 col-sm-push-7 description">
-                <h2>一步直达(丰富App捷径)</h2>
-                <hr class="separator red">
-                <p> 扫码、乘车码、钉钉打卡、切歌、QQ好友/群、查快递、查订单、搜索…</p>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-sm-pull-5 screen">
-                <picture>
-                    <img src="./resources/intr2.png" crossorigin="anonymous">
-                </picture>
-            </div>
-        </div>
+    
         <div class="row">
             <div class="col-xs-12 feature-line"></div>
         </div>
@@ -433,33 +483,52 @@
 </div>
 <script type="application/javascript">
     // 获取元素
-    const wrapper = document.querySelector('.wrapper');
     const iframe = document.querySelector('.video');
 
-    // 视频宽高比例
-    const ratio = 16 / 9;
-
-    // 监听wrapper大小变化
-    wrapper.addEventListener('resize', setIframeHeight);
-
+    // 获取图片元素
+    const imgElement = document.querySelector('.col-xs-12.col-sm-6.col-sm-pull-5.screen img');
+    
     // 设置初次iframe高度
     setIframeHeight();
 
     function setIframeHeight() {
-
-      // 获取wrapper实际宽度
-      const width = 1080;
-
-      // 根据宽高比例计算高度
-      const height = width / ratio;
-
-      // 设置iframe高度
-      iframe.style.height = height + 'px';
-
-iframe.style.position = 'relative';
-iframe.style.left = '50%';
-iframe.style.transform = 'translateX(-50%)';
+      // 获取iframe实际宽度
+      const width = iframe.offsetWidth;
+      
+      // 创建一个临时图片对象来获取intr2.png的原始宽高比
+      const img = new Image();
+      img.src = './resources/intr2.png';
+      
+      img.onload = function() {
+        // 根据图片的原始宽高比计算iframe高度
+        const imgRatio = img.width / img.height;
+        const height = width / imgRatio;
+        
+        // 设置iframe高度
+        iframe.style.height = height + 'px';
+      };
+      
+      // 如果图片已经加载过，直接使用imgElement的宽高比
+      if (imgElement && imgElement.complete) {
+        const imgRatio = imgElement.naturalWidth / imgElement.naturalHeight;
+        const height = width / imgRatio;
+        iframe.style.height = height + 'px';
+      }
     }
+    
+    // 监听窗口大小变化，重新调整视频高度
+    window.addEventListener('resize', setIframeHeight);
+    
+    // 处理视频封面
+    document.addEventListener('DOMContentLoaded', function() {
+        const videoFrame = document.querySelector('.video');
+        
+        // 当iframe加载完成后，移除封面
+        videoFrame.addEventListener('load', function() {
+            // 给iframe添加一个类，用于CSS控制封面显示
+            videoFrame.classList.add('video-loaded');
+        });
+    });
 
 
         function isClientMarket(market) {

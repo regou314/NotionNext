@@ -78,6 +78,57 @@
             position: relative;
         }
         
+        /* 轮播图样式 */
+        .carousel-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 400px; /* 添加最小高度确保容器有足够空间显示图片 */
+        }
+        
+        .carousel-slides {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        
+        .carousel-slide {
+            width: 100%;
+            flex-shrink: 0;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            position: relative;
+            display: none;
+        }
+        
+        .carousel-slide.active {
+            opacity: 1;
+            z-index: 1;
+            display: block;
+        }
+        
+        .carousel-slide img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+        }
+        
+        /* 轮播文字样式 */
+        .carousel-text {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+        
+        .carousel-text.active {
+            display: block;
+            opacity: 1;
+        }
+        
         /* 添加伪元素作为视频封面 */
         .video::before {
             content: "";
@@ -288,18 +339,83 @@
             <div class="col-xs-12 feature-line"></div>
         </div>
         <div class="row feature-row">
-            <div class="col-xs-12 col-sm-5 col-sm-push-7 description">
-                <h2>一步直达</h2>
-                <hr class="separator red">
-                
-                <p>多类型捷径、小程序、网站、联系人、图片、文件的直达，均支持自定义 <br>
-                    甚至可以直达指定QQ号的好友与群 <br>
-                    丰富的内置功能与自动化模拟手势</p>
+            <div class="col-xs-12 col-sm-5 col-sm-push-7 description" id="carousel-text-container">
+                <div class="carousel-text active" data-slide="0">
+                    <h2>一步直达</h2>
+                    <hr class="separator red">
+                    <p>多类型捷径、小程序、网站、联系人、图片、文件的直达 <br>
+                        甚至可以直达指定QQ号的好友与群 <br>
+                        均支持自定义</p>
+                </div>
+                <div class="carousel-text" data-slide="1">
+                    <h2>小部件</h2>
+                    <hr class="separator blue">
+                    <p>支持添加到桌面的小部件 <br>
+                        一键直达常用功能 <br>
+                        个性化定制，方便快捷</p>
+                </div>
+                <div class="carousel-text" data-slide="2">
+                    <h2>小程序</h2>
+                    <hr class="separator green">
+                    <p>支持微信小程序直达 <br>
+                        无需打开微信即可使用 <br>
+                        提高工作效率</p>
+                </div>
+                <div class="carousel-text" data-slide="3">
+                    <h2>内置功能</h2>
+                    <hr class="separator orange">
+                    <p>丰富的内置功能 <br>
+                        丰富的模拟手势（如上下左右自滚动、连续翻页等） <br>
+                        系统按键模拟：分屏、Home、返回键、视频拍摄、下拉通知等</p>
+                </div>
+                <div class="carousel-text" data-slide="4">
+                    <h2>本地资源</h2>
+                    <hr class="separator purple">
+                    <p>联系人、图片、文件快速访问 <br>
+                        本地资源一键直达 <br>
+                        高效管理各类内容</p>
+                </div>
+                <div class="carousel-text" data-slide="5">
+                    <h2>网站直达</h2>
+                    <hr class="separator teal">
+                    <p>常用网站一键直达 <br>
+                        自定义网址收藏 <br>
+                        提高网页访问效率</p>
+                </div>
+                <div class="carousel-text" data-slide="6">
+                    <h2>应用直达</h2>
+                    <hr class="separator red">
+                    <p>快速启动常用应用 <br>
+                        自定义应用分组 <br>
+                        提高工作效率</p>
+                </div>
             </div>
             <div class="col-xs-12 col-sm-6 col-sm-pull-5 screen">
-                <picture>
-                    <img src="./resources/intr2.png" crossorigin="anonymous">
-                </picture>
+                <div class="carousel-container">
+                    <div class="carousel-slides">
+                        <div class="carousel-slide active">
+                            <img src="./resources/img/shortcut/shortcut-onestep.png" crossorigin="anonymous">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./resources/img/shortcut/shortcut-widget.png" crossorigin="anonymous">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./resources/img/shortcut/shortcut-wxjs.png" crossorigin="anonymous">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./resources/img/shortcut/shortcut-func.png" crossorigin="anonymous">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./resources/img/shortcut/shortcut-local.png" crossorigin="anonymous">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./resources/img/shortcut/shortcut-web.png" crossorigin="anonymous">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./resources/img/shortcut/shortcut-app.png" crossorigin="anonymous">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -602,6 +718,45 @@
         crossorigin="anonymous"></script>
 <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"
         crossorigin="anonymous"></script>
+<script>
+    // 轮播图功能
+    document.addEventListener('DOMContentLoaded', function() {
+        const slides = document.querySelectorAll('.carousel-slide');
+        const textSlides = document.querySelectorAll('.carousel-text');
+        let currentSlide = 0;
+        
+        // 初始化轮播图
+        function showSlide(index) {
+            // 移除所有幻灯片的active类
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            // 移除所有文字的active类
+            textSlides.forEach(textSlide => {
+                textSlide.classList.remove('active');
+            });
+            
+            // 给当前幻灯片添加active类
+            slides[index].classList.add('active');
+            
+            // 给当前文字添加active类
+            textSlides[index].classList.add('active');
+        }
+        
+        // 切换到下一张幻灯片
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+        
+        // 设置3秒自动轮播
+        setInterval(nextSlide, 3000);
+        
+        // 初始显示第一张幻灯片
+        showSlide(0);
+    });
+</script>
 </div>
 </body>
 </html>

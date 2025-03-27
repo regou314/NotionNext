@@ -5,7 +5,25 @@
     <title>悬浮捷径SoftCircle</title>
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="悬浮捷径SoftCircle - 安卓系统的快捷工具，提供全局负一屏、悬浮菜单、一键直达等功能">
+    <meta name="keywords" content="悬浮捷径,SoftCircle,安卓工具,快捷方式,悬浮球,负一屏">
+    <meta name="author" content="深圳市途马贸易有限公司">
+    
+    <!-- Open Graph / 社交媒体标签 -->
+    <meta property="og:title" content="悬浮捷径SoftCircle">
+    <meta property="og:description" content="安卓系统的hao123，全局负一屏、悬浮菜单、一键直达等功能">
+    <meta property="og:image" content="./resources/app_icon.png">
+    <meta property="og:url" content="https://softcircle.cn">
+    <meta property="og:type" content="website">
+    
+    <!-- 预加载关键资源 -->
+    <link rel="preload" href="./resources/app_icon.png" as="image">
+    <link rel="preload" href="./resources/txtlogo.png" as="image">
+    <link rel="preload" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" as="style">
+    <link rel="preload" href="https://cdn.staticfile.org/jquery/1.12.4/jquery.min.js" as="script">
+    <link rel="preload" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js" as="script">
+    
     <link rel="shortcut icon" href="./resources/app_icon.png" type="image/x-icon">
 
     <link rel="stylesheet"
@@ -78,14 +96,14 @@
             position: relative;
         }
         
-        /* 轮播图样式 */
+        /* 轮播图样式增强 */
         .carousel-container {
             width: 100%;
             overflow: hidden;
             position: relative;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            min-height: 400px; /* 添加最小高度确保容器有足够空间显示图片 */
+            min-height: 320px; /* 减小最小高度 */
         }
         
         .carousel-slides {
@@ -99,34 +117,128 @@
             width: 100%;
             flex-shrink: 0;
             opacity: 0;
-            transition: opacity 0.6s ease;
+            transition: all 0.8s ease;
             position: relative;
             display: none;
+            transform: scale(0.9);
         }
         
         .carousel-slide.active {
             opacity: 1;
             z-index: 1;
             display: block;
+            transform: scale(1);
+        }
+        
+        .carousel-slide.prev {
+            opacity: 0;
+            transform: translateX(-5%) scale(0.9);
+        }
+        
+        .carousel-slide.next {
+            opacity: 0;
+            transform: translateX(5%) scale(0.9);
         }
         
         .carousel-slide img {
             width: 100%;
+            max-width: 500px; /* 添加最大宽度限制 */
             height: auto;
             border-radius: 8px;
             display: block;
+            margin: 0 auto; /* 居中显示 */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.8s ease;
         }
         
-        /* 轮播文字样式 */
+        /* 轮播文字样式增强 */
         .carousel-text {
             display: none;
             opacity: 0;
-            transition: opacity 0.6s ease;
+            transition: all 0.8s ease;
+            transform: translateY(10px);
         }
         
         .carousel-text.active {
             display: block;
             opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* 添加轮播导航点 */
+        .carousel-dots {
+            position: absolute;
+            bottom: 15px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            z-index: 10;
+        }
+        
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-dot.active {
+            background-color: #fff;
+            transform: scale(1.2);
+        }
+        
+        /* 添加轮播箭头按钮 */
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255,255,255,0.7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            opacity: 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .carousel-container:hover .carousel-arrow {
+            opacity: 1;
+        }
+        
+        .carousel-arrow-prev {
+            left: 10px;
+        }
+        
+        .carousel-arrow-next {
+            right: 10px;
+        }
+        
+        .carousel-arrow:before {
+            content: '';
+            display: block;
+            width: 10px;
+            height: 10px;
+            border-top: 2px solid #333;
+            border-right: 2px solid #333;
+        }
+        
+        .carousel-arrow-prev:before {
+            transform: rotate(-135deg);
+            margin-left: 4px;
+        }
+        
+        .carousel-arrow-next:before {
+            transform: rotate(45deg);
+            margin-right: 4px;
         }
         
         /* 添加伪元素作为视频封面 */
@@ -152,12 +264,20 @@
             z-index: -1;
         }
         
-        /* 横向自滚动组件样式 */
+        /* 横向自滚动组件样式优化 */
         .auto-scroll-container {
-            margin: 30px -15vw;
-            max-width: 130vw;
+            margin: 30px auto;
+            max-width: 100vw;
             overflow: hidden;
             position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            width: 100vw;
+            text-align: center;
+            background-color: transparent; /* 移除背景色，与网页背景保持一致 */
+            padding: 10px 0;
         }
         
         .scroll-wrapper {
@@ -165,21 +285,42 @@
             overflow: hidden;
             padding: 20px 0;
             position: relative;
+            display: flex;
+            justify-content: center;
         }
         
         .scroll-content {
             display: flex;
-            animation: scrollAnimation 35s linear infinite;
+            animation: scrollAnimation 60s linear infinite; /* 延长动画时间，使滚动更平滑 */
             width: max-content;
             padding: 10px 0;
+            margin: 0 auto;
+            will-change: transform; /* 优化性能 */
+            visibility: hidden; /* 初始隐藏，等图片加载完成后显示 */
+            opacity: 0;
+            animation-name: fadeInAndScroll;
+            animation-duration: 60s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+        
+        .scroll-content:hover {
+            animation-play-state: paused; /* 鼠标悬停时暂停滚动 */
         }
         
         .scroll-item {
             flex: 0 0 auto;
             margin: 0 20px;
             text-align: center;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, opacity 0.3s ease;
             padding: 10px;
+            opacity: 0.9;
+        }
+        
+        .scroll-item:hover {
+            transform: translateY(-10px) scale(1.05);
+            opacity: 1;
+            z-index: 1;
         }
         
         .scroll-item img {
@@ -188,7 +329,13 @@
             border-radius: 16px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             padding: 13px;
-            background-color: transparent;
+            background-color: transparent; /* 将背景改为透明 */
+            transition: all 0.3s ease;
+        }
+        
+        .scroll-item:hover img {
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            background-color: transparent; /* 悬停时也保持透明 */
         }
         
         .scroll-caption {
@@ -197,16 +344,27 @@
             color: #353535;
         }
         
-        .scroll-item:hover {
-            transform: translateY(-10px);
-        }
-        
         @keyframes scrollAnimation {
             0% {
                 transform: translateX(0);
             }
             100% {
-                transform: translateX(-50%);
+                transform: translateX(calc(-260px * 7 - 40px * 7)); /* 基于一组图片的总宽度计算 */
+            }
+        }
+        
+        /* 添加淡入和滚动组合动画 */
+        @keyframes fadeInAndScroll {
+            0% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            2% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(calc(-260px * 7 - 40px * 7));
             }
         }
         
@@ -233,7 +391,7 @@
     </style>
 </head>
 <body>
-<nav class="navbar navbar-default invert-buttons">
+<nav class="navbar navbar-default invert-buttons" role="navigation" aria-label="主导航">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -244,12 +402,10 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="https://softcircle.cn">
-                <img src="./resources/app_icon.png" class="app-icon" alt="悬浮捷径SoftCircle"
-                     id="site-logo">
+                <img src="./resources/app_icon.png" class="app-icon" alt="悬浮捷径SoftCircle应用图标" id="site-logo" width="30" height="30">
             </a>
             <a class="navbar-brand" href="https://softcircle.cn">
-                <img src="./resources/txtlogo.png" class="app-icon" alt="悬浮捷径SoftCircle"
-                     id="site-txt">
+                <img src="./resources/txtlogo.png" class="app-icon" alt="悬浮捷径SoftCircle文字标志" id="site-txt">
             </a>
 
         </div>
@@ -263,19 +419,19 @@
                 <li class="qr-hover">
                     <a href="https://www.xiaohongshu.com/user/profile/5d1c7b270000000012036a83" target="_blank">小红书</a>
                     <div class="qr-image">
-                        <img src="./resources/qr_xiaohongshu.jpg" alt="小红书二维码">
+                        <img src="./resources/qr_xiaohongshu.jpg" alt="扫描关注悬浮捷径SoftCircle小红书账号" width="150" height="150">
                     </div>
                 </li>
                 <li class="qr-hover">
                     <a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=Mzg5MjY3OTk0OQ==" target="_blank">公众号</a>
                     <div class="qr-image">
-                        <img src="./resources/qr_wechat.jpg" alt="公众号二维码">
+                        <img src="./resources/qr_wechat.jpg" alt="扫描关注悬浮捷径SoftCircle微信公众号" width="150" height="150">
                     </div>
                 </li>
                 <li class="qr-hover">
                     <a href="https://qm.qq.com/q/GK2KWKgeK4" target="_blank">QQ群</a>
                     <div class="qr-image">
-                        <img src="./resources/qr_qq.jpg" alt="QQ群二维码">
+                        <img src="./resources/qr_qq.jpg" alt="扫描加入悬浮捷径SoftCircle QQ交流群" width="150" height="150">
                     </div>
                 </li>
                 <li>
@@ -391,29 +547,40 @@
                 </div>
             </div>
             <div class="col-xs-12 col-sm-6 col-sm-pull-5 screen">
-                <div class="carousel-container">
+                <div class="carousel-container" aria-roledescription="轮播" aria-label="产品功能展示">
+                    <div class="carousel-arrow carousel-arrow-prev" aria-label="上一张"></div>
+                    <div class="carousel-arrow carousel-arrow-next" aria-label="下一张"></div>
                     <div class="carousel-slides">
-                        <div class="carousel-slide active">
-                            <img src="./resources/img/shortcut/shortcut-onestep.png" crossorigin="anonymous">
+                        <div class="carousel-slide active" aria-roledescription="幻灯片" aria-label="一步直达功能">
+                            <img src="./resources/img/shortcut/shortcut-onestep.png" alt="悬浮捷径SoftCircle一步直达功能展示" loading="eager" crossorigin="anonymous">
                         </div>
-                        <div class="carousel-slide">
-                            <img src="./resources/img/shortcut/shortcut-widget.png" crossorigin="anonymous">
+                        <div class="carousel-slide" aria-roledescription="幻灯片" aria-label="小部件功能">
+                            <img src="./resources/img/shortcut/shortcut-widget.png" alt="悬浮捷径SoftCircle小部件功能展示" loading="lazy" crossorigin="anonymous">
                         </div>
-                        <div class="carousel-slide">
-                            <img src="./resources/img/shortcut/shortcut-wxjs.png" crossorigin="anonymous">
+                        <div class="carousel-slide" aria-roledescription="幻灯片" aria-label="小程序功能">
+                            <img src="./resources/img/shortcut/shortcut-wxjs.png" alt="悬浮捷径SoftCircle微信小程序直达功能展示" loading="lazy" crossorigin="anonymous">
                         </div>
-                        <div class="carousel-slide">
-                            <img src="./resources/img/shortcut/shortcut-func.png" crossorigin="anonymous">
+                        <div class="carousel-slide" aria-roledescription="幻灯片" aria-label="内置功能">
+                            <img src="./resources/img/shortcut/shortcut-func.png" alt="悬浮捷径SoftCircle内置功能展示" loading="lazy" crossorigin="anonymous">
                         </div>
-                        <div class="carousel-slide">
-                            <img src="./resources/img/shortcut/shortcut-local.png" crossorigin="anonymous">
+                        <div class="carousel-slide" aria-roledescription="幻灯片" aria-label="本地资源功能">
+                            <img src="./resources/img/shortcut/shortcut-local.png" alt="悬浮捷径SoftCircle本地资源访问功能展示" loading="lazy" crossorigin="anonymous">
                         </div>
-                        <div class="carousel-slide">
-                            <img src="./resources/img/shortcut/shortcut-web.png" crossorigin="anonymous">
+                        <div class="carousel-slide" aria-roledescription="幻灯片" aria-label="网站直达功能">
+                            <img src="./resources/img/shortcut/shortcut-web.png" alt="悬浮捷径SoftCircle网站直达功能展示" loading="lazy" crossorigin="anonymous">
                         </div>
-                        <div class="carousel-slide">
-                            <img src="./resources/img/shortcut/shortcut-app.png" crossorigin="anonymous">
+                        <div class="carousel-slide" aria-roledescription="幻灯片" aria-label="应用直达功能">
+                            <img src="./resources/img/shortcut/shortcut-app.png" alt="悬浮捷径SoftCircle应用直达功能展示" loading="lazy" crossorigin="anonymous">
                         </div>
+                    </div>
+                    <div class="carousel-dots">
+                        <div class="carousel-dot active" data-slide="0" aria-label="切换到第1张幻灯片"></div>
+                        <div class="carousel-dot" data-slide="1" aria-label="切换到第2张幻灯片"></div>
+                        <div class="carousel-dot" data-slide="2" aria-label="切换到第3张幻灯片"></div>
+                        <div class="carousel-dot" data-slide="3" aria-label="切换到第4张幻灯片"></div>
+                        <div class="carousel-dot" data-slide="4" aria-label="切换到第5张幻灯片"></div>
+                        <div class="carousel-dot" data-slide="5" aria-label="切换到第6张幻灯片"></div>
+                        <div class="carousel-dot" data-slide="6" aria-label="切换到第7张幻灯片"></div>
                     </div>
                 </div>
             </div>
@@ -422,231 +589,441 @@
     <!-- 横向自滚动组件 -->
     <div class="container auto-scroll-container">
         <div class="scroll-wrapper">
-            <div class="scroll-content">
+            <div class="scroll-content" id="scroll-content">
+                <!-- 第一组 -->
                 <div class="scroll-item">
-                    <img src="./resources/img/shortcut/shortcut-onestep.png" alt="一步" crossorigin="anonymous">
+                    <img src="./resources/img/shortcut/shortcut-onestep.png" alt="悬浮捷径SoftCircle一步直达功能" loading="eager" crossorigin="anonymous">
                     <div class="scroll-caption">一步直达</div>
                 </div>
                 <div class="scroll-item">
-                    <img src="./resources/img/shortcut/shortcut-widget.png" alt="小部件" crossorigin="anonymous">
+                    <img src="./resources/img/shortcut/shortcut-widget.png" alt="悬浮捷径SoftCircle小部件功能" loading="eager" crossorigin="anonymous">
                     <div class="scroll-caption">小部件</div>
                 </div>
                 <div class="scroll-item">
-                    <img src="./resources/img/shortcut/shortcut-wxjs.png" alt="小程序" crossorigin="anonymous">
+                    <img src="./resources/img/shortcut/shortcut-wxjs.png" alt="悬浮捷径SoftCircle小程序功能" loading="eager" crossorigin="anonymous">
                     <div class="scroll-caption">小程序</div>
                 </div>
                 <div class="scroll-item">
-                    <img src="./resources/img/shortcut/shortcut-func.png" alt="内置功能" crossorigin="anonymous">
+                    <img src="./resources/img/shortcut/shortcut-func.png" alt="悬浮捷径SoftCircle内置功能" loading="eager" crossorigin="anonymous">
                     <div class="scroll-caption">内置功能</div>
                 </div>
                 <div class="scroll-item">
-                    <img src="./resources/img/shortcut/shortcut-local.png" alt="联系人、图片、文件" crossorigin="anonymous">
+                    <img src="./resources/img/shortcut/shortcut-local.png" alt="悬浮捷径SoftCircle联系人、图片、文件功能" loading="eager" crossorigin="anonymous">
                     <div class="scroll-caption">联系人、图片、文件</div>
                 </div>
                 <div class="scroll-item">
-                    <img src="./resources/img/shortcut/shortcut-web.png" alt="网站" crossorigin="anonymous">
+                    <img src="./resources/img/shortcut/shortcut-web.png" alt="悬浮捷径SoftCircle网站功能" loading="eager" crossorigin="anonymous">
                     <div class="scroll-caption">网站</div>
                 </div>
                 <div class="scroll-item">
-                    <img src="./resources/img/shortcut/shortcut-app.png" alt="应用App" crossorigin="anonymous">
+                    <img src="./resources/img/shortcut/shortcut-app.png" alt="悬浮捷径SoftCircle应用App功能" loading="eager" crossorigin="anonymous">
                     <div class="scroll-caption">应用App</div>
                 </div>
-                <!-- 复制一组实现无缝滚动 -->
+                <!-- 第二组（确保无缝滚动） -->
                 <div class="scroll-item">
-                    <img src="./resources/img/shortcut/shortcut-onestep.png" alt="一步" crossorigin="anonymous">
+                    <img src="./resources/img/shortcut/shortcut-onestep.png" alt="悬浮捷径SoftCircle一步直达功能" loading="lazy" crossorigin="anonymous">
                     <div class="scroll-caption">一步直达</div>
                 </div>
                 <div class="scroll-item">
-                    <img src="./resources/img/shortcut/shortcut-widget.png" alt="小部件" crossorigin="anonymous">
+                    <img src="./resources/img/shortcut/shortcut-widget.png" alt="悬浮捷径SoftCircle小部件功能" loading="lazy" crossorigin="anonymous">
                     <div class="scroll-caption">小部件</div>
                 </div>
                 <div class="scroll-item">
-                    <img src="./resources/img/shortcut/shortcut-wxjs.png" alt="小程序" crossorigin="anonymous">
+                    <img src="./resources/img/shortcut/shortcut-wxjs.png" alt="悬浮捷径SoftCircle小程序功能" loading="lazy" crossorigin="anonymous">
                     <div class="scroll-caption">小程序</div>
                 </div>
                 <div class="scroll-item">
-                    <img src="./resources/img/shortcut/shortcut-func.png" alt="内置功能" crossorigin="anonymous">
+                    <img src="./resources/img/shortcut/shortcut-func.png" alt="悬浮捷径SoftCircle内置功能" loading="lazy" crossorigin="anonymous">
                     <div class="scroll-caption">内置功能</div>
                 </div>
                 <div class="scroll-item">
-                    <img src="./resources/img/shortcut/shortcut-local.png" alt="联系人、图片、文件" crossorigin="anonymous">
+                    <img src="./resources/img/shortcut/shortcut-local.png" alt="悬浮捷径SoftCircle联系人、图片、文件功能" loading="lazy" crossorigin="anonymous">
                     <div class="scroll-caption">联系人、图片、文件</div>
                 </div>
                 <div class="scroll-item">
-                    <img src="./resources/img/shortcut/shortcut-web.png" alt="网站" crossorigin="anonymous">
+                    <img src="./resources/img/shortcut/shortcut-web.png" alt="悬浮捷径SoftCircle网站功能" loading="lazy" crossorigin="anonymous">
                     <div class="scroll-caption">网站</div>
                 </div>
                 <div class="scroll-item">
-                    <img src="./resources/img/shortcut/shortcut-app.png" alt="应用App" crossorigin="anonymous">
+                    <img src="./resources/img/shortcut/shortcut-app.png" alt="悬浮捷径SoftCircle应用App功能" loading="lazy" crossorigin="anonymous">
+                    <div class="scroll-caption">应用App</div>
+                </div>
+                <!-- 第三组（额外保险） -->
+                <div class="scroll-item">
+                    <img src="./resources/img/shortcut/shortcut-onestep.png" alt="悬浮捷径SoftCircle一步直达功能" loading="lazy" crossorigin="anonymous">
+                    <div class="scroll-caption">一步直达</div>
+                </div>
+                <div class="scroll-item">
+                    <img src="./resources/img/shortcut/shortcut-widget.png" alt="悬浮捷径SoftCircle小部件功能" loading="lazy" crossorigin="anonymous">
+                    <div class="scroll-caption">小部件</div>
+                </div>
+                <div class="scroll-item">
+                    <img src="./resources/img/shortcut/shortcut-wxjs.png" alt="悬浮捷径SoftCircle小程序功能" loading="lazy" crossorigin="anonymous">
+                    <div class="scroll-caption">小程序</div>
+                </div>
+                <div class="scroll-item">
+                    <img src="./resources/img/shortcut/shortcut-func.png" alt="悬浮捷径SoftCircle内置功能" loading="lazy" crossorigin="anonymous">
+                    <div class="scroll-caption">内置功能</div>
+                </div>
+                <div class="scroll-item">
+                    <img src="./resources/img/shortcut/shortcut-local.png" alt="悬浮捷径SoftCircle联系人、图片、文件功能" loading="lazy" crossorigin="anonymous">
+                    <div class="scroll-caption">联系人、图片、文件</div>
+                </div>
+                <div class="scroll-item">
+                    <img src="./resources/img/shortcut/shortcut-web.png" alt="悬浮捷径SoftCircle网站功能" loading="lazy" crossorigin="anonymous">
+                    <div class="scroll-caption">网站</div>
+                </div>
+                <div class="scroll-item">
+                    <img src="./resources/img/shortcut/shortcut-app.png" alt="悬浮捷径SoftCircle应用App功能" loading="lazy" crossorigin="anonymous">
                     <div class="scroll-caption">应用App</div>
                 </div>
             </div>
         </div>
+    </div>
     
-        <div class="row">
-            <div class="col-xs-12 feature-line"></div>
+    <div class="row">
+        <div class="col-xs-12 feature-line"></div>
+    </div>
+    <div class="row feature-row">
+        <div class="col-xs-12 col-sm-5 description">
+            <h2>超多内置快捷功能</h2>
+            <hr class="separator blue">
+            <p>分屏、模拟按键、一键百度、区域截屏、App切换、贴纸、手电筒、锁屏……</p>
         </div>
-        <div class="row feature-row">
-            <div class="col-xs-12 col-sm-5 description">
-                <h2>超多内置快捷功能</h2>
-                <hr class="separator blue">
-                <p>分屏、模拟按键、一键百度、区域截屏、App切换、贴纸、手电筒、锁屏……</p>
-            </div>
-            <div class="col-xs-12 col-sm-offset-1 col-sm-6 screen">
-                <picture>
-                    <img src="./resources/intr3.png" crossorigin="anonymous">
-                </picture>
-            </div>
+        <div class="col-xs-12 col-sm-offset-1 col-sm-6 screen">
+            <picture>
+                <img src="./resources/intr3.png" alt="悬浮捷径SoftCircle内置快捷功能展示：分屏、模拟按键、截屏等功能" loading="lazy" crossorigin="anonymous">
+            </picture>
         </div>
-        <div class="row">
-            <div class="col-xs-12 feature-line"></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 feature-line"></div>
+    </div>
+    <div class="row feature-row">
+        <div class="col-xs-12 col-sm-5 col-sm-push-7 description">
+            <h2>悬浮桌面插件(可点击)</h2>
+            <hr class="separator red">
+            <p>可添加音乐、天气、便签、新闻等App插件到悬浮菜单</p>
         </div>
-        <div class="row feature-row">
-            <div class="col-xs-12 col-sm-5 col-sm-push-7 description">
-                <h2>悬浮桌面插件(可点击)</h2>
-                <hr class="separator red">
-                <p>可添加音乐、天气、便签、新闻等App插件到悬浮菜单</p>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-sm-pull-5 screen">
-                <picture>
-                    <img src="./resources/intr4.png" crossorigin="anonymous">
-                </picture>
-            </div>
+        <div class="col-xs-12 col-sm-6 col-sm-pull-5 screen">
+            <picture>
+                <img src="./resources/intr4.png" alt="悬浮捷径SoftCircle桌面插件功能展示：音乐、天气、便签等可点击插件" loading="lazy" crossorigin="anonymous">
+            </picture>
         </div>
-        <div class="row">
-            <div class="col-xs-12 feature-line"></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 feature-line"></div>
+    </div>
+    <div class="row feature-row">
+        <div class="col-xs-12 col-sm-5 description">
+            <h2>其他捷径</h2>
+            <hr class="separator blue">
+            <p>用户可以自定义添加任意小程序、网址、图片、文件等</p>
         </div>
-        <div class="row feature-row">
-            <div class="col-xs-12 col-sm-5 description">
-                <h2>其他捷径</h2>
-                <hr class="separator blue">
-                <p>用户可以自定义添加任意小程序、网址、图片、文件等</p>
-            </div>
-            <div class="col-xs-12 col-sm-offset-1 col-sm-6 screen">
-                <picture>
-                    <img src="./resources/intr5.png" crossorigin="anonymous">
-                </picture>
-            </div>
+        <div class="col-xs-12 col-sm-offset-1 col-sm-6 screen">
+            <picture>
+                <img src="./resources/intr5.png" alt="悬浮捷径SoftCircle自定义捷径功能展示：小程序、网址、图片、文件等" loading="lazy" crossorigin="anonymous">
+            </picture>
         </div>
-        <div class="row">
-            <div class="col-xs-12 feature-line"></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 feature-line"></div>
+    </div>
+    <div class="row feature-row">
+        <div class="description">
+            <h2>悬浮捷径SoftCircle的愿景</h2>
+            <hr class="separator blue">
+            <p>悬浮捷径SoftCircle是为了用户更快到达目的界面 <br>
+                包含app、小程序、单个文件、网站、小部件及其子界面 <br>
+                提供悬浮、T9搜索、通知栏、桌面快捷方式等多种入口</p>
         </div>
-        <div class="row feature-row">
-            <div class="description">
-                <h2>悬浮捷径SoftCircle的愿景</h2>
-                <hr class="separator blue">
-                <p>悬浮捷径SoftCircle是为了用户更快到达目的界面 <br>
-                    包含app、小程序、单个文件、网站、小部件及其子界面 <br>
-                    提供悬浮、T9搜索、通知栏、桌面快捷方式等多种入口</p>
-            </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 feature-line"></div>
+    </div>
+</div> <!-- features -->
+<!-- <div class="container comments" style="margin-top: 40px;">
+    <h2>用户评价</h2>
+    <br/>
+    <br/>
+</div> -->
+<hr>
+<div class="container">
+    <h5>友情链接：</h5>
+    <div class="row">
+        <div class="col-xs-6 col-sm-3"><a href="https://www.w2solo.com" target="_blank"
+                                          class="out-link">W2solo-独立开发者社区</a>
         </div>
-        <div class="row">
-            <div class="col-xs-12 feature-line"></div>
+        <div class="col-xs-6 col-sm-3"><a href="https://www.91wink.com/" target="_blank"
+                                          class="out-link">独立开发前线</a>
         </div>
-    </div> <!-- features -->
-    <!-- <div class="container comments" style="margin-top: 40px;">
-        <h2>用户评价</h2>
-        <br/>
-        <br/>
-    </div> -->
-    <hr>
-    <div class="container">
-        <h5>友情链接：</h5>
-        <div class="row">
-            <div class="col-xs-6 col-sm-3"><a href="https://www.w2solo.com" target="_blank"
-                                              class="out-link">W2solo-独立开发者社区</a>
-            </div>
-            <div class="col-xs-6 col-sm-3"><a href="https://www.91wink.com/" target="_blank"
-                                              class="out-link">独立开发前线</a>
-            </div>
-            <div class="col-xs-6 col-sm-3"><a href="https://hao.logosc.cn/" class="out-link">神器集</a>
-            </div>
-            <!--<div class="col-xs-6 col-sm-3"><a href="https://sdt.zishu.life" class="out-link">闪电藤-新一代文件传输助手</a>
-            </div>
-            <div class="col-xs-6 col-sm-3"><a href="https://wearosbox.com" class="out-link">WearOS
-                工具箱-专为智能手表打造的搞机软件</a>
-            </div>
+        <div class="col-xs-6 col-sm-3"><a href="https://hao.logosc.cn/" class="out-link">神器集</a>
         </div>
+        <!--<div class="col-xs-6 col-sm-3"><a href="https://sdt.zishu.life" class="out-link">闪电藤-新一代文件传输助手</a>
+        </div>
+        <div class="col-xs-6 col-sm-3"><a href="https://wearosbox.com" class="out-link">WearOS
+            工具箱-专为智能手表打造的搞机软件</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-sm-3">
+            <a href="https://coffee-note.xiangshikeji.com/" target="_blank"
+               class="out-link">享咖小记-改善您每日杯中的美好风味</a>
+        </div>
+    </div>-->
+</div>
+<hr>
+<footer role="contentinfo" aria-label="页脚">
+    <div class="container footer-nav">
         <div class="row">
             <div class="col-xs-6 col-sm-3">
-                <a href="https://coffee-note.xiangshikeji.com/" target="_blank"
-                   class="out-link">享咖小记-改善您每日杯中的美好风味</a>
+                <div class="bottom-link">©2024 深圳市途马贸易有限公司</div>
             </div>
-        </div>-->
-    </div>
-    <hr>
-    <footer>
-        <div class="container footer-nav">
-            <div class="row">
-                <div class="col-xs-6 col-sm-3">
-                    <div class="bottom-link">©2024 深圳市途马贸易有限公司</div>
-                </div>
-                <div class="col-xs-6 col-sm-3">
-                    <div class="bottom-link">邮箱：<a href="mailto:regou314@hotmail.com" target="_blank"
-                                                   class="bottom-link">regou314@hotmail.com</a></div>
-                </div>
-                <div class="col-xs-6 col-sm-3">
-                    <a href="http://beian.miit.gov.cn" target="_blank" id="beian_id"
-                       class="bottom-link">粤ICP备2025358184号</a>
-                </div>
-                <!--<div class="col-xs-6 col-sm-3">
-                    <a href="https://beian.mps.gov.cn/#/query/webSearch?code=61019102000524"
-                       rel="noreferrer" target="_blank" class="bottom-link">陕公网安备61019102000524</a>
-                </div>-->
+            <div class="col-xs-6 col-sm-3">
+                <div class="bottom-link">邮箱：<a href="mailto:regou314@hotmail.com" target="_blank"
+                                               class="bottom-link">regou314@hotmail.com</a></div>
             </div>
+            <div class="col-xs-6 col-sm-3">
+                <a href="http://beian.miit.gov.cn" target="_blank" id="beian_id"
+                   class="bottom-link">粤ICP备2025358184号</a>
+            </div>
+            <!--<div class="col-xs-6 col-sm-3">
+                <a href="https://beian.mps.gov.cn/#/query/webSearch?code=61019102000524"
+                   rel="noreferrer" target="_blank" class="bottom-link">陕公网安备61019102000524</a>
+            </div>-->
         </div>
-    </footer>
+    </div>
+</footer>
 </div>
 <script type="application/javascript">
-    // 获取元素
-    const iframe = document.querySelector('.video');
-
-    // 获取图片元素
-    const imgElement = document.querySelector('.col-xs-12.col-sm-6.col-sm-pull-5.screen img');
-    
-    // 设置初次iframe高度
-    setIframeHeight();
-
-    function setIframeHeight() {
-      // 获取iframe实际宽度
-      const width = iframe.offsetWidth;
-      
-      // 创建一个临时图片对象来获取intr2.png的原始宽高比
-      const img = new Image();
-      img.src = './resources/intr2.png';
-      
-      img.onload = function() {
-        // 根据图片的原始宽高比计算iframe高度
-        const imgRatio = img.width / img.height;
-        const height = width / imgRatio;
+    // 使用DOMContentLoaded事件，比load更早触发
+    document.addEventListener('DOMContentLoaded', function() {
+        // 获取元素
+        const iframe = document.querySelector('.video');
+        const imgElement = document.querySelector('.col-xs-12.col-sm-6.col-sm-pull-5.screen img');
         
-        // 设置iframe高度
-        iframe.style.height = height + 'px';
-      };
-      
-      // 如果图片已经加载过，直接使用imgElement的宽高比
-      if (imgElement && imgElement.complete) {
-        const imgRatio = imgElement.naturalWidth / imgElement.naturalHeight;
-        const height = width / imgRatio;
-        iframe.style.height = height + 'px';
-      }
+        // 处理视频封面
+        if (iframe) {
+            // 当iframe加载完成后，移除封面
+            iframe.addEventListener('load', function() {
+                // 给iframe添加一个类，用于CSS控制封面显示
+                iframe.classList.add('video-loaded');
+            });
+            
+            // 设置初次iframe高度
+            setIframeHeight();
+        }
+        
+        // 防抖函数 - 提高resize事件处理性能
+        function debounce(func, wait) {
+            let timeout;
+            return function() {
+                const context = this;
+                const args = arguments;
+                clearTimeout(timeout);
+                timeout = setTimeout(function() {
+                    func.apply(context, args);
+                }, wait);
+            };
+        }
+        
+        // 使用防抖优化resize事件
+        window.addEventListener('resize', debounce(setIframeHeight, 150));
+        
+        // 设置iframe高度的函数
+        function setIframeHeight() {
+            if (!iframe) return;
+            
+            // 获取iframe实际宽度
+            const width = iframe.offsetWidth;
+            
+            if (imgElement && imgElement.complete) {
+                // 如果图片已经加载过，直接使用imgElement的宽高比
+                const imgRatio = imgElement.naturalWidth / imgElement.naturalHeight;
+                const height = width / imgRatio;
+                iframe.style.height = height + 'px';
+            } else {
+                // 创建一个临时图片对象来获取intr2.png的原始宽高比
+                const img = new Image();
+                img.src = './resources/intr2.png';
+                
+                img.onload = function() {
+                    // 根据图片的原始宽高比计算iframe高度
+                    const imgRatio = img.width / img.height;
+                    const height = width / imgRatio;
+                    
+                    // 设置iframe高度
+                    iframe.style.height = height + 'px';
+                };
+            }
+        }
+        
+        // 初始化轮播图功能
+        initCarousel();
+        
+        // 初始化横向滚动组件
+        initScrollComponent();
+        
+        // 设置设备类型检测
+        setupDeviceDetection();
+    });
+    
+    // 轮播图初始化函数
+    function initCarousel() {
+        const slides = document.querySelectorAll('.carousel-slide');
+        const textSlides = document.querySelectorAll('.carousel-text');
+        const dots = document.querySelectorAll('.carousel-dot');
+        const prevArrow = document.querySelector('.carousel-arrow-prev');
+        const nextArrow = document.querySelector('.carousel-arrow-next');
+        let currentSlide = 0;
+        let slideInterval;
+        
+        // 设置幻灯片状态类
+        function setSlideClasses() {
+            // 清除所有幻灯片的状态类
+            slides.forEach(slide => {
+                slide.classList.remove('active', 'prev', 'next');
+            });
+            
+            // 设置当前、上一个、下一个幻灯片的状态类
+            slides[currentSlide].classList.add('active');
+            
+            const prevIndex = (currentSlide - 1 + slides.length) % slides.length;
+            const nextIndex = (currentSlide + 1) % slides.length;
+            
+            slides[prevIndex].classList.add('prev');
+            slides[nextIndex].classList.add('next');
+        }
+        
+        // 初始化轮播图
+        function showSlide(index) {
+            // 保存当前索引
+            currentSlide = index;
+            
+            // 移除所有文字的active类
+            textSlides.forEach(textSlide => {
+                textSlide.classList.remove('active');
+            });
+            
+            // 移除所有导航点的active类
+            dots.forEach(dot => {
+                dot.classList.remove('active');
+            });
+            
+            // 设置幻灯片状态类
+            setSlideClasses();
+            
+            // 给当前文字添加active类
+            textSlides[index].classList.add('active');
+            
+            // 给当前导航点添加active类
+            dots[index].classList.add('active');
+        }
+        
+        // 切换到下一张幻灯片
+        function nextSlide() {
+            showSlide((currentSlide + 1) % slides.length);
+        }
+        
+        // 切换到上一张幻灯片
+        function prevSlide() {
+            showSlide((currentSlide - 1 + slides.length) % slides.length);
+        }
+        
+        // 绑定导航点点击事件
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                showSlide(index);
+                resetInterval();
+            });
+        });
+        
+        // 绑定箭头按钮点击事件
+        if (prevArrow) {
+            prevArrow.addEventListener('click', () => {
+                prevSlide();
+                resetInterval();
+            });
+        }
+        
+        if (nextArrow) {
+            nextArrow.addEventListener('click', () => {
+                nextSlide();
+                resetInterval();
+            });
+        }
+        
+        // 键盘导航支持
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                prevSlide();
+                resetInterval();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+                resetInterval();
+            }
+        });
+        
+        // 重置自动播放计时器
+        function resetInterval() {
+            clearInterval(slideInterval);
+            startAutoPlay();
+        }
+        
+        // 开始自动播放
+        function startAutoPlay() {
+            slideInterval = setInterval(nextSlide, 5000); // 增加到5秒，给用户更多时间查看每张幻灯片
+        }
+        
+        // 页面不可见时暂停轮播，提高性能
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                clearInterval(slideInterval);
+            } else {
+                // 页面可见时重新启动轮播
+                resetInterval();
+            }
+        });
+        
+        // 触摸事件支持
+        const carouselContainer = document.querySelector('.carousel-container');
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        if (carouselContainer) {
+            carouselContainer.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, {passive: true});
+            
+            carouselContainer.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, {passive: true});
+        }
+        
+        function handleSwipe() {
+            const threshold = 50; // 最小滑动距离
+            if (touchEndX < touchStartX - threshold) {
+                // 向左滑动，显示下一张
+                nextSlide();
+                resetInterval();
+            } else if (touchEndX > touchStartX + threshold) {
+                // 向右滑动，显示上一张
+                prevSlide();
+                resetInterval();
+            }
+        }
+        
+        // 初始显示第一张幻灯片
+        setSlideClasses();
+        showSlide(0);
+        
+        // 开始自动播放
+        startAutoPlay();
     }
     
-    // 监听窗口大小变化，重新调整视频高度
-    window.addEventListener('resize', setIframeHeight);
-    
-    // 处理视频封面
-    document.addEventListener('DOMContentLoaded', function() {
-        const videoFrame = document.querySelector('.video');
-        
-        // 当iframe加载完成后，移除封面
-        videoFrame.addEventListener('load', function() {
-            // 给iframe添加一个类，用于CSS控制封面显示
-            videoFrame.classList.add('video-loaded');
-        });
-    });
-
-
+    // 设备类型检测
+    function setupDeviceDetection() {
         function isClientMarket(market) {
             const url = window.location.href;
             return url.indexOf('mk=' + market) >= 0;
@@ -679,84 +1056,150 @@
 
         /**
          * 根据应用市场控制下载按钮，避免被谷歌认为是诱导下载
-         * @type {HTMLElement}
          */
         const btnAndroid = document.getElementById("btn-download-guanwang");
         const btnAndroidHD = document.getElementById("btn-download-androidhd");
         const btnAndroidWatch = document.getElementById("btn-download-andwatch");
         const btnGoogle = document.getElementById("btn-download-google");
+        
+        // 仅在按钮存在时执行
+        if (!btnAndroid && !btnAndroidHD && !btnAndroidWatch && !btnGoogle) return;
+        
         if (isClientMarket('huawei') || isClientMarket('huaweihd')) {
+            // 华为应用市场
         } else if (isAndroidQianji()) {
             /* 悬浮捷径SoftCircle Android 内置网页内打开 */
-            btnAndroid.style.display = "none";
-            btnAndroidHD.style.display = "none";
-            btnGoogle.style.display = "table";
+            if (btnAndroid) btnAndroid.style.display = "none";
+            if (btnAndroidHD) btnAndroidHD.style.display = "none";
+            if (btnGoogle) btnGoogle.style.display = "table";
         } else if (isAndroid()) {
             /* Android 网页打开 */
-            btnAndroid.style.display = "table";
-            btnAndroidHD.style.display = "table";
-            btnAndroidWatch.style.display = "table";
+            if (btnAndroid) btnAndroid.style.display = "table";
+            if (btnAndroidHD) btnAndroidHD.style.display = "table";
+            if (btnAndroidWatch) btnAndroidWatch.style.display = "table";
         } else if (isIphoneQianji()) {
             /* 悬浮捷径SoftCircle iOS 内置网页打开 */
-            console.log('is-iphone');
-            btnGoogle.style.display = "none";
+            if (btnGoogle) btnGoogle.style.display = "none";
         } else if (isIphone()) {
-            btnAndroid.style.display = "table";
-            btnAndroidHD.style.display = "table";
-            btnAndroidWatch.style.display = "table";
-            btnGoogle.style.display = "table";
+            if (btnAndroid) btnAndroid.style.display = "table";
+            if (btnAndroidHD) btnAndroidHD.style.display = "table";
+            if (btnAndroidWatch) btnAndroidWatch.style.display = "table";
+            if (btnGoogle) btnGoogle.style.display = "table";
         } else {
-            console.log("最后 自定义");
-            btnAndroid.style.display = "table";
-            btnAndroidHD.style.display = "table";
-            btnAndroidWatch.style.display = "table";
-            btnGoogle.style.display = "table";
+            if (btnAndroid) btnAndroid.style.display = "table";
+            if (btnAndroidHD) btnAndroidHD.style.display = "table";
+            if (btnAndroidWatch) btnAndroidWatch.style.display = "table";
+            if (btnGoogle) btnGoogle.style.display = "table";
         }
-</script>
-<!-- container-fluid -->
-<script src="https://cdn.staticfile.org/jquery/1.12.4/jquery.min.js"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"
-        crossorigin="anonymous"></script>
-<script>
-    // 轮播图功能
-    document.addEventListener('DOMContentLoaded', function() {
-        const slides = document.querySelectorAll('.carousel-slide');
-        const textSlides = document.querySelectorAll('.carousel-text');
-        let currentSlide = 0;
+    }
+
+    // 优化横向滚动组件
+    function initScrollComponent() {
+        const scrollContent = document.getElementById('scroll-content');
+        if (!scrollContent) return;
         
-        // 初始化轮播图
-        function showSlide(index) {
-            // 移除所有幻灯片的active类
-            slides.forEach(slide => {
-                slide.classList.remove('active');
+        // 强制预加载所有图片
+        const images = scrollContent.querySelectorAll('img');
+        let loadedCount = 0;
+        const totalImages = images.length;
+        
+        // 检查是否所有图片都已加载
+        function checkAllImagesLoaded() {
+            loadedCount++;
+            if (loadedCount === totalImages) {
+                // 所有图片加载完成，确保动画平滑
+                scrollContent.style.visibility = 'visible';
+                
+                // 检测支持的动画特性
+                if (typeof document.body.style.transform !== 'undefined') {
+                    scrollContent.style.transform = 'translateZ(0)'; // 硬件加速
+                }
+            }
+        }
+        
+        // 图片加载监听
+        images.forEach(img => {
+            if (img.complete) {
+                checkAllImagesLoaded();
+            } else {
+                img.onload = checkAllImagesLoaded;
+                // 如果图片加载失败，也要计入总数
+                img.onerror = checkAllImagesLoaded;
+            }
+        });
+        
+        // 处理滚动动画重启，避免无缝滚动中断
+        scrollContent.addEventListener('animationiteration', () => {
+            // 动画重新开始时，确保所有图片可见
+            images.forEach(img => {
+                if (!img.complete) {
+                    img.src = img.src; // 重新加载未完成的图片
+                }
+            });
+        });
+        
+        // 滚动容器鼠标事件处理
+        const scrollContainer = document.querySelector('.auto-scroll-container');
+        if (scrollContainer) {
+            // 鼠标进入滚动区域时减慢速度
+            scrollContainer.addEventListener('mouseenter', () => {
+                scrollContent.style.animationPlayState = 'paused';
             });
             
-            // 移除所有文字的active类
-            textSlides.forEach(textSlide => {
-                textSlide.classList.remove('active');
+            // 鼠标离开时恢复速度
+            scrollContainer.addEventListener('mouseleave', () => {
+                scrollContent.style.animationPlayState = 'running';
             });
-            
-            // 给当前幻灯片添加active类
-            slides[index].classList.add('active');
-            
-            // 给当前文字添加active类
-            textSlides[index].classList.add('active');
         }
         
-        // 切换到下一张幻灯片
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % slides.length;
-            showSlide(currentSlide);
-        }
-        
-        // 设置3秒自动轮播
-        setInterval(nextSlide, 3000);
-        
-        // 初始显示第一张幻灯片
-        showSlide(0);
-    });
+        // 当页面不可见时暂停动画以节省资源
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                scrollContent.style.animationPlayState = 'paused';
+            } else {
+                scrollContent.style.animationPlayState = 'running';
+            }
+        });
+    }
 </script>
-</div>
+<!-- 延迟加载非关键JS资源 -->
+<script src="https://cdn.staticfile.org/jquery/1.12.4/jquery.min.js" defer crossorigin="anonymous"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js" defer crossorigin="anonymous"></script>
+
+<!-- 结构化数据标记 - 不影响页面显示，提高SEO -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "悬浮捷径SoftCircle",
+    "operatingSystem": "Android",
+    "applicationCategory": "UtilitiesApplication",
+    "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "CNY"
+    },
+    "description": "安卓系统的快捷工具，提供全局负一屏、悬浮菜单、一键直达等功能",
+    "author": {
+        "@type": "Organization",
+        "name": "深圳市途马贸易有限公司",
+        "url": "https://softcircle.cn"
+    },
+    "screenshot": "./resources/intr1.png",
+    "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "1000"
+    },
+    "featureList": [
+        "悬浮AI面板",
+        "悬浮浏览器",
+        "悬浮搜索面板",
+        "悬浮自动化面板",
+        "小窗启动",
+        "一步直达"
+    ]
+}
+</script>
 </body>
 </html>

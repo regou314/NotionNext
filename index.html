@@ -17,12 +17,17 @@
     <meta property="og:url" content="https://softcircle.cn">
     <meta property="og:type" content="website">
     
+    <!-- DNS预解析和预连接，提高资源加载速度 -->
+    <link rel="dns-prefetch" href="//cdn.staticfile.org">
+    <link rel="preconnect" href="//cdn.staticfile.org" crossorigin>
+    <link rel="dns-prefetch" href="//player.bilibili.com">
+    <link rel="preconnect" href="//player.bilibili.com" crossorigin>
+    
     <!-- 预加载关键资源 -->
-    <link rel="preload" href="./resources/app_icon.png" as="image">
-    <link rel="preload" href="./resources/txtlogo.png" as="image">
+    <link rel="preload" href="./resources/app_icon.png" as="image" fetchpriority="high">
+    <link rel="preload" href="./resources/txtlogo.png" as="image" fetchpriority="high">
     <link rel="preload" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" as="style">
-    <link rel="preload" href="https://cdn.staticfile.org/jquery/1.12.4/jquery.min.js" as="script">
-    <link rel="preload" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js" as="script">
+    <link rel="preload" href="./resources/img/shortcut/shortcut-onestep.png" as="image" fetchpriority="high">
     
     <link rel="shortcut icon" href="./resources/app_icon.png" type="image/x-icon">
 
@@ -103,7 +108,8 @@
             position: relative;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            min-height: 320px; /* 减小最小高度 */
+            min-height: 320px;
+            background: transparent;
         }
         
         .carousel-slides {
@@ -117,38 +123,45 @@
             width: 100%;
             flex-shrink: 0;
             opacity: 0;
-            transition: all 0.8s ease;
-            position: relative;
-            display: none;
-            transform: scale(0.9);
+            position: absolute;
+            left: 0;
+            top: 0;
+            transition: opacity 0.8s ease, transform 0.8s ease; /* 修改过渡效果 */
+            transform: translateX(100%); /* 初始位置在右侧 */
+            visibility: hidden; /* 非活动状态时隐藏 */
         }
         
         .carousel-slide.active {
             opacity: 1;
-            z-index: 1;
-            display: block;
-            transform: scale(1);
+            z-index: 2;
+            transform: translateX(0); /* 当前幻灯片居中 */
+            visibility: visible; /* 活动状态时显示 */
         }
         
         .carousel-slide.prev {
             opacity: 0;
-            transform: translateX(-5%) scale(0.9);
+            transform: translateX(-100%); /* 前一张在左侧 */
+            z-index: 1;
+            visibility: hidden;
         }
         
         .carousel-slide.next {
             opacity: 0;
-            transform: translateX(5%) scale(0.9);
+            transform: translateX(100%); /* 下一张在右侧 */
+            z-index: 1;
+            visibility: hidden;
         }
         
         .carousel-slide img {
-            width: 100%;
-            max-width: 500px; /* 添加最大宽度限制 */
+            width: 95%;
+            max-width: 350px; /* 进一步减小最大宽度限制 */
             height: auto;
             border-radius: 8px;
             display: block;
             margin: 0 auto; /* 居中显示 */
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: none; /* 移除图片阴影 */
             transition: all 0.8s ease;
+            background: transparent; /* 确保背景透明 */
         }
         
         /* 轮播文字样式增强 */
@@ -388,6 +401,23 @@
                 padding: 5px;
             }
         }
+        
+        /* 添加导航栏图标样式 */
+        .app-icon {
+            object-fit: contain;
+            vertical-align: middle;
+        }
+
+        #site-logo {
+            width: 40px;
+            height: 40px;
+            margin-right: 5px;
+        }
+
+        #site-txt {
+            height: 32px;
+            width: auto;
+        }
     </style>
 </head>
 <body>
@@ -402,7 +432,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="https://softcircle.cn">
-                <img src="./resources/app_icon.png" class="app-icon" alt="悬浮捷径SoftCircle应用图标" id="site-logo" width="30" height="30">
+                <img src="./resources/app_icon.png" class="app-icon" alt="悬浮捷径SoftCircle应用图标" id="site-logo" width="40" height="40">
             </a>
             <a class="navbar-brand" href="https://softcircle.cn">
                 <img src="./resources/txtlogo.png" class="app-icon" alt="悬浮捷径SoftCircle文字标志" id="site-txt">
@@ -488,7 +518,7 @@
                 <p>超多捷径、快捷功能 <br> 设计巧妙、操作有趣 <br> 简约强大、不占内存</p>
             </div>
             <div class="col-xs-12 col-sm-offset-1 col-sm-6 screen">
-                <iframe src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1&high_quality=1&danmaku=0" class="video" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="width:100%;"> </iframe>
+                <iframe src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1&high_quality=1&danmaku=0" class="video" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="width:100%;" loading="lazy"> </iframe>
             </div>
         </div>
         <div class="row">
@@ -796,17 +826,141 @@
 </footer>
 </div>
 <script type="application/javascript">
-    // 使用DOMContentLoaded事件，比load更早触发
-    document.addEventListener('DOMContentLoaded', function() {
-        // 获取元素
-        const iframe = document.querySelector('.video');
-        const imgElement = document.querySelector('.col-xs-12.col-sm-6.col-sm-pull-5.screen img');
+    // 优化横向滚动组件
+    function initScrollComponent() {
+        const scrollContent = document.getElementById('scroll-content');
+        if (!scrollContent) return;
         
-        // 处理视频封面
+        // 使用Intersection Observer优化图片加载
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        if (img.dataset.src) {
+                            img.src = img.dataset.src;
+                            img.removeAttribute('data-src');
+                        }
+                        observer.unobserve(img);
+                    }
+                });
+            }, {
+                rootMargin: '200px 0px' // 预加载视口外200px的图片
+            });
+            
+            // 只对懒加载的图片应用观察器
+            const lazyImages = scrollContent.querySelectorAll('img[loading="lazy"]');
+            lazyImages.forEach(img => {
+                // 保存原始src到data-src
+                if (!img.dataset.src && img.src) {
+                    img.dataset.src = img.src;
+                    // 清空src以避免立即加载，但保留第一组图片的src以确保可见
+                    if (!img.closest('.scroll-item:nth-child(-n+7)')) {
+                        img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"%3E%3C/svg%3E';
+                    }
+                }
+                imageObserver.observe(img);
+            });
+        }
+        
+        // 强制预加载第一组图片
+        const firstGroupImages = scrollContent.querySelectorAll('.scroll-item:nth-child(-n+7) img');
+        let loadedCount = 0;
+        const totalFirstGroupImages = firstGroupImages.length;
+        
+        // 检查是否所有图片都已加载
+        function checkAllImagesLoaded() {
+            loadedCount++;
+            if (loadedCount >= totalFirstGroupImages) {
+                // 第一组图片加载完成，激活动画
+                scrollContent.style.visibility = 'visible';
+                scrollContent.style.opacity = '1';
+                
+                // 优化动画性能
+                requestAnimationFrame(() => {
+                    scrollContent.style.transform = 'translateZ(0)'; // 硬件加速
+                });
+            }
+        }
+        
+        // 第一组图片加载监听
+        firstGroupImages.forEach(img => {
+            if (img.complete) {
+                checkAllImagesLoaded();
+            } else {
+                img.onload = checkAllImagesLoaded;
+                img.onerror = checkAllImagesLoaded;
+            }
+        });
+        
+        // 动画迭代优化
+        scrollContent.addEventListener('animationiteration', () => {
+            // 使用requestIdleCallback在浏览器空闲时间处理图片加载
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(() => {
+                    const pendingImages = scrollContent.querySelectorAll('img[data-src]');
+                    if (pendingImages.length > 0) {
+                        pendingImages.forEach(img => {
+                            img.src = img.dataset.src;
+                            img.removeAttribute('data-src');
+                        });
+                    }
+                });
+            }
+        });
+        
+        // 滚动容器事件委托优化
+        const scrollContainer = document.querySelector('.auto-scroll-container');
+        if (scrollContainer) {
+            scrollContainer.addEventListener('mouseenter', () => {
+                scrollContent.style.animationPlayState = 'paused';
+            });
+            
+            scrollContainer.addEventListener('mouseleave', () => {
+                scrollContent.style.animationPlayState = 'running';
+            });
+        }
+        
+        // 页面可见性API优化
+        const handleVisibilityChange = () => {
+            scrollContent.style.animationPlayState = document.hidden ? 'paused' : 'running';
+        };
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+    }
+    
+    // 优化iframe加载
+    function setIframeHeight() {
+        const iframe = document.querySelector('.video');
+        if (!iframe) return;
+        
+        // 获取iframe实际宽度
+        const width = iframe.offsetWidth;
+        
+        // 使用参考图片的宽高比，而不是固定的16:9
+        const img = new Image();
+        img.src = './resources/intr2.png';
+        
+        // 设置临时高度以避免布局偏移
+        iframe.style.height = (width * 0.75) + 'px'; // 临时设置一个合理比例
+        
+        img.onload = function() {
+            // 根据图片的原始宽高比计算iframe高度
+            const imgRatio = img.width / img.height;
+            const height = width / imgRatio;
+            
+            // 设置iframe高度
+            iframe.style.height = height + 'px';
+        };
+    }
+    
+    // 优化DOMContentLoaded
+    document.addEventListener('DOMContentLoaded', function() {
+        // 限制事件处理器作用域
+        const iframe = document.querySelector('.video');
+        
         if (iframe) {
-            // 当iframe加载完成后，移除封面
+            // 优化iframe加载
             iframe.addEventListener('load', function() {
-                // 给iframe添加一个类，用于CSS控制封面显示
                 iframe.classList.add('video-loaded');
             });
             
@@ -814,58 +968,31 @@
             setIframeHeight();
         }
         
-        // 防抖函数 - 提高resize事件处理性能
+        // 防抖函数 - 更高效的实现
         function debounce(func, wait) {
             let timeout;
             return function() {
                 const context = this;
                 const args = arguments;
                 clearTimeout(timeout);
-                timeout = setTimeout(function() {
-                    func.apply(context, args);
-                }, wait);
+                timeout = setTimeout(() => func.apply(context, args), wait);
             };
         }
         
-        // 使用防抖优化resize事件
-        window.addEventListener('resize', debounce(setIframeHeight, 150));
+        // 使用被动事件监听优化触摸事件
+        window.addEventListener('resize', debounce(setIframeHeight, 150), {passive: true});
         
-        // 设置iframe高度的函数
-        function setIframeHeight() {
-            if (!iframe) return;
+        // 异步初始化非关键组件
+        setTimeout(() => {
+            // 初始化轮播图功能
+            initCarousel();
             
-            // 获取iframe实际宽度
-            const width = iframe.offsetWidth;
-            
-            if (imgElement && imgElement.complete) {
-                // 如果图片已经加载过，直接使用imgElement的宽高比
-                const imgRatio = imgElement.naturalWidth / imgElement.naturalHeight;
-                const height = width / imgRatio;
-                iframe.style.height = height + 'px';
-            } else {
-                // 创建一个临时图片对象来获取intr2.png的原始宽高比
-                const img = new Image();
-                img.src = './resources/intr2.png';
-                
-                img.onload = function() {
-                    // 根据图片的原始宽高比计算iframe高度
-                    const imgRatio = img.width / img.height;
-                    const height = width / imgRatio;
-                    
-                    // 设置iframe高度
-                    iframe.style.height = height + 'px';
-                };
-            }
-        }
+            // 设置设备类型检测
+            setupDeviceDetection();
+        }, 0);
         
-        // 初始化轮播图功能
-        initCarousel();
-        
-        // 初始化横向滚动组件
+        // 优先初始化横向滚动组件
         initScrollComponent();
-        
-        // 设置设备类型检测
-        setupDeviceDetection();
     });
     
     // 轮播图初始化函数
@@ -1091,75 +1218,6 @@
             if (btnAndroidWatch) btnAndroidWatch.style.display = "table";
             if (btnGoogle) btnGoogle.style.display = "table";
         }
-    }
-
-    // 优化横向滚动组件
-    function initScrollComponent() {
-        const scrollContent = document.getElementById('scroll-content');
-        if (!scrollContent) return;
-        
-        // 强制预加载所有图片
-        const images = scrollContent.querySelectorAll('img');
-        let loadedCount = 0;
-        const totalImages = images.length;
-        
-        // 检查是否所有图片都已加载
-        function checkAllImagesLoaded() {
-            loadedCount++;
-            if (loadedCount === totalImages) {
-                // 所有图片加载完成，确保动画平滑
-                scrollContent.style.visibility = 'visible';
-                
-                // 检测支持的动画特性
-                if (typeof document.body.style.transform !== 'undefined') {
-                    scrollContent.style.transform = 'translateZ(0)'; // 硬件加速
-                }
-            }
-        }
-        
-        // 图片加载监听
-        images.forEach(img => {
-            if (img.complete) {
-                checkAllImagesLoaded();
-            } else {
-                img.onload = checkAllImagesLoaded;
-                // 如果图片加载失败，也要计入总数
-                img.onerror = checkAllImagesLoaded;
-            }
-        });
-        
-        // 处理滚动动画重启，避免无缝滚动中断
-        scrollContent.addEventListener('animationiteration', () => {
-            // 动画重新开始时，确保所有图片可见
-            images.forEach(img => {
-                if (!img.complete) {
-                    img.src = img.src; // 重新加载未完成的图片
-                }
-            });
-        });
-        
-        // 滚动容器鼠标事件处理
-        const scrollContainer = document.querySelector('.auto-scroll-container');
-        if (scrollContainer) {
-            // 鼠标进入滚动区域时减慢速度
-            scrollContainer.addEventListener('mouseenter', () => {
-                scrollContent.style.animationPlayState = 'paused';
-            });
-            
-            // 鼠标离开时恢复速度
-            scrollContainer.addEventListener('mouseleave', () => {
-                scrollContent.style.animationPlayState = 'running';
-            });
-        }
-        
-        // 当页面不可见时暂停动画以节省资源
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden) {
-                scrollContent.style.animationPlayState = 'paused';
-            } else {
-                scrollContent.style.animationPlayState = 'running';
-            }
-        });
     }
 </script>
 <!-- 延迟加载非关键JS资源 -->

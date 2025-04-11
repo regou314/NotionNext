@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>悬浮捷径</title>
+    <title>悬浮捷径-安卓系统的hao123</title>
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
@@ -418,6 +418,88 @@
             height: 32px;
             width: auto;
         }
+
+        /* 添加媒体推荐区域样式 */
+        .media-recommendations {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 800px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .media-recommendations h3 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        .media-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .media-card {
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 8px;
+            padding: 15px;
+            width: calc(33.333% - 20px);
+            min-width: 200px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #333;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .media-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            background: rgba(255, 255, 255, 0.6);
+        }
+        
+        .media-card h4 {
+            margin: 0 0 10px 0;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .media-card p {
+            margin: 0;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .years-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #a8d5ff, #4CAF50);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin: 10px auto;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .media-card {
+                width: calc(50% - 20px);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .media-card {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -473,9 +555,42 @@
 </nav>
 <div class="container-fluid">
     <div class="container top-section">
+        
         <div class="row">
             <div class="col-xs-12">
-                <h1 id="title">安卓系统的hao123</h1>
+                <h1 id="title">安卓系统的hao123 <span class="years-badge" style="font-size: 16px; padding: 4px 10px; vertical-align: middle; margin-left: 10px;">迭代10年</span></h1>
+
+                <div class="media-recommendations">
+                    <h3>多家自媒体推荐</h3>
+                    <div class="media-cards">
+                        <a href="https://mp.weixin.qq.com/s/wvatPyQjSGSBN-fZiptpCw" target="_blank" class="media-card">
+                            <h4>网罗灯下黑</h4>
+                            <p>专题推荐</p>
+                        </a>
+                        <a href="https://mp.weixin.qq.com/s/tVmdshpjQgcqoAyuoLI2Xg" target="_blank" class="media-card">
+                            <h4>最美应用</h4>
+                            <p>应用推荐</p>
+                        </a>
+                        <a href="https://mp.weixin.qq.com/s/-1xaWrTi8gm-S2qjx77mog" target="_blank" class="media-card">
+                            <h4>开源阅读</h4>
+                            <p>应用推荐</p>
+                        </a>
+                    </div>
+
+                <!-- 下载按钮部分 -->
+                <div class="download-buttons text-center" style="margin: 30px auto; display: flex; justify-content: center; flex-wrap: wrap; gap: 15px;">
+                    <a id="btn-download-guanwang" href="https://www.pgyer.com/softcircle" class="btn btn-primary btn-lg" style="margin: 0; min-width: 200px; text-align: left; padding-left: 30px;">
+                        <i class="glyphicon glyphicon-download-alt"></i> 官网下载
+                    </a>
+                    <a id="btn-download-androidhd" href="https://a.app.qq.com/o/simple.jsp?pkgname=com.rsyuan.softcircle&fromcase=70051&g_f=1182517&scenevia=XQYFX" target="_blank" class="btn btn-success btn-lg" style="margin: 0; min-width: 200px; text-align: left; padding-left: 30px;">
+                        <i class="glyphicon glyphicon-phone"></i> 应用宝下载
+                    </a>
+                    <a id="btn-download-google" href="https://play.google.com/store/apps/details?id=com.rsyuan.softcircle" target="_blank" class="btn btn-info btn-lg" style="margin: 0; min-width: 200px; text-align: left; padding-left: 30px;">
+                        <i class="glyphicon glyphicon-play"></i> Google Play 下载
+                    </a>
+                </div>
+                </div>
+
                 <div class="feature-highlights"> 
                     <div class="feature-main">
                         <p><strong>全局负一屏：</strong>
@@ -489,19 +604,6 @@
                         <p><strong>悬浮球：</strong>可小窗启动任意小程序、一步、网址、文件、图片等任意位置</p>
                         <p><strong>系统菜单：</strong>所有快捷方式和内置功能都支持添加到通知栏、磁贴、小部件、桌面等快捷方式中</p>
                     </div>
-                </div>
-                
-                <!-- 下载按钮部分 -->
-                <div class="download-buttons text-center" style="margin: 30px auto; display: flex; justify-content: center; flex-wrap: wrap; gap: 15px;">
-                    <a id="btn-download-guanwang" href="https://www.pgyer.com/softcircle" class="btn btn-primary btn-lg" style="margin: 0; min-width: 200px;">
-                        <i class="glyphicon glyphicon-download-alt"></i> 官网下载
-                    </a>
-                    <a id="btn-download-androidhd" href="https://a.app.qq.com/o/simple.jsp?pkgname=com.rsyuan.softcircle&fromcase=70051&g_f=1182517&scenevia=XQYFX" target="_blank" class="btn btn-success btn-lg" style="margin: 0; min-width: 200px;">
-                        <i class="glyphicon glyphicon-phone"></i> 应用宝下载
-                    </a>
-                    <a id="btn-download-google" href="https://play.google.com/store/apps/details?id=com.rsyuan.softcircle" target="_blank" class="btn btn-info btn-lg" style="margin: 0; min-width: 200px;">
-                        <i class="glyphicon glyphicon-play"></i> Google Play 下载
-                    </a>
                 </div>
             </div>
         </div>

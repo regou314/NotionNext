@@ -500,6 +500,222 @@
                 width: 100%;
             }
         }
+        
+        /* 特性轮播样式 - iOS风格 */
+        .feature-carousel {
+            margin: 50px 0 60px;
+            position: relative;
+            background: transparent;
+            padding: 0;
+            border: none;
+        }
+        
+        /* 标签导航样式 */
+        .feature-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            border-bottom: none;
+            padding: 0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .feature-tab {
+            padding: 12px 24px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+            position: relative;
+            flex: 1;
+            font-size: 16px;
+            color: #8e8e93;
+            margin: 0 5px;
+            font-weight: normal;
+            border-radius: 20px;
+            background: transparent;
+        }
+        
+        .feature-tab:hover {
+            background: rgba(255, 255, 255, 0.5);
+            color: #333;
+        }
+        
+        .feature-tab.active {
+            background: rgba(255, 255, 255, 0.8);
+            color: #007aff;
+            font-weight: bold;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        
+        .feature-tab.active:after {
+            display: none;
+        }
+        
+        /* 内容区域样式 */
+        .feature-content-wrapper {
+            position: relative;
+            min-height: 250px;
+            overflow: hidden;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0;
+        }
+        
+        .feature-content {
+            position: absolute;
+            width: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease;
+            transform: translateZ(0); /* 开启硬件加速 */
+            will-change: opacity; /* 提示浏览器该元素将变化 */
+            padding: 0;
+        }
+        
+        .feature-content.active {
+            opacity: 1;
+            visibility: visible;
+            position: relative;
+            transform: translateZ(0);
+        }
+        
+        .feature-content .row {
+            margin-left: 0;
+            margin-right: 0;
+        }
+        
+        .feature-content .col-xs-12 {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+        
+        .feature-text {
+            padding: 15px 25px 15px 0;
+            line-height: 1.6;
+            font-size: 16px;
+            color: #333;
+        }
+        
+        .feature-text h3 {
+            margin: 0 0 15px 0;
+            font-size: 20px;
+            color: #007aff;
+        }
+        
+        .feature-text p {
+            margin-bottom: 20px;
+        }
+        
+        .feature-text .features-list {
+            margin: 0 0 15px 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .feature-text .feature-item {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.6);
+            padding: 8px 16px;
+            margin: 5px 8px;
+            border-radius: 15px;
+            border: none;
+            font-size: 14px;
+            color: #333;
+            text-align: center;
+        }
+        
+        .feature-media {
+            width: 100%;
+            max-height: 650px;
+            object-fit: cover;
+            border-radius: 12px;
+            transform: translateZ(0); /* 开启硬件加速 */
+        }
+        
+        .feature-video {
+            padding: 0 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .feature-video iframe {
+            width: 338px; /* 9:16比例下，高度600px对应的宽度 */
+            height: 600px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transform: translateZ(0); /* 开启硬件加速 */
+            will-change: transform; /* 提示浏览器该元素将变化 */
+            max-width: 100%;
+        }
+        
+        @media (max-width: 768px) {
+            .feature-content .row {
+                display: flex;
+                flex-direction: column-reverse;
+            }
+            
+            .feature-carousel {
+                margin: 30px 0 40px;
+                padding: 0 10px;
+            }
+            
+            .feature-content-wrapper {
+                padding: 0 5px;
+            }
+            
+            .feature-content .col-xs-12 {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+            
+            .feature-text {
+                margin-top: 25px;
+                padding: 10px 15px;
+            }
+            
+            .feature-video iframe {
+                width: 253px; /* 9:16比例下，高度450px对应的宽度 */
+                height: 450px;
+            }
+            
+            .feature-tabs {
+                flex-wrap: wrap;
+                margin-bottom: 30px;
+            }
+            
+            .feature-tab {
+                padding: 10px 20px;
+                font-size: 14px;
+                margin: 0 4px;
+                flex: 0 0 auto;
+                min-width: 80px;
+            }
+            
+            .feature-video {
+                padding: 0 10px;
+            }
+        }
+        
+        /* 键盘导航提示 */
+        .keyboard-nav-hint {
+            text-align: center;
+            margin: 30px 0 0;
+            font-size: 12px;
+            color: #8e8e93;
+            opacity: 0.8;
+            font-weight: normal;
+            letter-spacing: normal;
+        }
     </style>
 </head>
 <body>
@@ -558,7 +774,7 @@
         
         <div class="row">
             <div class="col-xs-12">
-                <h1 id="title">安卓系统的hao123 <span class="years-badge" style="font-size: 16px; padding: 4px 10px; vertical-align: middle; margin-left: 10px;">迭代10年</span></h1>
+                <h1 id="title">安卓系统的任申元 <span class="years-badge" style="font-size: 16px; padding: 4px 10px; vertical-align: middle; margin-left: 10px;">迭代10年</span></h1>
 
                 <div class="media-recommendations">
                     <h3>多家自媒体推荐</h3>
@@ -591,18 +807,85 @@
                 </div>
                 </div>
 
-                <div class="feature-highlights"> 
-                    <div class="feature-main">
-                        <p><strong>全局负一屏：</strong>
-                            <span class="feature-item">悬浮AI面板(免费)</span>
-                            <span class="feature-item">悬浮浏览器</span>
-                            <span class="feature-item">悬浮搜索面板</span>
-                            <span class="feature-item">悬浮自动化面板</span>
-                        </p>
+                <!-- 特性轮播组件 - 替换原来的feature-highlights -->
+                <div class="feature-carousel">
+                    <!-- 始终显示的标题导航 -->
+                    <div class="feature-tabs">
+                        <div class="feature-tab active" data-tab="tab1">
+                            <strong>全局负一屏</strong>
+                        </div>
+                        <div class="feature-tab" data-tab="tab2">
+                            <strong>悬浮球</strong>
+                        </div>
+                        <div class="feature-tab" data-tab="tab3">
+                            <strong>系统菜单</strong>
+                        </div>
                     </div>
-                    <div class="feature-secondary">
-                        <p><strong>悬浮球：</strong>可小窗启动任意小程序、一步、网址、文件、图片等任意位置</p>
-                        <p><strong>系统菜单：</strong>所有快捷方式和内置功能都支持添加到通知栏、磁贴、小部件、桌面等快捷方式中</p>
+                    
+                    <!-- 轮播内容区域 -->
+                    <div class="feature-content-wrapper">
+                        <!-- 全局负一屏内容 -->
+                        <div class="feature-content active" id="tab1">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 feature-text">
+                                    <h3>全局负一屏</h3>
+                                    <p>智能工具面板，随时可用的全局快捷功能，一步直达您需要的功能。</p>
+                                    <ul class="features-list">
+                                        <li class="feature-item">悬浮AI面板(免费)</li>
+                                        <li class="feature-item">悬浮浏览器</li>
+                                        <li class="feature-item">悬浮搜索面板</li>
+                                        <li class="feature-item">悬浮自动化面板</li>
+                                    </ul>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 feature-video">
+                                    <iframe src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" class="feature-media"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 悬浮球内容 -->
+                        <div class="feature-content" id="tab2">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 feature-text">
+                                    <h3>悬浮球</h3>
+                                    <p>一键快速启动您常用的功能，提高操作效率。</p>
+                                    <ul class="features-list">
+                                        <li class="feature-item">小窗启动小程序</li>
+                                        <li class="feature-item">一步直达</li>
+                                        <li class="feature-item">快速启动网址</li>
+                                        <li class="feature-item">文件图片直达</li>
+                                    </ul>
+                                    <p>无论您在使用哪个应用，随时可以快速调用常用功能。</p>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 feature-video">
+                                    <iframe src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" class="feature-media"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 系统菜单内容 -->
+                        <div class="feature-content" id="tab3">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 feature-text">
+                                    <h3>系统菜单</h3>
+                                    <p>灵活添加快捷方式到系统各处，随时随地使用。</p>
+                                    <ul class="features-list">
+                                        <li class="feature-item">通知栏添加</li>
+                                        <li class="feature-item">磁贴快捷方式</li>
+                                        <li class="feature-item">桌面小部件</li>
+                                        <li class="feature-item">自定义组合</li>
+                                    </ul>
+                                    <p>为您提供多样化的访问方式，提高您的工作效率。</p>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 feature-video">
+                                    <iframe src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" class="feature-media"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="keyboard-nav-hint">
+                        提示：您可以使用键盘左右箭头键切换功能
                     </div>
                 </div>
             </div>
@@ -1067,6 +1350,132 @@
         };
     }
     
+    // 特性轮播功能
+    function initFeatureCarousel() {
+        // 获取元素
+        const tabs = document.querySelectorAll('.feature-tab');
+        const contents = document.querySelectorAll('.feature-content');
+        const carouselContainer = document.querySelector('.feature-carousel');
+        let currentTab = 0;
+        let autoPlayInterval;
+        let isPaused = false;
+        
+        // 显示指定标签内容
+        function showTab(index) {
+            // 更新当前标签索引
+            currentTab = index;
+            
+            // 移除所有活动类
+            tabs.forEach(tab => tab.classList.remove('active'));
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // 添加活动类到当前项
+            tabs[index].classList.add('active');
+            contents[index].classList.add('active');
+            
+            // 处理iframe视频（如果需要）
+            // bilibili的iframe不需要额外的暂停/播放操作，它会自动处理
+        }
+        
+        // 下一个标签
+        function nextTab() {
+            showTab((currentTab + 1) % tabs.length);
+        }
+        
+        // 上一个标签
+        function prevTab() {
+            showTab((currentTab - 1 + tabs.length) % tabs.length);
+        }
+        
+        // 绑定标签点击事件
+        tabs.forEach((tab, index) => {
+            tab.addEventListener('click', () => {
+                showTab(index);
+                clearInterval(autoPlayInterval);
+                startAutoPlay();
+            });
+        });
+        
+        // 键盘导航
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                prevTab();
+                clearInterval(autoPlayInterval);
+                startAutoPlay();
+            } else if (e.key === 'ArrowRight') {
+                nextTab();
+                clearInterval(autoPlayInterval);
+                startAutoPlay();
+            }
+        });
+        
+        // 自动轮播
+        function startAutoPlay() {
+            clearInterval(autoPlayInterval);
+            if (!isPaused) {
+                autoPlayInterval = setInterval(nextTab, 10000);
+            }
+        }
+        
+        // 鼠标悬停时暂停轮播
+        if (carouselContainer) {
+            carouselContainer.addEventListener('mouseenter', () => {
+                isPaused = true;
+                clearInterval(autoPlayInterval);
+            });
+            
+            carouselContainer.addEventListener('mouseleave', () => {
+                isPaused = false;
+                startAutoPlay();
+            });
+        }
+        
+        // 页面可见性变化处理
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                clearInterval(autoPlayInterval);
+            } else {
+                startAutoPlay();
+            }
+        });
+        
+        // 触摸事件支持
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        if (carouselContainer) {
+            carouselContainer.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+                // 触摸开始时暂停自动轮播
+                clearInterval(autoPlayInterval);
+            }, {passive: true});
+            
+            carouselContainer.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+                // 触摸结束后恢复自动轮播
+                startAutoPlay();
+            }, {passive: true});
+        }
+        
+        function handleSwipe() {
+            const threshold = 50;
+            if (touchEndX < touchStartX - threshold) {
+                // 左滑
+                nextTab();
+            } else if (touchEndX > touchStartX + threshold) {
+                // 右滑
+                prevTab();
+            }
+        }
+        
+        // 初始显示第一个标签内容
+        showTab(0);
+        
+        // 开始自动轮播
+        startAutoPlay();
+    }
+    
     // 优化DOMContentLoaded
     document.addEventListener('DOMContentLoaded', function() {
         // 限制事件处理器作用域
@@ -1098,8 +1507,11 @@
         
         // 异步初始化非关键组件
         setTimeout(() => {
-            // 初始化轮播图功能
+            // 初始化产品轮播图功能
             initCarousel();
+            
+            // 初始化特性轮播功能
+            initFeatureCarousel();
             
             // 设置设备类型检测
             setupDeviceDetection();
@@ -1109,7 +1521,7 @@
         initScrollComponent();
     });
     
-    // 轮播图初始化函数
+    // 产品轮播图初始化函数
     function initCarousel() {
         const slides = document.querySelectorAll('.carousel-slide');
         const textSlides = document.querySelectorAll('.carousel-text');

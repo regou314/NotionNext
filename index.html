@@ -708,6 +708,7 @@
         
         /* 键盘导航提示 */
         .keyboard-nav-hint {
+            display: none; /* 隐藏键盘导航提示 */
             text-align: center;
             margin: 30px 0 0;
             font-size: 12px;
@@ -838,7 +839,7 @@
                                     </ul>
                                 </div>
                                 <div class="col-xs-12 col-sm-6 feature-video">
-                                    <iframe src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" class="feature-media"></iframe>
+                                    <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=114515437950044&bvid=BV1XREpzUEQa&cid=29983441841&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" class="feature-media"></iframe>
                                 </div>
                             </div>
                         </div>
@@ -878,7 +879,7 @@
                                     <p>为您提供多样化的访问方式，提高您的工作效率。</p>
                                 </div>
                                 <div class="col-xs-12 col-sm-6 feature-video">
-                                    <iframe src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" class="feature-media"></iframe>
+                                    <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=114538825388544&bvid=BV1YYJtzAE27&cid=30053041927&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" class="feature-media"></iframe>
                                 </div>
                             </div>
                         </div>
@@ -908,7 +909,7 @@
     </div>
     </div>
     <div class="container features">
-        <div class="row feature-row">
+        <!-- <div class="row feature-row">
             <div class="col-xs-12 col-sm-5 description">
                 <h2>简约而不简单</h2>
                 <hr class="separator blue">
@@ -917,7 +918,7 @@
             <div class="col-xs-12 col-sm-offset-1 col-sm-6 screen">
                 <iframe src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1&high_quality=1&danmaku=0" class="video" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="width:100%;" loading="lazy"> </iframe>
             </div>
-        </div>
+        </div> -->
         <div class="row">
             <div class="col-xs-12 feature-line"></div>
         </div>
@@ -1357,8 +1358,6 @@
         const contents = document.querySelectorAll('.feature-content');
         const carouselContainer = document.querySelector('.feature-carousel');
         let currentTab = 0;
-        let autoPlayInterval;
-        let isPaused = false;
         
         // 显示指定标签内容
         function showTab(index) {
@@ -1391,8 +1390,6 @@
         tabs.forEach((tab, index) => {
             tab.addEventListener('click', () => {
                 showTab(index);
-                clearInterval(autoPlayInterval);
-                startAutoPlay();
             });
         });
         
@@ -1400,42 +1397,8 @@
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowLeft') {
                 prevTab();
-                clearInterval(autoPlayInterval);
-                startAutoPlay();
             } else if (e.key === 'ArrowRight') {
                 nextTab();
-                clearInterval(autoPlayInterval);
-                startAutoPlay();
-            }
-        });
-        
-        // 自动轮播
-        function startAutoPlay() {
-            clearInterval(autoPlayInterval);
-            if (!isPaused) {
-                autoPlayInterval = setInterval(nextTab, 10000);
-            }
-        }
-        
-        // 鼠标悬停时暂停轮播
-        if (carouselContainer) {
-            carouselContainer.addEventListener('mouseenter', () => {
-                isPaused = true;
-                clearInterval(autoPlayInterval);
-            });
-            
-            carouselContainer.addEventListener('mouseleave', () => {
-                isPaused = false;
-                startAutoPlay();
-            });
-        }
-        
-        // 页面可见性变化处理
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                clearInterval(autoPlayInterval);
-            } else {
-                startAutoPlay();
             }
         });
         
@@ -1446,15 +1409,11 @@
         if (carouselContainer) {
             carouselContainer.addEventListener('touchstart', (e) => {
                 touchStartX = e.changedTouches[0].screenX;
-                // 触摸开始时暂停自动轮播
-                clearInterval(autoPlayInterval);
             }, {passive: true});
             
             carouselContainer.addEventListener('touchend', (e) => {
                 touchEndX = e.changedTouches[0].screenX;
                 handleSwipe();
-                // 触摸结束后恢复自动轮播
-                startAutoPlay();
             }, {passive: true});
         }
         
@@ -1471,9 +1430,6 @@
         
         // 初始显示第一个标签内容
         showTab(0);
-        
-        // 开始自动轮播
-        startAutoPlay();
     }
     
     // 优化DOMContentLoaded

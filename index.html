@@ -717,6 +717,203 @@
             font-weight: normal;
             letter-spacing: normal;
         }
+
+        /* 自动化触发模块样式 - 完全仿照滴答清单设计 */
+        .automation-triggers {
+            margin: 50px 0;
+        }
+        
+        .automation-triggers .description {
+            display: flex;
+            flex-direction: column;
+            padding-right: 15px;
+        }
+        
+        .automation-triggers .description h2 {
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        
+        .automation-triggers .description hr {
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .automation-triggers .description > p {
+            margin-bottom: 25px;
+        }
+        
+        .automation-triggers .screen {
+            display: flex;
+            align-items: flex-start;
+            padding-left: 15px;
+        }
+        
+        .trigger-tabs {
+            margin-top: 0;
+            flex: 1;
+        }
+        
+        .trigger-tab {
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            margin-bottom: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: #ffffff;
+            overflow: hidden;
+        }
+        
+        .trigger-tab:last-child {
+            margin-bottom: 0;
+        }
+        
+        .trigger-tab:hover {
+            border-color: rgba(0, 122, 255, 0.3);
+            box-shadow: 0 1px 3px rgba(0, 122, 255, 0.1);
+        }
+        
+        .trigger-tab.active {
+            border-color: #007aff;
+            box-shadow: 0 1px 3px rgba(0, 122, 255, 0.2);
+            background: rgba(0, 122, 255, 0.02);
+        }
+        
+        .trigger-tab-header {
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            min-height: 44px;
+            box-sizing: border-box;
+        }
+        
+        .trigger-tab.active .trigger-tab-header {
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .trigger-tab h4 {
+            margin: 0;
+            font-size: 15px;
+            font-weight: 500;
+            color: #374151;
+            transition: color 0.2s ease;
+        }
+        
+        .trigger-tab.active h4 {
+            color: #007aff;
+            font-weight: 600;
+        }
+        
+        .trigger-tab-icon {
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9ca3af;
+            transition: all 0.2s ease;
+            font-size: 12px;
+        }
+        
+        .trigger-tab.active .trigger-tab-icon {
+            color: #007aff;
+            transform: rotate(180deg);
+        }
+        
+        .trigger-tab-content {
+            padding: 0 16px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.25s ease;
+            opacity: 0;
+        }
+        
+        .trigger-tab.active .trigger-tab-content {
+            padding: 8px 16px 12px 16px;
+            max-height: 80px;
+            opacity: 1;
+        }
+        
+        .trigger-tab p {
+            margin: 0;
+            font-size: 13px;
+            color: #6b7280;
+            line-height: 1.4;
+        }
+        
+        .trigger-display {
+            position: relative;
+            width: 100%;
+            min-height: 400px;
+            overflow: hidden;
+            margin-top: 0;
+        }
+        
+        .trigger-content {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
+        }
+        
+        .trigger-content.active {
+            opacity: 1;
+            visibility: visible;
+            position: relative;
+            height: auto;
+        }
+        
+        .trigger-content img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .automation-triggers .row {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .automation-triggers .description {
+                margin-bottom: 30px;
+                order: 2;
+                padding-right: 15px;
+            }
+            
+            .automation-triggers .screen {
+                order: 1;
+                margin-bottom: 30px;
+                padding-left: 15px;
+            }
+            
+            .trigger-tab-header {
+                padding: 10px 14px;
+                min-height: 40px;
+            }
+            
+            .trigger-tab h4 {
+                font-size: 14px;
+            }
+            
+            .trigger-tab.active .trigger-tab-content {
+                padding: 6px 14px 10px 14px;
+                max-height: 70px;
+            }
+            
+            .trigger-tab p {
+                font-size: 12px;
+            }
+            
+            .trigger-display {
+                min-height: 300px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1115,16 +1312,94 @@
     <div class="row">
         <div class="col-xs-12 feature-line"></div>
     </div>
-    <div class="row feature-row">
+    <div class="row feature-row automation-triggers">
         <div class="col-xs-12 col-sm-5 description">
-            <h2>超多内置快捷功能</h2>
+            <h2>自动化触发的悬浮面板</h2>
             <hr class="separator blue">
-            <p>分屏、模拟按键、一键百度、区域截屏、App切换、贴纸、手电筒、锁屏……</p>
+            <p>可以设置“眨眼抖音翻页、抬手拍照、自动浏览朋友圈”等酷炫功能</p>
+            
+            <div class="trigger-tabs">
+                <div class="trigger-tab" data-trigger="time">
+                    <div class="trigger-tab-header">
+                        <h4>时间触发</h4>
+                        <div class="trigger-tab-icon">▼</div>
+                    </div>
+                    <div class="trigger-tab-content">
+                        <p>设定时间自动显示悬浮面板，定时提醒重要事项。</p>
+                    </div>
+                </div>
+                <div class="trigger-tab" data-trigger="location">
+                    <div class="trigger-tab-header">
+                        <h4>表情触发</h4>
+                        <div class="trigger-tab-icon">▼</div>
+                    </div>
+                    <div class="trigger-tab-content">
+                        <p>到达指定位置时自动弹出相关功能面板。</p>
+                    </div>
+                </div>
+                <div class="trigger-tab" data-trigger="app">
+                    <div class="trigger-tab-header">
+                        <h4>应用触发</h4>
+                        <div class="trigger-tab-icon">▼</div>
+                    </div>
+                    <div class="trigger-tab-content">
+                        <p>打开特定应用时自动显示相关快捷功能。</p>
+                    </div>
+                </div>
+                <div class="trigger-tab" data-trigger="gesture">
+                    <div class="trigger-tab-header">
+                        <h4>手势触发</h4>
+                        <div class="trigger-tab-icon">▼</div>
+                    </div>
+                    <div class="trigger-tab-content">
+                        <p>通过自定义手势快速调出悬浮面板。</p>
+                    </div>
+                </div>
+                <div class="trigger-tab" data-trigger="event">
+                    <div class="trigger-tab-header">
+                        <h4>事件触发</h4>
+                        <div class="trigger-tab-icon">▼</div>
+                    </div>
+                    <div class="trigger-tab-content">
+                        <p>系统事件（充电、蓝牙连接等）自动触发。</p>
+                    </div>
+                </div>
+                <div class="trigger-tab" data-trigger="smart">
+                    <div class="trigger-tab-header">
+                        <h4>智能触发</h4>
+                        <div class="trigger-tab-icon">▼</div>
+                    </div>
+                    <div class="trigger-tab-content">
+                        <p>AI学习您的使用习惯，智能预测并触发。</p>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-xs-12 col-sm-offset-1 col-sm-6 screen">
-            <picture>
-                <img src="./resources/intr3.png" alt="悬浮捷径SoftCircle内置快捷功能展示：分屏、模拟按键、截屏等功能" loading="lazy" crossorigin="anonymous">
-            </picture>
+            <div class="trigger-display">
+                <!-- 默认显示的AI gif -->
+                <div class="trigger-content active" data-trigger="default">
+                    <img src="./resources/img/ai/blink.gif" alt="悬浮捷径SoftCircle AI智能助手动画展示" loading="eager" crossorigin="anonymous">
+                </div>
+                <div class="trigger-content" data-trigger="time">
+                    <img src="./resources/intr3.png" alt="悬浮捷径SoftCircle时间触发功能展示" loading="lazy" crossorigin="anonymous">
+                </div>
+                <div class="trigger-content" data-trigger="location">
+                    <img src="./resources/intr3.png" alt="悬浮捷径SoftCircle位置触发功能展示" loading="lazy" crossorigin="anonymous">
+                </div>
+                <div class="trigger-content" data-trigger="app">
+                    <img src="./resources/intr3.png" alt="悬浮捷径SoftCircle应用触发功能展示" loading="lazy" crossorigin="anonymous">
+                </div>
+                <div class="trigger-content" data-trigger="gesture">
+                    <img src="./resources/intr3.png" alt="悬浮捷径SoftCircle手势触发功能展示" loading="lazy" crossorigin="anonymous">
+                </div>
+                <div class="trigger-content" data-trigger="event">
+                    <img src="./resources/intr3.png" alt="悬浮捷径SoftCircle事件触发功能展示" loading="lazy" crossorigin="anonymous">
+                </div>
+                <div class="trigger-content" data-trigger="smart">
+                    <img src="./resources/intr3.png" alt="悬浮捷径SoftCircle智能触发功能展示" loading="lazy" crossorigin="anonymous">
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -1475,6 +1750,11 @@
             // 设置设备类型检测
             setupDeviceDetection();
         }, 0);
+
+        // 初始化自动化触发模块的tab切换功能
+        setTimeout(() => {
+            initAutomationTriggers();
+        }, 0);
         
         // 优先初始化横向滚动组件
         initScrollComponent();
@@ -1703,6 +1983,72 @@
             if (btnAndroidWatch) btnAndroidWatch.style.display = "table";
             if (btnGoogle) btnGoogle.style.display = "table";
         }
+    }
+
+    // 自动化触发模块的tab切换功能
+    function initAutomationTriggers() {
+        const triggerTabs = document.querySelectorAll('.trigger-tab');
+        const triggerContents = document.querySelectorAll('.trigger-content');
+        
+        if (triggerTabs.length === 0 || triggerContents.length === 0) return;
+        
+        // 显示指定tab内容
+        function showTriggerTab(targetTrigger) {
+            // 如果点击的tab已经是active状态，则关闭它并显示默认内容
+            const clickedTab = document.querySelector(`.trigger-tab[data-trigger="${targetTrigger}"]`);
+            const isCurrentlyActive = clickedTab && clickedTab.classList.contains('active');
+            
+            // 先关闭所有tab
+            triggerTabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // 如果当前tab不是激活状态，则激活它
+            if (!isCurrentlyActive && clickedTab) {
+                clickedTab.classList.add('active');
+                
+                // 切换右侧内容显示
+                triggerContents.forEach(content => content.classList.remove('active'));
+                const activeContent = document.querySelector(`.trigger-content[data-trigger="${targetTrigger}"]`);
+                if (activeContent) {
+                    activeContent.classList.add('active');
+                }
+            } else {
+                // 如果当前tab是激活状态或没有找到tab，显示默认内容
+                triggerContents.forEach(content => content.classList.remove('active'));
+                const defaultContent = document.querySelector('.trigger-content[data-trigger="default"]');
+                if (defaultContent) {
+                    defaultContent.classList.add('active');
+                }
+            }
+        }
+        
+        // 绑定tab点击事件
+        triggerTabs.forEach(tab => {
+            const tabHeader = tab.querySelector('.trigger-tab-header');
+            if (tabHeader) {
+                tabHeader.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const trigger = tab.getAttribute('data-trigger');
+                    showTriggerTab(trigger);
+                });
+                
+                // 添加键盘支持
+                tabHeader.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        const trigger = tab.getAttribute('data-trigger');
+                        showTriggerTab(trigger);
+                    }
+                });
+                
+                // 使tab header可以被键盘焦点
+                tabHeader.setAttribute('tabindex', '0');
+            }
+        });
+        
+        // 默认不选中任何tab，显示默认内容
+        // 不需要调用showTriggerTab，因为默认内容已经在HTML中设置为active
     }
 </script>
 <!-- 延迟加载非关键JS资源 -->

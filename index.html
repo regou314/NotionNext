@@ -202,10 +202,26 @@
         /* 为body添加顶部padding，避免内容被固定导航栏遮挡 */
         body {
             padding-top: 80px !important; /* 根据导航栏高度调整 */
+            /* 防止移动端刷新时自动滚动 */
+            scroll-behavior: auto !important;
+            overflow-anchor: none !important;
+        }
+        
+        /* 确保页面顶部有足够的空间 */
+        .container-fluid {
+            position: relative;
+        }
+        
+        .container.top-section {
+            padding-top: 20px; /* 增加顶部间距 */
         }
         
         /* 超大屏幕优化 (1920px+) */
         @media (min-width: 1920px) {
+            body {
+                padding-top: 90px !important;
+            }
+            
             .container {
                 max-width: 1400px;
             }
@@ -225,6 +241,10 @@
         
         /* 大屏幕优化 (1200px - 1919px) */
         @media (min-width: 1200px) and (max-width: 1919px) {
+            body {
+                padding-top: 85px !important;
+            }
+            
             .container {
                 max-width: 1140px;
             }
@@ -232,6 +252,10 @@
         
         /* 平板横屏优化 (992px - 1199px) */
         @media (min-width: 992px) and (max-width: 1199px) {
+            body {
+                padding-top: 80px !important;
+            }
+            
             .feature-carousel {
                 padding: 30px 20px;
             }
@@ -248,6 +272,36 @@
         
         /* 平板竖屏优化 (768px - 991px) */
         @media (min-width: 768px) and (max-width: 991px) {
+            body {
+                padding-top: 75px !important;
+            }
+            
+            /* 功能特性一览模块平板端优化 */
+            .feature-row {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .feature-row .screen {
+                order: 1;
+                margin-bottom: 35px;
+                padding-left: 0;
+            }
+            
+            .feature-row .description {
+                order: 2;
+                padding-right: 0;
+                text-align: center;
+            }
+            
+            /* 轮播图标题样式优化 */
+            .feature-row .screen h3,
+            .feature-row .screen h4 {
+                text-align: center !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+            
             .navbar-default .navbar-nav > li > a {
                 font-size: 14px !important;
                 padding-left: 10px !important;
@@ -282,7 +336,117 @@
         /* 移动设备优化 (481px - 767px) */
         @media (min-width: 481px) and (max-width: 767px) {
             body {
-                padding-top: 70px !important;
+                padding-top: 75px !important;
+                /* 移动端防滚动优化 */
+                scroll-behavior: auto !important;
+                overflow-anchor: none !important;
+            }
+            
+            /* 确保顶部内容可见 */
+            .container.top-section {
+                padding-top: 25px;
+                min-height: calc(100vh - 75px);
+            }
+            
+            /* 功能特性一览模块移动端优化 */
+            .feature-row {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .feature-row .screen {
+                order: 1;
+                margin-bottom: 30px;
+                padding-left: 0;
+            }
+            
+            .feature-row .description {
+                order: 2;
+                padding-right: 0;
+                text-align: center;
+            }
+            
+            /* 轮播图标题样式优化 */
+            .feature-row .screen h3,
+            .feature-row .screen h4 {
+                text-align: center !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+            
+            /* 导航栏折叠菜单优化 */
+            .navbar-collapse {
+                border-top: none;
+                margin-top: 0;
+                padding-top: 0;
+            border: none;
+                box-shadow: none;
+            }
+            
+            .navbar-collapse.in,
+            .navbar-collapse.collapsing {
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(25px);
+                -webkit-backdrop-filter: blur(25px);
+                border-radius: 16px;
+                margin: 15px -15px -15px -15px;
+                padding: 20px;
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                animation: slideDown 0.3s ease-out;
+            }
+            
+            /* 折叠菜单链接样式优化 */
+            .navbar-collapse .navbar-nav {
+                margin: 0;
+            }
+            
+            .navbar-collapse .navbar-nav > li {
+                margin: 8px 0;
+            }
+            
+            .navbar-collapse .navbar-nav > li > a {
+                background: rgba(255, 255, 255, 0.6) !important;
+                backdrop-filter: blur(15px) !important;
+                -webkit-backdrop-filter: blur(15px) !important;
+                border-radius: 12px !important;
+                margin: 4px 0 !important;
+                padding: 12px 16px !important;
+                color: #2c3e50 !important;
+                font-weight: 500 !important;
+                transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+                border: 1px solid rgba(255, 255, 255, 0.4) !important;
+                text-align: center !important;
+                line-height: 1.4 !important;
+                height: auto !important;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08) !important;
+            }
+            
+            .navbar-collapse .navbar-nav > li > a:hover,
+            .navbar-collapse .navbar-nav > li > a:focus {
+                background: rgba(0, 122, 255, 0.1) !important;
+                color: #007aff !important;
+                transform: translateY(-2px) scale(1.02) !important;
+                box-shadow: 0 6px 20px rgba(0, 122, 255, 0.2) !important;
+                border: 1px solid rgba(0, 122, 255, 0.3) !important;
+            }
+            
+            /* QR悬浮效果在移动端的优化 */
+            .navbar-collapse .qr-hover .qr-image {
+                position: static;
+                display: block;
+                transform: none;
+                margin: 8px auto 0;
+                background: rgba(255, 255, 255, 0.9);
+                padding: 10px;
+                border-radius: 12px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.5);
+            }
+            
+            .navbar-collapse .qr-hover .qr-image img {
+                width: 100px;
+                height: 100px;
             }
             
             /* 导航栏原始状态 */
@@ -293,12 +457,24 @@
             
             .navbar-default .container {
                 min-height: 60px !important;
+                padding-left: 12px;
+                padding-right: 12px;
             }
             
             .navbar-default .navbar-brand {
                 line-height: 60px !important;
                 height: 60px !important;
-                padding: 0 15px !important;
+                padding: 0 8px !important;
+            }
+            
+            /* 修复第一个logo的左边距 */
+            .navbar-default .navbar-brand:first-of-type {
+                padding-left: 12px !important;
+            }
+            
+            /* 修复第二个logo与第一个的距离 */
+            .navbar-default .navbar-brand:last-of-type {
+                padding-left: 2px !important;
             }
             
             .navbar-default .navbar-nav > li > a {
@@ -307,6 +483,31 @@
                 font-size: 13px !important;
                 padding-left: 8px !important;
                 padding-right: 8px !important;
+            }
+            
+            /* 修复汉堡菜单按钮垂直居中 */
+            .navbar-toggle {
+                margin-top: 12px !important;
+                margin-bottom: 6px !important;
+                margin-right: 12px !important;
+                background: rgba(255, 255, 255, 0.2) !important;
+                border: 1px solid rgba(255, 255, 255, 0.3) !important;
+                border-radius: 8px !important;
+                padding: 8px 10px !important;
+                transition: all 0.3s ease !important;
+            }
+            
+            .navbar-toggle:hover,
+            .navbar-toggle:focus {
+                background: rgba(255, 255, 255, 0.3) !important;
+                border: 1px solid rgba(255, 255, 255, 0.4) !important;
+                transform: scale(1.05) !important;
+            }
+            
+            .navbar-toggle .icon-bar {
+                background-color: rgba(255, 255, 255, 0.9) !important;
+                border-radius: 1px !important;
+                transition: all 0.3s ease !important;
             }
             
             .navbar-default #site-logo {
@@ -326,18 +527,37 @@
             
             .navbar-scrolled .container {
                 min-height: 45px !important;
+                padding-left: 10px;
+                padding-right: 10px;
             }
             
             .navbar-scrolled .navbar-brand {
                 line-height: 45px !important;
                 height: 45px !important;
-                padding: 0 15px !important;
+                padding: 0 6px !important;
+            }
+            
+            /* 滚动状态下修复第一个logo的左边距 */
+            .navbar-scrolled .navbar-brand:first-of-type {
+                padding-left: 10px !important;
+            }
+            
+            /* 滚动状态下修复第二个logo与第一个的距离 */
+            .navbar-scrolled .navbar-brand:last-of-type {
+                padding-left: 1px !important;
             }
             
             .navbar-scrolled .navbar-nav > li > a {
                 line-height: 45px !important;
                 height: 45px !important;
                 font-size: 11px !important;
+            }
+            
+            /* 滚动状态下修复汉堡菜单按钮垂直居中 */
+            .navbar-scrolled .navbar-toggle {
+                margin-top: 9px !important;
+                margin-bottom: 9px !important;
+                margin-right: 10px !important;
             }
             
             .navbar-scrolled #site-logo {
@@ -362,16 +582,45 @@
             }
             
             .feature-tabs {
-                flex-wrap: wrap;
+                flex-wrap: nowrap;
                 justify-content: center;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+                gap: 4px;
+                padding: 6px;
+                margin-bottom: 30px;
+                max-width: 420px;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.2);
+                border-radius: 18px;
+                box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+            }
+            
+            .feature-tabs::before {
+                top: 6px;
+                left: 6px;
+                width: calc(33.333% - 4px);
+                height: calc(100% - 12px);
+                border-radius: 14px;
+                transform: translateX(0);
+            }
+            
+            .feature-tabs::-webkit-scrollbar {
+                display: none;
             }
             
             .feature-tab {
-                flex: 0 0 calc(50% - 8px);
-                margin: 4px;
-                padding: 10px 15px;
-                font-size: 14px;
+                flex: 1;
+                margin: 0;
+                padding: 12px 16px;
+                font-size: 13px;
                 min-width: auto;
+                white-space: nowrap;
+                border-radius: 14px;
+                min-height: 44px;
+                font-weight: 500;
             }
             
             .media-card {
@@ -389,8 +638,51 @@
         /* 小屏手机优化 (320px - 480px) */
         @media (max-width: 480px) {
             body {
-                padding-top: 65px !important;
+                padding-top: 70px !important;
                 font-size: 14px;
+                /* 移动端防滚动优化 */
+                scroll-behavior: auto !important;
+                overflow-anchor: none !important;
+            }
+            
+            /* 确保顶部内容可见 */
+            .container.top-section {
+                padding-top: 30px;
+                min-height: calc(100vh - 70px);
+            }
+            
+            /* 功能特性一览模块移动端优化 */
+            .feature-row {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .feature-row .screen {
+                order: 1;
+                margin-bottom: 25px;
+                padding-left: 0;
+            }
+            
+            .feature-row .description {
+                order: 2;
+                padding-right: 0;
+                text-align: center;
+            }
+            
+            /* 轮播图标题样式优化 */
+            .feature-row .screen h3,
+            .feature-row .screen h4 {
+                text-align: center !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+            
+            /* 标题优化 */
+            h1#title {
+                font-size: 24px !important;
+                line-height: 1.3 !important;
+                margin-bottom: 5px !important;
+                margin-top: 10px !important;
             }
             
             /* 导航栏原始状态 */
@@ -408,15 +700,128 @@
             .navbar-default .navbar-brand {
                 line-height: 55px !important;
                 height: 55px !important;
-                padding: 0 10px !important;
+                padding: 0 6px !important;
+            }
+            
+            /* 修复第一个logo的左边距 */
+            .navbar-default .navbar-brand:first-of-type {
+                padding-left: 10px !important;
+            }
+            
+            /* 修复第二个logo与第一个的距离 */
+            .navbar-default .navbar-brand:last-of-type {
+                padding-left: 1px !important;
             }
             
             .navbar-default .navbar-nav > li > a {
                 line-height: 55px !important;
                 height: 55px !important;
-                font-size: 12px !important;
-                padding-left: 6px !important;
-                padding-right: 6px !important;
+                font-size: 11px !important;
+                padding-left: 4px !important;
+                padding-right: 4px !important;
+            }
+            
+            /* 修复导航栏汉堡菜单按钮 */
+            .navbar-toggle {
+                margin-top: 10px !important;
+                margin-bottom: 5px !important;
+                margin-right: 10px !important;
+                padding: 6px 8px !important;
+                border: 1px solid rgba(255, 255, 255, 0.3) !important;
+                background: rgba(255, 255, 255, 0.15) !important;
+                border-radius: 8px !important;
+                transition: all 0.3s ease !important;
+            }
+            
+            .navbar-toggle:hover,
+            .navbar-toggle:focus {
+                background: rgba(255, 255, 255, 0.25) !important;
+                border: 1px solid rgba(255, 255, 255, 0.4) !important;
+                transform: scale(1.05) !important;
+            }
+            
+            .navbar-toggle .icon-bar {
+                width: 18px !important;
+                height: 2px !important;
+                background-color: rgba(255, 255, 255, 0.9) !important;
+                border-radius: 1px !important;
+                transition: all 0.3s ease !important;
+            }
+            
+            /* 导航栏折叠菜单优化 */
+            .navbar-collapse {
+                border-top: none;
+                margin-top: 0;
+                padding-top: 0;
+                border: none;
+                box-shadow: none;
+            }
+            
+            .navbar-collapse.in,
+            .navbar-collapse.collapsing {
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(25px);
+                -webkit-backdrop-filter: blur(25px);
+                border-radius: 12px;
+                margin: 12px -10px -10px -10px;
+                padding: 16px;
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                animation: slideDown 0.3s ease-out;
+            }
+            
+            /* 折叠菜单链接样式优化 */
+            .navbar-collapse .navbar-nav {
+                margin: 0;
+            }
+            
+            .navbar-collapse .navbar-nav > li {
+                margin: 6px 0;
+            }
+            
+            .navbar-collapse .navbar-nav > li > a {
+                background: rgba(255, 255, 255, 0.7) !important;
+                backdrop-filter: blur(15px) !important;
+                -webkit-backdrop-filter: blur(15px) !important;
+                border-radius: 10px !important;
+                margin: 3px 0 !important;
+                padding: 10px 14px !important;
+                color: #2c3e50 !important;
+                font-weight: 500 !important;
+                transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+                border: 1px solid rgba(255, 255, 255, 0.4) !important;
+                text-align: center !important;
+                line-height: 1.3 !important;
+                height: auto !important;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+                font-size: 14px !important;
+            }
+            
+            .navbar-collapse .navbar-nav > li > a:hover,
+            .navbar-collapse .navbar-nav > li > a:focus {
+                background: rgba(0, 122, 255, 0.15) !important;
+                color: #007aff !important;
+                transform: translateY(-1px) scale(1.02) !important;
+                box-shadow: 0 4px 15px rgba(0, 122, 255, 0.2) !important;
+                border: 1px solid rgba(0, 122, 255, 0.3) !important;
+            }
+            
+            /* QR悬浮效果在移动端的优化 */
+            .navbar-collapse .qr-hover .qr-image {
+                position: static;
+                display: block;
+                transform: none;
+                margin: 6px auto 0;
+                background: rgba(255, 255, 255, 0.9);
+                padding: 8px;
+                border-radius: 10px;
+                box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.5);
+            }
+            
+            .navbar-collapse .qr-hover .qr-image img {
+                width: 80px;
+                height: 80px;
             }
             
             .navbar-default #site-logo {
@@ -436,18 +841,38 @@
             
             .navbar-scrolled .container {
                 min-height: 40px !important;
+                padding-left: 8px;
+                padding-right: 8px;
             }
             
             .navbar-scrolled .navbar-brand {
                 line-height: 40px !important;
                 height: 40px !important;
-                padding: 0 10px !important;
+                padding: 0 4px !important;
+            }
+            
+            /* 滚动状态下修复第一个logo的左边距 */
+            .navbar-scrolled .navbar-brand:first-of-type {
+                padding-left: 8px !important;
+            }
+            
+            /* 滚动状态下修复第二个logo与第一个的距离 */
+            .navbar-scrolled .navbar-brand:last-of-type {
+                padding-left: 1px !important;
             }
             
             .navbar-scrolled .navbar-nav > li > a {
                 line-height: 40px !important;
                 height: 40px !important;
                 font-size: 10px !important;
+            }
+            
+            /* 滚动状态下修复汉堡菜单按钮垂直居中 */
+            .navbar-scrolled .navbar-toggle {
+                margin-top: 7px !important;
+                margin-bottom: 7px !important;
+                margin-right: 8px !important;
+                padding: 5px 6px !important;
             }
             
             .navbar-scrolled #site-logo {
@@ -463,12 +888,6 @@
             .container {
                 padding-left: 10px;
                 padding-right: 10px;
-            }
-            
-            h1#title {
-                font-size: 24px !important;
-                line-height: 1.3 !important;
-                margin-bottom: 20px !important;
             }
             
             .download-buttons {
@@ -497,21 +916,6 @@
                 margin-bottom: 15px;
             }
             
-            .media-card {
-                width: 100%;
-                padding: 15px;
-                margin-bottom: 12px;
-                min-width: auto;
-            }
-            
-            .media-card h4 {
-                font-size: 15px;
-            }
-            
-            .media-card p {
-                font-size: 13px;
-            }
-            
             .years-badge {
                 font-size: 12px;
                 padding: 6px 12px;
@@ -527,157 +931,177 @@
             }
             
             .feature-tabs {
-                margin-bottom: 25px;
-                gap: 6px;
+                margin-bottom: 20px;
+                gap: 4px;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+                padding: 0 5px;
+            }
+            
+            .feature-tabs::-webkit-scrollbar {
+                display: none;
             }
             
             .feature-tab {
-                flex: 1 1 calc(50% - 3px);
-                margin: 3px 0;
-                padding: 8px 12px;
-                font-size: 13px;
-                border-radius: 16px;
-                min-width: auto;
+                flex: 0 0 auto;
+                margin: 2px;
+                padding: 8px 16px;
+                font-size: 12px;
+                border-radius: 20px;
+                min-width: 90px;
                 text-align: center;
+                white-space: nowrap;
             }
             
             .feature-content-wrapper {
-                min-height: 200px;
+                min-height: 180px;
             }
             
             .feature-text {
-                padding: 10px 0;
+                padding: 15px 10px;
                 text-align: center;
             }
             
             .feature-text h3 {
-                font-size: 18px;
-                margin-bottom: 10px;
+                font-size: 20px;
+                margin-bottom: 12px;
+                color: #007aff;
             }
             
             .feature-text p {
                 font-size: 14px;
                 margin-bottom: 15px;
+                line-height: 1.5;
             }
             
             .feature-item {
-                font-size: 12px;
-                padding: 6px 12px;
-                margin: 4px 6px;
+                font-size: 11px;
+                padding: 6px 10px;
+                margin: 3px 4px;
                 border-radius: 12px;
+                display: inline-block;
+            }
+            
+            .features-list {
+                justify-content: center !important;
+                text-align: center !important;
+            }
+            
+            .feature-video {
+                padding: 0 10px;
+                margin-top: 5px;
             }
             
             .feature-video iframe {
-                width: 220px;
-                height: 391px;
+                width: 100%;
+                max-width: 280px;
+                height: 498px;
+                margin: 0 auto;
+                display: block;
             }
             
             .automation-triggers {
                 margin: 30px 0;
                 padding: 25px 15px;
-                border-radius: 20px;
+                border-radius: 18px;
             }
-            
-            .automation-triggers .description h2 {
-                font-size: 24px;
-                margin-bottom: 6px;
-                text-align: center;
+
+            .trigger-tabs {
+                gap: 6px;
+                margin-bottom: 18px;
             }
-            
-            .automation-triggers .description hr {
-                width: 40px;
-                margin: 8px auto 15px;
-            }
-            
-            .automation-triggers .description > p {
-                font-size: 15px;
-                margin-bottom: 20px;
-                text-align: center;
-            }
-            
+
             .trigger-tab {
-                margin-bottom: 8px;
-                border-radius: 12px;
+                border-radius: 14px;
             }
-            
+
             .trigger-tab-header {
                 padding: 12px 15px;
                 min-height: 44px;
             }
-            
-            .trigger-tab h4 {
+
+            .trigger-tab-header h4 {
                 font-size: 14px;
             }
-            
+
             .trigger-tab-icon {
                 width: 16px;
                 height: 16px;
-                font-size: 12px;
+                font-size: 10px;
             }
-            
+
+            .trigger-tab-content {
+                padding: 0 15px;
+            }
+
             .trigger-tab.active .trigger-tab-content {
-                padding: 4px 15px 6px;
+                padding: 0 15px 12px;
+                max-height: 120px;
             }
-            
-            .trigger-tab p {
-                font-size: 12px;
-                line-height: 1.2;
+
+            .trigger-tab-content p {
+                font-size: 13px;
+                line-height: 1.3;
             }
-            
-            .trigger-display {
-                min-height: 220px;
-                border-radius: 12px;
+
+            /* Trigger Display */ .trigger-display {
+                min-height: 240px;
+                border-radius: 14px;
+                max-width: 320px;
             }
-            
+
+            .trigger-content {
+                padding: 0;
+            }
+
             .trigger-content img {
-                border-radius: 8px;
-            }
-            
-            .scroll-item img {
-                width: 140px;
-                padding: 10px;
-                border-radius: 12px;
-            }
-            
-            .scroll-item {
-                margin: 0 8px;
-                padding: 5px;
-            }
-            
-            .scroll-caption {
-                font-size: 12px;
-                margin-top: 8px;
-            }
-            
-            .auto-scroll-container {
-                margin: 30px auto;
-                padding: 15px 0;
-            }
-            
-            .carousel-container {
-                min-height: 280px;
-            }
-            
-            .carousel-slide img {
-                max-width: 280px;
-            }
-            
-            .qr-image img {
-                width: 120px;
-                height: 120px;
-            }
-            
-            .qr-image {
-                padding: 10px;
-                border-radius: 12px;
+                border-radius: 10px;
             }
         }
         
         /* 超小屏设备优化 (小于320px) */
         @media (max-width: 319px) {
             body {
-                padding-top: 60px !important;
+                padding-top: 65px !important;
                 font-size: 13px;
+                /* 移动端防滚动优化 */
+                scroll-behavior: auto !important;
+                overflow-anchor: none !important;
+            }
+            
+            /* 确保顶部内容可见 */
+            .container.top-section {
+                padding-top: 35px;
+                min-height: calc(100vh - 65px);
+            }
+            
+            /* 功能特性一览模块移动端优化 */
+            .feature-row {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .feature-row .screen {
+                order: 1;
+                margin-bottom: 20px;
+                padding-left: 0;
+            }
+            
+            .feature-row .description {
+                order: 2;
+                padding-right: 0;
+                text-align: center;
+            }
+            
+            /* 轮播图标题样式优化 */
+            .feature-row .screen h3,
+            .feature-row .screen h4 {
+                text-align: center !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
             }
             
             .navbar-default {
@@ -693,7 +1117,17 @@
             .navbar-default .navbar-brand {
                 line-height: 50px !important;
                 height: 50px !important;
-                padding: 0 8px !important;
+                padding: 0 4px !important;
+            }
+            
+            /* 修复第一个logo的左边距 */
+            .navbar-default .navbar-brand:first-of-type {
+                padding-left: 8px !important;
+            }
+            
+            /* 修复第二个logo与第一个的距离 */
+            .navbar-default .navbar-brand:last-of-type {
+                padding-left: 1px !important;
             }
             
             .navbar-default .navbar-nav > li > a {
@@ -702,6 +1136,90 @@
                 font-size: 11px !important;
                 padding-left: 4px !important;
                 padding-right: 4px !important;
+            }
+            
+            /* 修复汉堡菜单按钮垂直居中 */
+            .navbar-toggle {
+                margin-top: 8px !important;
+                margin-bottom: 8px !important;
+                margin-right: 8px !important;
+                padding: 5px 6px !important;
+                border: 1px solid rgba(255, 255, 255, 0.3) !important;
+                background: rgba(255, 255, 255, 0.15) !important;
+                border-radius: 6px !important;
+                transition: all 0.3s ease !important;
+            }
+            
+            .navbar-toggle:hover,
+            .navbar-toggle:focus {
+                background: rgba(255, 255, 255, 0.25) !important;
+                border: 1px solid rgba(255, 255, 255, 0.4) !important;
+                transform: scale(1.05) !important;
+            }
+            
+            .navbar-toggle .icon-bar {
+                width: 16px !important;
+                height: 2px !important;
+                background-color: rgba(255, 255, 255, 0.9) !important;
+                border-radius: 1px !important;
+            }
+            
+            /* 导航栏折叠菜单优化 */
+            .navbar-collapse.in,
+            .navbar-collapse.collapsing {
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border-radius: 10px;
+                margin: 10px -8px -8px -8px;
+                padding: 12px;
+                box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                animation: slideDown 0.3s ease-out;
+            }
+            
+            .navbar-collapse .navbar-nav > li > a {
+                background: rgba(255, 255, 255, 0.7) !important;
+                backdrop-filter: blur(12px) !important;
+                -webkit-backdrop-filter: blur(12px) !important;
+                border-radius: 8px !important;
+                margin: 2px 0 !important;
+                padding: 8px 12px !important;
+                color: #2c3e50 !important;
+                font-weight: 500 !important;
+                transition: all 0.3s ease !important;
+                border: 1px solid rgba(255, 255, 255, 0.4) !important;
+                text-align: center !important;
+                line-height: 1.2 !important;
+                height: auto !important;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08) !important;
+                font-size: 12px !important;
+            }
+            
+            .navbar-collapse .navbar-nav > li > a:hover,
+            .navbar-collapse .navbar-nav > li > a:focus {
+                background: rgba(0, 122, 255, 0.15) !important;
+                color: #007aff !important;
+                transform: translateY(-1px) !important;
+                box-shadow: 0 3px 12px rgba(0, 122, 255, 0.2) !important;
+                border: 1px solid rgba(0, 122, 255, 0.3) !important;
+            }
+            
+            .navbar-collapse .qr-hover .qr-image {
+                position: static;
+                display: block;
+                transform: none;
+                margin: 4px auto 0;
+                background: rgba(255, 255, 255, 0.9);
+                padding: 6px;
+                border-radius: 8px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.5);
+            }
+            
+            .navbar-collapse .qr-hover .qr-image img {
+                width: 60px;
+                height: 60px;
             }
             
             .navbar-default #site-logo {
@@ -713,24 +1231,56 @@
                 height: 18px;
             }
             
-            h1#title {
-                font-size: 20px !important;
-                line-height: 1.4 !important;
+            /* 滚动状态下的样式 */
+            .navbar-scrolled .navbar-brand:first-of-type {
+                padding-left: 6px !important;
+            }
+            
+            .navbar-scrolled .navbar-brand:last-of-type {
+                padding-left: 1px !important;
+            }
+            
+            .navbar-scrolled .navbar-toggle {
+                margin-top: 6px !important;
+                margin-bottom: 6px !important;
+                margin-right: 6px !important;
+                padding: 4px 5px !important;
             }
             
             .container {
-                padding-left: 8px;
-                padding-right: 8px;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+            
+            h1#title {
+                font-size: 20px !important;
+                line-height: 1.4 !important;
+                margin-top: 8px !important;
+            }
+            
+            .feature-tabs {
+                gap: 2px;
+                padding: 0 2px;
             }
             
             .feature-tab {
-                font-size: 11px;
+                font-size: 10px;
                 padding: 6px 8px;
+                min-width: 70px;
+                border-radius: 16px;
             }
             
             .feature-video iframe {
-                width: 180px;
-                height: 320px;
+                width: 100%;
+                max-width: 200px;
+                height: 356px;
+                margin: 0 auto;
+                display: block;
+            }
+            
+            .carousel-slide img {
+                width: 85%;
+                max-width: 200px;
             }
             
             .download-buttons .btn {
@@ -745,6 +1295,75 @@
             .scroll-item img {
                 width: 120px;
             }
+            
+            /* 媒体推荐卡片超紧凑样式 */
+            .media-card {
+                padding: 10px 12px;  /* 进一步减少padding */
+            }
+            
+            .media-card h4 {
+                margin: 0 0 3px 0;  /* 进一步减少间距 */
+                font-size: 14px;  /* 进一步减小字体 */
+                line-height: 1.2;
+            }
+            
+            .media-card p {
+                font-size: 12px;  /* 进一步减小字体 */
+                line-height: 1.2;
+            }
+            
+            .media-recommendations {
+                padding: 12px 8px;  /* 进一步减少padding */
+                margin: 10px auto;  /* 进一步减少margin */
+                border-radius: 12px;  /* 减小圆角 */
+            }
+            
+            .media-recommendations h3 {
+                font-size: 18px;  /* 进一步减小标题 */
+                margin-bottom: 8px;  /* 进一步减少间距 */
+                line-height: 1.2;
+            }
+            
+            .media-cards {
+                gap: 8px;  /* 进一步减少间距 */
+            }
+        }
+        
+        /* 添加菜单展开动画 */
+        @keyframes slideDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px) scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        /* 汉堡菜单按钮动画效果 */
+        .navbar-toggle.collapsed .icon-bar:nth-child(1) {
+            transform: rotate(0deg);
+        }
+        
+        .navbar-toggle.collapsed .icon-bar:nth-child(2) {
+            opacity: 1;
+        }
+        
+        .navbar-toggle.collapsed .icon-bar:nth-child(3) {
+            transform: rotate(0deg);
+        }
+        
+        .navbar-toggle:not(.collapsed) .icon-bar:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        
+        .navbar-toggle:not(.collapsed) .icon-bar:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .navbar-toggle:not(.collapsed) .icon-bar:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
         }
         
         /* 横屏模式优化 */
@@ -876,6 +1495,26 @@
         
         .touch-device .navbar-nav > li > a {
             min-height: 44px;
+        }
+        
+        /* 移动端特殊优化 */
+        @media (max-width: 767px) {
+            .touch-device .feature-tab {
+                min-height: 40px;
+                min-width: 80px;
+                padding: 10px 16px !important;
+            }
+            
+            .touch-device .carousel-dot {
+                min-height: 32px;
+                min-width: 32px;
+                padding: 8px;
+            }
+            
+            .touch-device .carousel-arrow {
+                min-height: 40px;
+                min-width: 40px;
+            }
         }
         
         /* 非触摸设备的hover效果增强 */
@@ -1416,56 +2055,84 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
         }
         
-        /* 标签导航样式 */
+        /* 标签导航样式 - 苹果风格优化 */
         .feature-tabs {
             display: flex;
             justify-content: center;
             margin-bottom: 40px;
             border-bottom: none;
-            padding: 0;
-            max-width: 600px;
+            padding: 8px;
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            gap: 4px;
+            position: relative;
+        }
+        
+        /* 滑动指示器 */
+        .feature-tabs::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            width: calc(33.333% - 8px);
+            height: calc(100% - 16px);
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 1;
+            pointer-events: none;
         }
         
         .feature-tab {
-            padding: 14px 28px;
+            padding: 16px 24px;
             cursor: pointer;
             text-align: center;
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
             flex: 1;
-            font-size: 16px;
-            color: #2c3e50;
-            margin: 0 6px;
+            font-size: 15px;
+            color: #6e6e73;
+            margin: 0;
             font-weight: 500;
-            border-radius: 24px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            background: transparent;
+            border: none;
+            min-height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            letter-spacing: -0.01em;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            z-index: 2;
         }
         
         .feature-tab:hover {
-            background: rgba(255, 255, 255, 0.2);
-            color: #1a252f;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .feature-tab.active {
-            background: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            color: #1a252f;
-            font-weight: 700;
-            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: #1d1d1f;
             transform: translateY(-1px);
         }
         
-        .feature-tab.active:after {
-            display: none;
+        .feature-tab.active {
+            background: transparent;
+            color: #1d1d1f;
+            font-weight: 600;
+            transform: translateY(0);
+        }
+        
+        .feature-tab.active:hover {
+            transform: translateY(0);
         }
         
         /* 内容区域样式 */
@@ -1576,52 +2243,267 @@
             max-width: 100%;
         }
         
-        @media (max-width: 768px) {
-            .feature-content .row {
-                display: flex;
-                flex-direction: column-reverse;
-            }
-            
-            .feature-carousel {
-                margin: 30px 0 40px;
-                padding: 0 10px;
-            }
-            
-            .feature-content-wrapper {
-                padding: 0 5px;
-            }
-            
-            .feature-content .col-xs-12 {
-                padding-left: 15px;
-                padding-right: 15px;
-            }
-            
-            .feature-text {
-                margin-top: 25px;
-                padding: 10px 15px;
-            }
-            
-            .feature-video iframe {
-                width: 253px; /* 9:16比例下，高度450px对应的宽度 */
-                height: 450px;
-            }
-            
+        /* 平板竖屏优化 (768px - 991px) */
+        @media (min-width: 768px) and (max-width: 991px) {
             .feature-tabs {
-                flex-wrap: wrap;
-                margin-bottom: 30px;
+                max-width: 500px;
+                padding: 6px;
+                gap: 3px;
+            }
+            
+            .feature-tabs::before {
+                top: 6px;
+                left: 6px;
+                width: calc(33.333% - 6px);
+                height: calc(100% - 12px);
+                border-radius: 14px;
             }
             
             .feature-tab {
-                padding: 10px 20px;
+                padding: 14px 18px;
                 font-size: 14px;
-                margin: 0 4px;
-                flex: 0 0 auto;
-                min-width: 80px;
+                min-height: 48px;
+                border-radius: 14px;
+            }
+            
+            .feature-video iframe {
+                width: 280px;
+                height: 498px;
+            }
+        }
+        
+        /* 移动设备优化 (481px - 767px) */
+        @media (min-width: 481px) and (max-width: 767px) {
+            .feature-carousel {
+                margin: 40px 0 50px;
+                padding: 30px 20px;
+                border-radius: 24px;
+            }
+            
+            .feature-tabs {
+                flex-wrap: nowrap;
+                justify-content: center;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+                gap: 4px;
+                padding: 6px;
+                margin-bottom: 30px;
+                max-width: 420px;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.2);
+                border-radius: 18px;
+                box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+            }
+            
+            .feature-tabs::before {
+                top: 6px;
+                left: 6px;
+                width: calc(33.333% - 4px);
+                height: calc(100% - 12px);
+                border-radius: 14px;
+                transform: translateX(0);
+            }
+            
+            .feature-tabs::-webkit-scrollbar {
+                display: none;
+            }
+            
+            .feature-tab {
+                flex: 1;
+                margin: 0;
+                padding: 12px 16px;
+                font-size: 13px;
+                min-width: auto;
+                white-space: nowrap;
+                border-radius: 14px;
+                min-height: 44px;
+                font-weight: 500;
+            }
+            
+            .feature-content-wrapper {
+                min-height: 200px;
+            }
+            
+            .feature-text {
+                padding: 10px 15px;
+                text-align: center;
             }
             
             .feature-video {
                 padding: 0 10px;
+                margin-top: 5px;
             }
+            
+            .feature-video iframe {
+                width: 100%;
+                max-width: 300px;
+                height: 534px;
+                margin: 0 auto;
+                display: block;
+            }
+        }
+        
+        /* 小屏手机优化 (320px - 480px) */
+        @media (max-width: 480px) {
+            .feature-carousel {
+                margin: 30px 0 40px;
+                padding: 20px 15px;
+                border-radius: 20px;
+            }
+            
+            .feature-tabs {
+                margin-bottom: 20px;
+                gap: 3px;
+                flex-wrap: nowrap;
+                justify-content: center;
+                overflow: visible;
+                padding: 4px;
+                max-width: 340px;
+                width: calc(100% - 20px);
+                background: rgba(255, 255, 255, 0.25);
+                border-radius: 16px;
+                box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            }
+            
+            .feature-tabs::before {
+                top: 4px;
+                left: 4px;
+                width: calc(33.333% - 3px);
+                height: calc(100% - 8px);
+                border-radius: 12px;
+                transform: translateX(0);
+            }
+            
+            .feature-tab {
+                flex: 1;
+                margin: 0;
+                padding: 10px 12px;
+                font-size: 12px;
+                border-radius: 12px;
+                min-width: auto;
+                text-align: center;
+                white-space: nowrap;
+                min-height: 40px;
+                font-weight: 500;
+                letter-spacing: -0.005em;
+            }
+            
+            .feature-content-wrapper {
+                min-height: 180px;
+            }
+            
+            .feature-text {
+                padding: 15px 10px;
+                text-align: center;
+            }
+            
+            .feature-text h3 {
+                font-size: 20px;
+                margin-bottom: 12px;
+                color: #007aff;
+            }
+            
+            .feature-text p {
+                font-size: 14px;
+                margin-bottom: 15px;
+                line-height: 1.5;
+            }
+            
+            .feature-item {
+                font-size: 11px;
+                padding: 6px 10px;
+                margin: 3px 4px;
+                border-radius: 12px;
+                display: inline-block;
+            }
+            
+            .features-list {
+                justify-content: center !important;
+                text-align: center !important;
+            }
+            
+            .feature-video {
+                padding: 0 10px;
+                margin-top: 5px;
+            }
+            
+            .feature-video iframe {
+                width: 100%;
+                max-width: 280px;
+                height: 498px;
+                margin: 0 auto;
+                display: block;
+            }
+        }
+        
+        /* 超小屏设备优化 (小于320px) */
+        @media (max-width: 319px) {
+            .feature-carousel {
+                margin: 25px 0 35px;
+                padding: 15px 10px;
+                border-radius: 16px;
+            }
+            
+            .feature-tabs {
+                gap: 2px;
+                padding: 3px;
+                border-radius: 14px;
+                margin-bottom: 15px;
+                max-width: 280px;
+                width: calc(100% - 10px);
+            }
+            
+            .feature-tabs::before {
+                top: 3px;
+                left: 3px;
+                width: calc(33.333% - 2px);
+                height: calc(100% - 6px);
+                border-radius: 10px;
+                transform: translateX(0);
+            }
+            
+            .feature-tab {
+                font-size: 10px;
+                padding: 8px 8px;
+                border-radius: 10px;
+                min-height: 36px;
+                font-weight: 500;
+                flex: 1;
+                min-width: auto;
+            }
+            
+            .feature-video iframe {
+                width: 100%;
+                max-width: 200px;
+                height: 356px;
+                margin: 0 auto;
+                display: block;
+            }
+        }
+        
+        /* 触摸设备特殊优化 */
+        .touch-device .feature-tab {
+            min-height: 44px; /* iOS人机界面指南推荐的最小触摸目标 */
+            min-width: 44px;
+        }
+        
+        @media (max-width: 767px) {
+            .touch-device .feature-tab {
+                min-height: 40px;
+                min-width: 80px;
+                padding: 10px 16px !important;
+            }
+        }
+        
+        /* 非触摸设备的hover效果增强 */
+        .no-touch .feature-tab:hover {
+            transform: translateY(-2px) scale(1.02);
+        }
+        
+        .no-touch .feature-tab.active:hover {
+            transform: translateY(0) scale(1.01);
         }
         
         /* 键盘导航提示 */
@@ -1636,364 +2518,930 @@
             letter-spacing: normal;
         }
 
-        /* 自动化触发模块样式 - 毛玻璃风格设计 */
+        /* 自动化触发模块 - 标准feature-row布局 */
         .automation-triggers {
-            margin: 70px 0;
-            padding: 50px;
-            background: rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border-radius: 32px;
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-            position: relative;
-            overflow: hidden;
+            /* 移除自定义背景，使用标准feature-row样式 */
+            background: none;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+            border-radius: 0;
+            border: none;
+            margin: 0;
+            padding: 0;
+            box-shadow: none;
         }
-        
-        .automation-triggers::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(0, 122, 255, 0.02) 0%, rgba(255, 255, 255, 0.05) 100%);
-            pointer-events: none;
+
+        /* 重置flexbox，使用标准Bootstrap网格 */
+        .automation-triggers .row {
+            display: block;
+            align-items: initial;
+            gap: 0;
         }
-        
+
         .automation-triggers .description {
+            flex: none;
+            display: block;
+            text-align: left; /* 与其他模块保持一致 */
+        }
+
+        .automation-triggers .screen {
+            flex: none;
+            display: block;
+            align-items: initial;
+            padding-left: 15px; /* 恢复Bootstrap默认 */
+        }
+
+
+        /* 分隔线样式与其他模块一致 */
+        .automation-triggers .description hr.separator {
+            border-radius: 2px;
+            border: 0;
+            height: 7px;
+            margin: 0 auto 0 0;
+            width: 120px;
+            background: #0351AB;
+        }
+
+        /* Trigger Tabs 重新设计 - 更紧凑的布局 */
+        .trigger-tabs {
             display: flex;
             flex-direction: column;
-            padding-right: 25px;
-            position: relative;
-            z-index: 1;
+            gap: 4px; /* 从6px减小到4px */
+            margin-top: 8px; /* 从20px减少到8px */
         }
-        
-        .automation-triggers .description h2 {
-            margin-top: 0;
-            margin-bottom: 8px;
-            font-size: 32px;
-            font-weight: 700;
-            color: #1d1d1f;
-            letter-spacing: -0.02em;
-            line-height: 1.2;
-        }
-        
-        .automation-triggers .description hr {
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(90deg, #007aff, #5ac8fa);
-            border: none;
-            border-radius: 2px;
-            margin: 12px 0 20px 0;
-        }
-        
-        .automation-triggers .description > p {
-            margin-bottom: 30px;
-            font-size: 18px;
-            color: #6e6e73;
-            line-height: 1.6;
-            font-weight: 400;
-            letter-spacing: -0.01em;
-        }
-        
-        .automation-triggers .screen {
-            display: flex;
-            align-items: flex-start;
-            padding-left: 25px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .trigger-tabs {
-            margin-top: 0;
-            flex: 1;
-        }
-        
+
         .trigger-tab {
-            border: none;
-            border-radius: 20px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px; /* 减小圆角 */
+            border: 1px solid rgba(255, 255, 255, 0.12);
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.25);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
         }
-        
-        .trigger-tab:last-child {
-            margin-bottom: 0;
-        }
-        
+
         .trigger-tab:hover {
-            transform: translateY(-3px) scale(1.01);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-            background: rgba(255, 255, 255, 0.25);
-            border: 1px solid rgba(255, 255, 255, 0.35);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
         }
-        
+
         .trigger-tab.active {
-            transform: translateY(-2px) scale(1.005);
-            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
-            background: rgba(255, 255, 255, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(0, 122, 255, 0.3);
+            box-shadow: 0 2px 12px rgba(0, 122, 255, 0.12);
         }
-        
+
         .trigger-tab-header {
-            padding: 16px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            cursor: pointer;
-            min-height: 52px;
-            box-sizing: border-box;
+            padding: 10px 16px; /* 减小内边距 */
+            min-height: 40px; /* 减小最小高度 */
         }
-        
-        .trigger-tab.active .trigger-tab-header {
-            border-bottom: 1px solid rgba(0, 122, 255, 0.1);
-        }
-        
-        .trigger-tab h4 {
-            margin: 0;
-            font-size: 16px;
+
+        .trigger-tab-header h4 {
+            font-size: 14px; /* 减小字体 */
             font-weight: 600;
-            color: #2c3e50;
-            transition: all 0.3s ease;
+            color: #1a1a1a;
+            margin: 0;
             letter-spacing: -0.01em;
         }
-        
-        .trigger-tab.active h4 {
-            color: #34495e;
-            font-weight: 700;
-        }
-        
+
         .trigger-tab-icon {
-            width: 20px;
-            height: 20px;
+            width: 18px; /* 减小尺寸 */
+            height: 18px;
+            background: rgba(0, 122, 255, 0.1);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #7f8c8d;
-            transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            font-size: 14px;
-            border-radius: 50%;
-            background: rgba(127, 140, 141, 0.1);
+            font-size: 9px; /* 减小字体 */
+            color: #007aff;
+            transition: all 0.3s ease;
+            font-weight: 600;
         }
-        
+
         .trigger-tab.active .trigger-tab-icon {
-            color: #34495e;
-            transform: rotate(180deg) scale(1.1);
-            background: rgba(52, 73, 94, 0.1);
+            background: rgba(0, 122, 255, 0.2);
+            transform: rotate(180deg);
         }
-        
+
         .trigger-tab-content {
-            padding: 0 20px;
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-                        opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                        padding 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            opacity: 0;
+            transition: max-height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.4s ease;
+            padding: 0 16px; /* 减小内边距 */
         }
-        
+
         .trigger-tab.active .trigger-tab-content {
-            padding: 6px 20px 8px 20px;
-            opacity: 1;
-            /* max-height 将通过JavaScript动态设置 */
+            max-height: 60px; /* 减小最大高度 */
+            padding: 0 16px 10px; /* 减小内边距 */
         }
-        
-        .trigger-tab p {
+
+        .trigger-tab-content p {
             margin: 0;
-            font-size: 14px;
-            color: #7f8c8d;
-            line-height: 1.1;
+            font-size: 12px; /* 减小字体 */
+            color: #6e6e73;
+            line-height: 1.4;
             font-weight: 400;
-            letter-spacing: -0.005em;
         }
-        
-        .trigger-display {
+
+        /* Trigger Display - 增加高度与左侧tabs总高度匹配 */
+        /* Trigger Display */ .trigger-display {
             position: relative;
             width: 100%;
-            min-height: 400px;
+            height: 100%;
+            min-height: 500px; /* 增加高度 */
             overflow: hidden;
-            margin-top: 0;
-            border-radius: 24px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        
+
         .trigger-content {
             position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            transform: scale(0.95);
+            transition: opacity 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
         }
-        
+
         .trigger-content.active {
             opacity: 1;
             visibility: visible;
-            position: relative;
-            height: auto;
-            transform: scale(1);
         }
-        
+
         .trigger-content img {
-            width: 100%;
-            height: auto;
-            border-radius: 16px;
-            box-shadow: none;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
         }
+
+        /* 响应式优化 - 遵循标准feature-row规则 */
         
-        @media (max-width: 768px) {
-            .automation-triggers {
-                margin: 40px 0;
-                padding: 24px;
-                border-radius: 20px;
-                box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+        /* 大屏幕优化 (1200px+) */
+        @media (min-width: 1200px) {
+            .automation-triggers .description hr.separator {
+                height: 8px;
+                width: 140px;
             }
-            
-            .automation-triggers .row {
-                display: flex;
-                flex-direction: column;
+
+            .trigger-display {
+                min-height: 580px; /* 增加高度 */
             }
-            
+
+            .trigger-content {
+                padding: 0;
+            }
+
+            .trigger-tabs {
+                gap: 8px; /* 稍微增加间距 */
+                margin-top: 10px;
+            }
+
+            .trigger-tab-header {
+                padding: 12px 18px; /* 稍微增加内边距 */
+                min-height: 44px; /* 稍微增加高度 */
+            }
+
+            .trigger-tab-header h4 {
+                font-size: 15px; /* 稍微增加字体 */
+            }
+
+            .trigger-tab-icon {
+                width: 20px; /* 稍微增加尺寸 */
+                height: 20px;
+                font-size: 10px; /* 稍微增加字体 */
+            }
+
+            .trigger-tab.active .trigger-tab-content {
+                max-height: 70px; /* 稍微增加高度 */
+                padding: 0 18px 12px; /* 稍微增加内边距 */
+            }
+
+            .trigger-tab-content {
+                padding: 0 18px; /* 稍微增加内边距 */
+            }
+
+            .trigger-tab-content p {
+                font-size: 13px; /* 稍微增加字体 */
+            }
+        }
+
+        /* 平板横屏优化 (992px - 1199px) */
+        @media (min-width: 992px) and (max-width: 1199px) {
+            .automation-triggers .description hr.separator {
+                height: 7px;
+                width: 130px;
+            }
+
+            .trigger-display {
+                min-height: 520px; /* 增加高度 */
+                border-radius: 18px;
+            }
+
+            .trigger-content {
+                padding: 0;
+            }
+
+            .trigger-tabs {
+                gap: 7px; /* 稍微增加间距 */
+                margin-top: 8px;
+            }
+
+            .trigger-tab-header {
+                padding: 11px 17px; /* 稍微调整内边距 */
+                min-height: 42px; /* 稍微调整高度 */
+            }
+
+            .trigger-tab-header h4 {
+                font-size: 14px; /* 保持较小字体 */
+            }
+
+            .trigger-tab-icon {
+                width: 19px; /* 稍微调整尺寸 */
+                height: 19px;
+                font-size: 9px; /* 保持较小字体 */
+            }
+
+            .trigger-tab.active .trigger-tab-content {
+                max-height: 65px; /* 稍微调整高度 */
+                padding: 0 17px 11px; /* 稍微调整内边距 */
+            }
+
+            .trigger-tab-content {
+                padding: 0 17px; /* 稍微调整内边距 */
+            }
+
+            .trigger-tab-content p {
+                font-size: 12px; /* 保持较小字体 */
+            }
+        }
+
+        /* 平板竖屏优化 (768px - 991px) */
+        @media (min-width: 768px) and (max-width: 991px) {
+            .trigger-display {
+                min-height: 460px; /* 增加高度 */
+                border-radius: 16px;
+            }
+
+            .trigger-content {
+                padding: 0;
+            }
+
+            .trigger-tabs {
+                gap: 6px; /* 保持紧凑间距 */
+                margin-top: 6px;
+            }
+
+            .trigger-tab {
+                border-radius: 10px;
+            }
+
+            .trigger-tab-header {
+                padding: 10px 15px; /* 调整内边距 */
+                min-height: 38px; /* 调整高度 */
+            }
+
+            .trigger-tab-header h4 {
+                font-size: 13px; /* 调整字体 */
+            }
+
+            .trigger-tab-icon {
+                width: 17px; /* 调整尺寸 */
+                height: 17px;
+                font-size: 8px; /* 调整字体 */
+            }
+
+            .trigger-tab.active .trigger-tab-content {
+                max-height: 55px; /* 调整高度 */
+                padding: 0 15px 9px; /* 调整内边距 */
+            }
+
+            .trigger-tab-content {
+                padding: 0 15px; /* 调整内边距 */
+            }
+
+            .trigger-tab-content p {
+                font-size: 11px; /* 调整字体 */
+            }
+        }
+
+        /* 移动端优化 (最大767px) - 垂直布局 */
+        @media (max-width: 767px) {
             .automation-triggers .description {
-                margin-bottom: 30px;
-                order: 2;
-                padding-right: 0;
                 text-align: center;
+                margin-bottom: 30px;
             }
-            
-            .automation-triggers .description h2 {
-                font-size: 28px;
-                margin-bottom: 6px;
+
+
+            .automation-triggers .description hr.separator {
+                margin: 15px auto 0 auto;
+                width: 80px;
+                height: 4px;
             }
-            
-            .automation-triggers .description hr {
-                margin: 10px auto 16px auto;
-                width: 50px;
+ 
+            .automation-triggers .row { display: flex; flex-direction: column; } .automation-triggers .col-sm-5 { order: 1; margin-bottom: 20px; width: 100%; padding: 0 15px; } .automation-triggers .col-sm-6 { order: 2; width: 100%; margin-left: 0 !important; margin-top: 0; padding: 0 15px; } .automation-triggers .screen {
+                padding-left: 15px;
+                margin-top: 6px;
+            }
+
+            .trigger-display {
+                min-height: 320px; /* 增加高度 */
+                border-radius: 14px;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .trigger-content {
+                padding: 0;
+            }
+
+            .trigger-tabs {
+                gap: 5px; /* 保持紧凑间距 */
+                margin-top: 5px;
+            }
+
+            .trigger-tab {
+                border-radius: 8px; /* 减小圆角 */
+            }
+
+            .trigger-tab-header {
+                padding: 8px 12px; /* 减小内边距 */
+                min-height: 32px; /* 减小高度 */
+            }
+
+            .trigger-tab-header h4 {
+                font-size: 12px; /* 减小字体 */
+            }
+
+            .trigger-tab-icon {
+                width: 14px; /* 减小尺寸 */
+                height: 14px;
+                font-size: 7px; /* 减小字体 */
+            }
+
+            .trigger-tab.active .trigger-tab-content {
+                max-height: 45px; /* 减小高度 */
+                padding: 0 12px 7px; /* 减小内边距 */
+            }
+
+            .trigger-tab-content {
+                padding: 0 12px; /* 减小内边距 */
+            }
+
+            .trigger-tab-content p {
+                font-size: 10px; /* 减小字体 */
+                line-height: 1.3;
+            }
+        }
+
+        /* 小屏手机优化 (最大480px) */
+        @media (max-width: 480px) {
+
+            .automation-triggers .description hr.separator {
+                width: 60px;
                 height: 3px;
             }
-            
-            .automation-triggers .description > p {
-                font-size: 16px;
-                margin-bottom: 24px;
-                line-height: 1.5;
+
+            /* Trigger Display */ .trigger-display {
+                min-height: 220px;
+                border-radius: 12px;
+                max-width: 300px;
             }
-            
-            .automation-triggers .screen {
-                order: 1;
-                margin-bottom: 30px;
-                padding-left: 0;
+
+            .trigger-content {
+                padding: 0;
             }
-            
+
+            .trigger-tabs {
+                gap: 5px;
+                margin-top: 5px;
+            }
+
             .trigger-tab {
-                border-radius: 12px;
-                margin-bottom: 6px;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+                border-radius: 8px;
             }
-            
+
             .trigger-tab-header {
-                padding: 14px 16px;
-                min-height: 48px;
+                padding: 10px 12px;
+                min-height: 36px;
             }
-            
-            .trigger-tab h4 {
-                font-size: 15px;
-                font-weight: 600;
+
+            .trigger-tab-header h4 {
+                font-size: 11px;
             }
-            
+
             .trigger-tab-icon {
-                width: 18px;
-                height: 18px;
-                font-size: 13px;
+                width: 15px;
+                height: 15px;
+                font-size: 7px;
             }
-            
+
             .trigger-tab.active .trigger-tab-content {
-                padding: 4px 16px 6px 16px;
-                /* max-height 将通过JavaScript动态设置 */
+                max-height: 50px;
+                padding: 0 12px 10px;
             }
-            
-            .trigger-tab p {
+
+            .trigger-tab-content {
+                padding: 0 12px;
+            }
+
+            .trigger-tab-content p {
+                font-size: 10px;
+                line-height: 1.2;
+            }
+        }
+
+        /* 功能特性一览模块样式 - 与自动化触发模块完全一致 */
+        .feature-overview .description h3 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #007aff;
+            margin-top: 33px;
+            margin-bottom: 16px;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        .feature-overview .description > h4 {
+            font-size: 18px;
+            color: #007aff;
+            line-height: 1.6;
+            margin-top: 6px;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        /* 大屏幕优化 (1200px+) */
+        @media (min-width: 1200px) {
+            .feature-overview .description h3 {
+                font-size: 36px;
+                color: #007aff;
+                margin-top: 40px;
+                margin-bottom: 20px;
+            }
+
+            .feature-overview .description > h4 {
+                font-size: 20px;
+                color: #007aff;
+                margin-top: 24px;
+                margin-bottom: 35px;
+            }
+        }
+
+        /* 平板横屏优化 (992px - 1199px) */
+        @media (min-width: 992px) and (max-width: 1199px) {
+            .feature-overview .description h3 {
+                font-size: 34px;
+                color: #007aff;
+                margin-top: 36px;
+                margin-bottom: 18px;
+            }
+
+            .feature-overview .description > h4 {
+                font-size: 19px;
+                color: #007aff;
+                margin-top: 8px;
+                margin-bottom: 32px;
+            }
+        }
+
+        /* 平板竖屏优化 (768px - 991px) */
+        @media (min-width: 768px) and (max-width: 991px) {
+            .feature-overview .description h3 {
+                font-size: 30px;
+                color: #007aff;
+                margin-top: 35px;
+                margin-bottom: 16px;
+            }
+
+            .feature-overview .description > h4 {
+                font-size: 17px;
+                color: #007aff;
+                margin-top: 6px;
+                margin-bottom: 28px;
+            }
+        }
+
+        /* 移动端优化 (最大767px) */
+        @media (max-width: 767px) {
+            .feature-overview .description {
+                text-align: center;
+                margin-bottom: 30px;
+            }
+
+            .feature-overview .description h3 {
+                font-size: 24px;
+                color: #007aff;
+                margin-top: 6px;
+                margin-bottom: 12px;
+            }
+
+            .feature-overview .description > h4 {
+                font-size: 15px;
+                color: #007aff;
+                margin-top: 5px;
+                margin-bottom: 25px;
+                padding: 0 10px;
+            }
+        }
+
+        /* 小屏手机优化 (最大480px) */
+        @media (max-width: 480px) {
+            .feature-overview .description h3 {
+                font-size: 20px;
+                color: #007aff;
+                margin-top: 5px;
+                margin-bottom: 10px;
+            }
+
+            .feature-overview .description > h4 {
                 font-size: 13px;
-                line-height: 1.1;
+                color: #007aff;
+                margin-top: 5px;
+                margin-bottom: 20px;
+                padding: 0;
             }
-            
-            .trigger-display {
-                min-height: 300px;
-                border-radius: 16px;
-                box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+
+            .feature-overview .description hr.separator {
+                width: 60px;
+                height: 3px;
             }
-            
-            .trigger-content img {
+
+            /* Trigger Display */ .trigger-display {
+                min-height: 220px;
                 border-radius: 12px;
+                max-width: 300px;
+            }
+
+            .trigger-content {
+                padding: 0;
+            }
+
+            .trigger-tabs {
+                gap: 5px;
+                margin-top: 5px;
+            }
+
+            .trigger-tab {
+                border-radius: 8px;
+            }
+
+            .trigger-tab-header {
+                padding: 10px 12px;
+                min-height: 36px;
+            }
+
+            .trigger-tab-header h4 {
+                font-size: 11px;
+            }
+
+            .trigger-tab-icon {
+                width: 15px;
+                height: 15px;
+                font-size: 7px;
+            }
+
+            .trigger-tab.active .trigger-tab-content {
+                max-height: 50px;
+                padding: 0 12px 10px;
+            }
+
+            .trigger-tab-content {
+                padding: 0 12px;
+            }
+
+            .trigger-tab-content p {
+                font-size: 10px;
+                line-height: 1.2;
+            }
+        }
+        /* 功能特性一览模块样式 - 与自动化触发模块完全一致 */
+        .feature-overview-title {
+            font-size: 32px !important;
+            font-weight: 700 !important;
+            color: #007aff !important;
+            margin-top: 10px !important;  /* 从33px减少到10px */
+            margin-bottom: 8px !important;  /* 从16px减少到8px */
+            line-height: 1.1 !important;  /* 从1.2减少到1.1 */
+            letter-spacing: -0.02em !important;
+        }
+
+        .feature-overview-subtitle {
+            font-size: 16px !important;  /* Reduced from 18px */
+            color: #007aff !important;
+            line-height: 1.4 !important;
+            margin-top: 12px !important;  /* Increased from 0 */
+            margin-bottom: 15px !important;
+            font-weight: 400 !important;
+        }
+
+        /* 大屏幕优化 (1200px+) */
+        @media (min-width: 1200px) {
+            .feature-overview-title {
+                font-size: 36px !important;
+                margin-top: 8px !important;
+                margin-bottom: 5px !important;
+            }
+
+            .feature-overview-subtitle {
+                font-size: 18px !important;  /* Reduced from 20px */
+                margin-top: 15px !important;  /* Increased from 0 */
+                margin-bottom: 10px !important;
+            }
+        }
+
+        /* 平板横屏优化 (992px - 1199px) */
+        @media (min-width: 992px) and (max-width: 1199px) {
+            .feature-overview-title {
+                font-size: 34px !important;
+                margin-top: 12px !important;
+                margin-bottom: 8px !important;
+            }
+
+            .feature-overview-subtitle {
+                font-size: 17px !important;  /* Reduced from 19px */
+                margin-top: 14px !important;  /* Increased from 0 */
+                margin-bottom: 18px !important;
+            }
+        }
+
+        /* 平板竖屏优化 (768px - 991px) */
+        @media (min-width: 768px) and (max-width: 991px) {
+            .feature-overview-title {
+                font-size: 30px !important;
+                margin-top: 10px !important;
+                margin-bottom: 8px !important;
+            }
+
+            .feature-overview-subtitle {
+                font-size: 15px !important;  /* Reduced from 17px */
+                margin-top: 12px !important;  /* Increased from 0 */
+                margin-bottom: 15px !important;
+            }
+        }
+
+        /* 移动端优化 (最大767px) */
+        @media (max-width: 767px) {
+            .feature-overview-title {
+                font-size: 24px !important;
+                margin-top: 0 !important;
+                margin-bottom: 6px !important;
+                text-align: center !important;
+            }
+
+            .feature-overview-subtitle {
+                font-size: 14px !important;  /* Reduced from 15px */
+                margin-top: 10px !important;  /* Increased from 8px */
+                margin-bottom: 12px !important;
+                padding: 0 10px !important;
+                text-align: center !important;
+            }
+        }
+
+        /* 小屏手机优化 (最大480px) */
+        @media (max-width: 480px) {
+            .feature-overview-title {
+                font-size: 20px !important;
+                margin-top: 8px !important;
+                margin-bottom: 5px !important;
+            }
+
+            .feature-overview-subtitle {
+                font-size: 12px !important;  /* Reduced from 13px */
+                margin-top: 10px !important;  /* Increased from 12px */
+                margin-bottom: 5px !important;
+                padding: 0 !important;
+            }
+        }
+
+        /* 桌面端重置 - 确保自动化触发模块正常布局 */
+        @media (min-width: 768px) {
+            .automation-triggers .row {
+                display: block !important;
+                flex-direction: unset !important;
+            }
+
+            .automation-triggers .row:before,
+            .automation-triggers .row:after {
+                content: " ";
+                display: table;
+            }
+
+            .automation-triggers .row:after {
+                clear: both;
+            }
+
+            .automation-triggers .col-sm-5 {
+                order: unset !important;
+                margin-bottom: unset !important;
+                width: 41.66666667% !important;
+                float: left !important;
+                padding: 15px !important;
+            }
+
+            .automation-triggers .col-sm-6 {
+                order: unset !important;
+                width: 50% !important;
+                float: left !important;
+                margin-left: 8.33333333% !important;
+                margin-top: unset !important;
+                padding: 15px !important;
+            }
+
+            .automation-triggers .col-sm-offset-1 {
+                margin-left: 8.33333333% !important;
+            }
+        }
+
+        /* 自动化触发模块标题样式 - 与功能特性一览保持一致 */
+        .automation-trigger-title {
+            font-size: 32px !important;
+            font-weight: 700 !important;
+            color: #007aff !important;
+            margin-top: 10px !important;  /* 从33px减少到10px */
+            margin-bottom: 8px !important;  /* 从16px减少到8px */
+            line-height: 1.1 !important;  /* 从1.2减少到1.1 */
+            letter-spacing: -0.02em !important;
+        }
+
+        .automation-trigger-subtitle {
+            font-size: 16px !important;  /* Reduced from 18px */
+            color: #007aff !important;
+            line-height: 1.4 !important;
+            margin-top: 12px !important;  /* Increased from 0 */
+            margin-bottom: 15px !important;
+            font-weight: 400 !important;
+        }
+
+        /* 大屏幕优化 (1200px+) */
+        @media (min-width: 1200px) {
+            .automation-trigger-title {
+                font-size: 36px !important;
+                margin-top: 8px !important;
+                margin-bottom: 5px !important;
+            }
+
+            .automation-trigger-subtitle {
+                font-size: 18px !important;  /* Reduced from 20px */
+                margin-top: 15px !important;  /* Increased from 0 */
+                margin-bottom: 10px !important;
+            }
+        }
+
+        /* 平板横屏优化 (992px - 1199px) */
+        @media (min-width: 992px) and (max-width: 1199px) {
+            .automation-trigger-title {
+                font-size: 34px !important;
+                margin-top: 12px !important;
+                margin-bottom: 8px !important;
+            }
+
+            .automation-trigger-subtitle {
+                font-size: 17px !important;  /* Reduced from 19px */
+                margin-top: 14px !important;  /* Increased from 0 */
+                margin-bottom: 18px !important;
+            }
+        }
+
+        /* 平板竖屏优化 (768px - 991px) */
+        @media (min-width: 768px) and (max-width: 991px) {
+            .automation-trigger-title {
+                font-size: 30px !important;
+                margin-top: 10px !important;
+                margin-bottom: 8px !important;
+            }
+
+            .automation-trigger-subtitle {
+                font-size: 15px !important;  /* Reduced from 17px */
+                margin-top: 12px !important;  /* Increased from 0 */
+                margin-bottom: 15px !important;
+            }
+        }
+
+        /* 移动端优化 (最大767px) */
+        @media (max-width: 767px) {
+            .automation-trigger-title {
+                font-size: 24px !important;
+                margin-top: 0 !important;
+                margin-bottom: 6px !important;
+                text-align: center !important;
+            }
+
+            .automation-trigger-subtitle {
+                font-size: 14px !important;  /* Reduced from 15px */
+                margin-top: 10px !important;  /* Increased from 8px */
+                margin-bottom: 12px !important;
+                padding: 0 10px !important;
+                text-align: center !important;
+            }
+        }
+
+        /* 小屏手机优化 (最大480px) */
+        @media (max-width: 480px) {
+            .automation-trigger-title {
+                font-size: 20px !important;
+                margin-top: 8px !important;
+                margin-bottom: 5px !important;
+            }
+
+            .automation-trigger-subtitle {
+                font-size: 13px !important;
+                margin-top: 12px !important;
+                margin-bottom: 5px !important;
+                padding: 0 !important;
+            }
+        }
+
+        /* 桌面端重置 - 确保自动化触发模块正常布局 */
+        @media (min-width: 768px) {
+            .automation-triggers .row {
+                display: block !important;
+                flex-direction: unset !important;
+            }
+
+            .automation-triggers .row:before,
+            .automation-triggers .row:after {
+                content: " ";
+                display: table;
+            }
+
+            .automation-triggers .row:after {
+                clear: both;
+            }
+
+            .automation-triggers .col-sm-5 {
+                order: unset !important;
+                margin-bottom: unset !important;
+                width: 41.66666667% !important;
+                float: left !important;
+                padding: 15px !important;
+            }
+
+            .automation-triggers .col-sm-6 {
+                order: unset !important;
+                width: 50% !important;
+                float: left !important;
+                margin-left: 8.33333333% !important;
+                margin-top: unset !important;
+                padding: 15px !important;
+            }
+
+            .automation-triggers .col-sm-offset-1 {
+                margin-left: 8.33333333% !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .media-card {
+                width: calc(50% - 20px);
+            }
+            
+            .media-recommendations h3 {
+                font-size: 22px;
+                margin-bottom: 12px;
             }
         }
         
         @media (max-width: 480px) {
-            .automation-triggers {
-                margin: 30px 0;
-                padding: 20px;
-                border-radius: 16px;
+            .media-card {
+                width: 100%;
+                padding: 12px 15px;  /* 从20px减少到12px 15px */
             }
             
-            .automation-triggers .description h2 {
-                font-size: 24px;
-                line-height: 1.3;
+            .media-card h4 {
+                margin: 0 0 5px 0;  /* 从10px减少到5px */
+                font-size: 15px;  /* 从16px减少到15px */
             }
             
-            .automation-triggers .description hr {
-                width: 40px;
-                height: 3px;
-                margin: 8px auto 14px auto;
+            .media-card p {
+                font-size: 13px;  /* 从14px减少到13px */
             }
             
-            .automation-triggers .description > p {
-                font-size: 15px;
-                margin-bottom: 20px;
+            .media-recommendations {
+                padding: 15px 10px;  /* 减少整体padding */
+                margin: 15px auto;  /* 减少margin */
             }
             
-            .trigger-tab {
-                border-radius: 10px;
-                margin-bottom: 4px;
+            .media-recommendations h3 {
+                font-size: 20px;
+                margin-bottom: 10px;  /* 减少底部间距 */
             }
             
-            .trigger-tab.active .trigger-tab-content {
-                padding: 3px 14px 5px 14px;
-            }
-            
-            .trigger-tab-header {
-                padding: 12px 14px;
-                min-height: 44px;
-            }
-            
-            .trigger-tab h4 {
-                font-size: 14px;
-            }
-            
-            .trigger-tab-icon {
-                width: 16px;
-                height: 16px;
-                font-size: 12px;
-            }
-            
-            .trigger-display {
-                min-height: 250px;
-                border-radius: 14px;
-            }
-            
-            .trigger-content img {
-                border-radius: 10px;
+            .media-cards {
+                gap: 12px;  /* 从20px减少到12px */
             }
         }
     </style>
@@ -2255,8 +3703,8 @@
                 </div>
             </div>
             <div class="col-xs-12 col-sm-6 col-sm-pull-5 screen">
-                <h3 class="text-left" style="margin-bottom: 10px; color: #007aff; font-weight: 600;">功能特性一览</h3>
-                <h4 class="text-left" style="margin-bottom: 40px; color: #007aff; font-weight: 310;">可添加至 全局负一屏、悬浮球、系统菜单</h3>
+                <h3 class="text-left feature-overview-title">功能特性一览</h3>
+                <h4 class="text-left feature-overview-subtitle">可添加至 全局负一屏、悬浮球、系统菜单</h4>
                 <div class="carousel-container" aria-roledescription="轮播" aria-label="产品功能展示">
                     <div class="carousel-arrow carousel-arrow-prev" aria-label="上一张"></div>
                     <div class="carousel-arrow carousel-arrow-next" aria-label="下一张"></div>
@@ -2396,9 +3844,8 @@
     </div>
     <div class="row feature-row automation-triggers">
         <div class="col-xs-12 col-sm-5 description">
-            <h2>自动化触发的悬浮面板</h2>
-            <hr class="separator blue">
-            <p>可以设置“眨眼抖音翻页、抬手拍照、自动浏览朋友圈”等酷炫功能</p>
+            <h3 class="text-left automation-trigger-title">自动化触发的悬浮面板</h3>
+            <h4 class="text-left automation-trigger-subtitle">可以设置"眨眼抖音翻页、抬手拍照、自动浏览朋友圈"等酷炫功能</h4>
             
             <div class="trigger-tabs">
                 <div class="trigger-tab" data-trigger="time">
@@ -2515,6 +3962,8 @@
         </div>
     </div>
     <div class="row">
+    </div>
+    <div class="row">
         <div class="col-xs-12 feature-line"></div>
     </div>
     <div class="row feature-row">
@@ -2584,6 +4033,114 @@
 </footer>
 </div>
 <script type="application/javascript">
+    // 防止移动端刷新时自动滚动的问题
+    function preventAutoScroll() {
+        // 强制页面滚动到顶部
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        
+        // 页面加载时立即滚动到顶部
+        window.scrollTo(0, 0);
+        
+        // 确保在DOM加载完成后也滚动到顶部
+        document.addEventListener('DOMContentLoaded', function() {
+            window.scrollTo(0, 0);
+            
+            // 延迟再次确保滚动到顶部，防止其他脚本干扰
+            setTimeout(function() {
+                window.scrollTo(0, 0);
+            }, 100);
+        });
+        
+        // 页面完全加载后再次确保
+        window.addEventListener('load', function() {
+            window.scrollTo(0, 0);
+        });
+        
+        // 监听页面显示事件（从缓存恢复时）
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted) {
+                window.scrollTo(0, 0);
+            }
+        });
+        
+        // 防止浏览器的自动滚动恢复
+        window.addEventListener('beforeunload', function() {
+            window.scrollTo(0, 0);
+        });
+    }
+    
+    // 立即执行防滚动函数
+    preventAutoScroll();
+    
+    // 优化DOMContentLoaded
+    document.addEventListener('DOMContentLoaded', function() {
+        // 再次确保页面在顶部
+        window.scrollTo(0, 0);
+        
+        // 限制事件处理器作用域
+        const iframe = document.querySelector('.video');
+        
+        if (iframe) {
+            // 优化iframe加载
+            iframe.addEventListener('load', function() {
+                iframe.classList.add('video-loaded');
+            });
+            
+            // 设置初次iframe高度
+            setIframeHeight();
+        }
+        
+        // 防抖函数 - 更高效的实现
+        function debounce(func, wait) {
+            let timeout;
+            return function() {
+                const context = this;
+                const args = arguments;
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(context, args), wait);
+            };
+        }
+        
+        // 使用被动事件监听优化触摸事件
+        window.addEventListener('resize', debounce(setIframeHeight, 150), {passive: true});
+        
+        // 初始化响应式优化（优先级最高）
+        initResponsiveOptimizations();
+        
+        // 移动端特性轮播tabs优化
+        initMobileTabsOptimization();
+        
+        // 初始化智能导航栏
+        initSmartNavbar();
+        
+        // 异步初始化非关键组件
+        setTimeout(() => {
+            // 初始化产品轮播图功能
+            initCarousel();
+            
+            // 初始化特性轮播功能
+            initFeatureCarousel();
+            
+            // 设置设备类型检测
+            setupDeviceDetection();
+        }, 0);
+
+        // 初始化自动化触发模块的tab切换功能
+        setTimeout(() => {
+            initAutomationTriggers();
+        }, 0);
+        
+        // 优先初始化横向滚动组件
+        initScrollComponent();
+        
+        // 最后再次确保页面在顶部
+        setTimeout(() => {
+            window.scrollTo(0, 0);
+        }, 500);
+    });
+    
     // 优化横向滚动组件
     function initScrollComponent() {
         const scrollContent = document.getElementById('scroll-content');
@@ -2717,7 +4274,48 @@
         const tabs = document.querySelectorAll('.feature-tab');
         const contents = document.querySelectorAll('.feature-content');
         const carouselContainer = document.querySelector('.feature-carousel');
+        const tabsContainer = document.querySelector('.feature-tabs');
         let currentTab = 0;
+        
+        // 更新滑动指示器位置
+        function updateSlideIndicator(index) {
+            if (!tabsContainer) return;
+            
+            const deviceType = getDeviceType();
+            const isDesktop = window.innerWidth >= 768;
+            
+            if (isDesktop) {
+                // 桌面端和平板：使用百分比定位
+                const style = document.createElement('style');
+                style.textContent = `
+                    .feature-tabs::before {
+                        transform: translateX(${index * 100}%) !important;
+                    }
+                `;
+                
+                // 移除之前的样式
+                const oldStyle = document.querySelector('#indicator-style');
+                if (oldStyle) oldStyle.remove();
+                
+                style.id = 'indicator-style';
+                document.head.appendChild(style);
+            } else {
+                // 移动端：使用百分比定位，因为现在按钮是等宽的
+                const style = document.createElement('style');
+                style.textContent = `
+                    .feature-tabs::before {
+                        transform: translateX(${index * 100}%) !important;
+                    }
+                `;
+                
+                // 移除之前的样式
+                const oldStyle = document.querySelector('#indicator-style');
+                if (oldStyle) oldStyle.remove();
+                
+                style.id = 'indicator-style';
+                document.head.appendChild(style);
+            }
+        }
         
         // 显示指定标签内容
         function showTab(index) {
@@ -2731,6 +4329,9 @@
             // 添加活动类到当前项
             tabs[index].classList.add('active');
             contents[index].classList.add('active');
+            
+            // 更新滑动指示器位置
+            updateSlideIndicator(index);
             
             // 处理iframe视频（如果需要）
             // bilibili的iframe不需要额外的暂停/播放操作，它会自动处理
@@ -2804,17 +4405,41 @@
             // 确保是水平滑动且时间不超过300ms
             if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > threshold && deltaTime < maxTime) {
                 if (deltaX < 0) {
-                    // 左滑
-                    nextTab();
+                // 左滑
+                nextTab();
                 } else {
-                    // 右滑
-                    prevTab();
-                }
+                // 右滑
+                prevTab();
             }
         }
+        }
+        
+        // 窗口大小变化时重新计算指示器位置
+        function handleResize() {
+            setTimeout(() => {
+                updateSlideIndicator(currentTab);
+            }, 100);
+        }
+        
+        // 防抖处理resize事件
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(handleResize, 150);
+        });
+        
+        // 监听设备方向变化
+        window.addEventListener('orientationchange', () => {
+            setTimeout(handleResize, 200);
+        });
         
         // 初始显示第一个标签内容
         showTab(0);
+        
+        // 延迟初始化指示器位置，确保DOM完全渲染
+        setTimeout(() => {
+            updateSlideIndicator(0);
+        }, 100);
     }
     
     // 智能导航栏滚动控制
@@ -2858,14 +4483,14 @@
         window.addEventListener('orientationchange', () => {
             setTimeout(updateNavbar, 100);
         }, { passive: true });
-        
+            
         // 初始状态检查
         updateNavbar();
         
         // 延迟再次检查，确保页面完全加载
         setTimeout(updateNavbar, 100);
-    }
-    
+        }
+        
     // 响应式工具函数
     function getDeviceType() {
         const width = window.innerWidth;
@@ -2885,6 +4510,39 @@
         return window.innerWidth > window.innerHeight;
     }
     
+    // 移动端特性轮播tabs优化
+    function initMobileTabsOptimization() {
+        const featureTabs = document.querySelector('.feature-tabs');
+        if (!featureTabs) return;
+        
+        // 确保活动tab在视口中可见
+        function scrollActiveTabIntoView() {
+            const activeTab = featureTabs.querySelector('.feature-tab.active');
+            if (activeTab && window.innerWidth <= 767) {
+                activeTab.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest',
+                    inline: 'center'
+                });
+            }
+        }
+        
+        // 监听tab切换
+        featureTabs.addEventListener('click', (e) => {
+            if (e.target.classList.contains('feature-tab')) {
+                setTimeout(scrollActiveTabIntoView, 100);
+            }
+        });
+        
+        // 窗口大小变化时重新调整
+        window.addEventListener('resize', () => {
+            setTimeout(scrollActiveTabIntoView, 100);
+        });
+        
+        // 初始调整
+        setTimeout(scrollActiveTabIntoView, 500);
+    }
+    
     // 响应式优化管理器
     function initResponsiveOptimizations() {
         let currentDeviceType = getDeviceType();
@@ -2894,7 +4552,7 @@
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(() => {
                 const newDeviceType = getDeviceType();
-                
+        
                 // 设备类型改变时重新初始化某些组件
                 if (newDeviceType !== currentDeviceType) {
                     currentDeviceType = newDeviceType;
@@ -2905,7 +4563,7 @@
                     // 重新初始化自动化触发器高度
                     const activeTab = document.querySelector('.trigger-tab.active');
                     if (activeTab) {
-                        setTimeout(() => {
+        setTimeout(() => {
                             setTabContentHeight(activeTab);
                         }, 100);
                     }
@@ -2926,7 +4584,7 @@
         // 初始设置
         document.documentElement.style.setProperty('--viewport-width', window.innerWidth + 'px');
         document.documentElement.style.setProperty('--viewport-height', window.innerHeight + 'px');
-        
+            
         // 为body添加设备类型类名
         document.body.classList.add(`device-${currentDeviceType}`);
         if (isTouchDevice()) {
@@ -2965,62 +4623,6 @@
             document.body.classList.add(`device-${e.detail.deviceType}`);
         });
     }
-
-    // 优化DOMContentLoaded
-    document.addEventListener('DOMContentLoaded', function() {
-        // 限制事件处理器作用域
-        const iframe = document.querySelector('.video');
-        
-        if (iframe) {
-            // 优化iframe加载
-            iframe.addEventListener('load', function() {
-                iframe.classList.add('video-loaded');
-            });
-            
-            // 设置初次iframe高度
-            setIframeHeight();
-        }
-        
-        // 防抖函数 - 更高效的实现
-        function debounce(func, wait) {
-            let timeout;
-            return function() {
-                const context = this;
-                const args = arguments;
-                clearTimeout(timeout);
-                timeout = setTimeout(() => func.apply(context, args), wait);
-            };
-        }
-        
-        // 使用被动事件监听优化触摸事件
-        window.addEventListener('resize', debounce(setIframeHeight, 150), {passive: true});
-        
-        // 初始化响应式优化（优先级最高）
-        initResponsiveOptimizations();
-        
-        // 初始化智能导航栏
-        initSmartNavbar();
-        
-        // 异步初始化非关键组件
-        setTimeout(() => {
-            // 初始化产品轮播图功能
-            initCarousel();
-            
-            // 初始化特性轮播功能
-            initFeatureCarousel();
-            
-            // 设置设备类型检测
-            setupDeviceDetection();
-        }, 0);
-
-        // 初始化自动化触发模块的tab切换功能
-        setTimeout(() => {
-            initAutomationTriggers();
-        }, 0);
-        
-        // 优先初始化横向滚动组件
-        initScrollComponent();
-    });
     
     // 产品轮播图初始化函数
     function initCarousel() {
@@ -3182,13 +4784,13 @@
             // 确保是水平滑动且时间不超过300ms
             if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > threshold && deltaTime < maxTime) {
                 if (deltaX < 0) {
-                    // 向左滑动，显示下一张
-                    nextSlide();
-                    resetInterval();
+                // 向左滑动，显示下一张
+                nextSlide();
+                resetInterval();
                 } else {
-                    // 向右滑动，显示上一张
-                    prevSlide();
-                    resetInterval();
+                // 向右滑动，显示上一张
+                prevSlide();
+                resetInterval();
                 }
             }
         }
@@ -3276,6 +4878,7 @@
     function initAutomationTriggers() {
         const triggerTabs = document.querySelectorAll('.trigger-tab');
         const triggerContents = document.querySelectorAll('.trigger-content');
+        const triggerDisplay = document.querySelector('.trigger-display');
         
         if (triggerTabs.length === 0 || triggerContents.length === 0) return;
         
@@ -3366,8 +4969,68 @@
                 
                 // 使tab header可以被键盘焦点
                 tabHeader.setAttribute('tabindex', '0');
+                tabHeader.setAttribute('role', 'button');
+                tabHeader.setAttribute('aria-expanded', 'false');
             }
         });
+
+        // 移动端触摸滑动支持
+        if (triggerDisplay && isTouchDevice()) {
+            let touchStartX = 0;
+            let touchStartY = 0;
+            let touchEndX = 0;
+            let touchEndY = 0;
+            let touchStartTime = 0;
+            
+            triggerDisplay.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+                touchStartY = e.changedTouches[0].screenY;
+                touchStartTime = Date.now();
+            }, {passive: true});
+            
+            triggerDisplay.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                touchEndY = e.changedTouches[0].screenY;
+                handleTriggerSwipe();
+            }, {passive: true});
+            
+            function handleTriggerSwipe() {
+                const deltaX = touchEndX - touchStartX;
+                const deltaY = touchEndY - touchStartY;
+                const deltaTime = Date.now() - touchStartTime;
+                const threshold = 50;
+                const maxTime = 300;
+                
+                // 确保是水平滑动且时间不超过300ms
+                if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > threshold && deltaTime < maxTime) {
+                    const triggerArray = Array.from(triggerTabs).map(tab => tab.getAttribute('data-trigger'));
+                    const currentActive = document.querySelector('.trigger-tab.active');
+                    let currentIndex = currentActive ? triggerArray.indexOf(currentActive.getAttribute('data-trigger')) : -1;
+                    
+                    if (deltaX < 0 && currentIndex < triggerArray.length - 1) {
+                        // 左滑，显示下一个trigger
+                        showTriggerTab(triggerArray[currentIndex + 1]);
+                    } else if (deltaX > 0 && currentIndex > 0) {
+                        // 右滑，显示上一个trigger
+                        showTriggerTab(triggerArray[currentIndex - 1]);
+                    } else if (deltaX > 0 && currentIndex === -1) {
+                        // 如果没有激活的tab，右滑显示第一个
+                        showTriggerTab(triggerArray[0]);
+                    }
+                }
+            }
+        }
+
+        // 移动端优化：自动滚动到激活的tab
+        function scrollActiveTabIntoView() {
+            const activeTab = document.querySelector('.trigger-tab.active');
+            if (activeTab && window.innerWidth <= 767) {
+                activeTab.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest'
+                });
+            }
+        }
         
         // 窗口大小变化时重新计算高度
         function handleResize() {
@@ -3375,6 +5038,7 @@
             if (activeTab) {
                 setTimeout(() => {
                     setTabContentHeight(activeTab);
+                    scrollActiveTabIntoView();
                 }, 100);
             }
         }
@@ -3386,9 +5050,29 @@
             resizeTimeout = setTimeout(handleResize, 150);
         });
         
+        // 监听设备方向变化
+        window.addEventListener('orientationchange', () => {
+            setTimeout(handleResize, 200);
+        });
+        
         // 初始化时设置所有tab的高度
         triggerTabs.forEach(tab => {
             setTabContentHeight(tab);
+            
+            // 为每个tab添加aria属性
+            const tabHeader = tab.querySelector('.trigger-tab-header');
+            if (tabHeader) {
+                const trigger = tab.getAttribute('data-trigger');
+                tabHeader.setAttribute('aria-controls', `trigger-content-${trigger}`);
+            }
+        });
+        
+        // 为trigger-content添加id属性以支持aria-controls
+        triggerContents.forEach(content => {
+            const trigger = content.getAttribute('data-trigger');
+            if (trigger) {
+                content.setAttribute('id', `trigger-content-${trigger}`);
+            }
         });
         
         // 默认不选中任何tab，显示默认内容

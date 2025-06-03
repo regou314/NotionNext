@@ -607,6 +607,17 @@
                 transform: translateX(0);
             }
             
+            /* automation容器的指示器样式 - 2个tab所以是50% */
+            .automation-feature-carousel .feature-tabs::before {
+                width: calc(50% - 6px);
+                right: 6px;
+            }
+            
+            /* 移除AI自动化模块标题后第一个feature-row的上边距 */
+            .feature-row.no-top-margin {
+                margin-top: 0 !important;
+            }
+            
             .feature-tabs::-webkit-scrollbar {
                 display: none;
             }
@@ -1038,8 +1049,8 @@
             }
 
             .trigger-tab.active .trigger-tab-content {
-                padding: 0 15px 12px;
-                max-height: 120px;
+                padding: 6px 15px;
+                max-height: 80px;
             }
 
             .trigger-tab-content p {
@@ -2306,6 +2317,17 @@
                 transform: translateX(0);
             }
             
+            /* automation容器的指示器样式 - 2个tab所以是50% */
+            .automation-feature-carousel .feature-tabs::before {
+                width: calc(50% - 6px);
+                right: 6px;
+            }
+            
+            /* 移除AI自动化模块标题后第一个feature-row的上边距 */
+            .feature-row.no-top-margin {
+                margin-top: 0 !important;
+            }
+            
             .feature-tabs::-webkit-scrollbar {
                 display: none;
             }
@@ -2637,8 +2659,8 @@
         }
 
         .trigger-tab.active .trigger-tab-content {
-            max-height: 60px; /* 减小最大高度 */
-            padding: 0 16px 10px; /* 减小内边距 */
+            max-height: 100px;
+            padding: 8px 20px;
         }
 
         .trigger-tab-content p {
@@ -3268,83 +3290,50 @@
 
         /* 自动化触发模块标题样式 - 与功能特性一览保持一致 */
         .automation-trigger-title {
-            font-size: 32px !important;
-            font-weight: 700 !important;
+            font-size: 11px !important;
+            font-weight: 600 !important;
             color: #007aff !important;
-            margin-top: 10px !important;  /* 从33px减少到10px */
-            margin-bottom: 8px !important;  /* 从16px减少到8px */
-            line-height: 1.1 !important;  /* 从1.2减少到1.1 */
-            letter-spacing: -0.02em !important;
-        }
-
-        .automation-trigger-subtitle {
-            font-size: 16px !important;  /* Reduced from 18px */
-            color: #007aff !important;
-            line-height: 1.4 !important;
-            margin-top: 12px !important;  /* Increased from 0 */
-            margin-bottom: 15px !important;
-            font-weight: 400 !important;
+            margin-bottom: 12px !important;
+            line-height: 1.3 !important;
+            text-align: center !important;
         }
 
         /* 大屏幕优化 (1200px+) */
         @media (min-width: 1200px) {
             .automation-trigger-title {
-                font-size: 36px !important;
+                font-size: 18px !important;
                 margin-top: 8px !important;
                 margin-bottom: 5px !important;
-            }
-
-            .automation-trigger-subtitle {
-                font-size: 18px !important;  /* Reduced from 20px */
-                margin-top: 15px !important;  /* Increased from 0 */
-                margin-bottom: 10px !important;
+                text-align: center !important;
             }
         }
 
         /* 平板横屏优化 (992px - 1199px) */
         @media (min-width: 992px) and (max-width: 1199px) {
             .automation-trigger-title {
-                font-size: 34px !important;
+                font-size: 17px !important;
                 margin-top: 12px !important;
                 margin-bottom: 8px !important;
-            }
-
-            .automation-trigger-subtitle {
-                font-size: 17px !important;  /* Reduced from 19px */
-                margin-top: 14px !important;  /* Increased from 0 */
-                margin-bottom: 18px !important;
+                text-align: center !important;
             }
         }
 
         /* 平板竖屏优化 (768px - 991px) */
         @media (min-width: 768px) and (max-width: 991px) {
             .automation-trigger-title {
-                font-size: 30px !important;
+                font-size: 15px !important;
                 margin-top: 10px !important;
                 margin-bottom: 8px !important;
-            }
-
-            .automation-trigger-subtitle {
-                font-size: 15px !important;  /* Reduced from 17px */
-                margin-top: 12px !important;  /* Increased from 0 */
-                margin-bottom: 15px !important;
+                text-align: center !important;
             }
         }
 
         /* 移动端优化 (最大767px) */
         @media (max-width: 767px) {
             .automation-trigger-title {
-                font-size: 24px !important;
+                font-size: 12px !important;
                 margin-top: 0 !important;
                 margin-bottom: 6px !important;
-                text-align: center !important;
-            }
-
-            .automation-trigger-subtitle {
-                font-size: 14px !important;  /* Reduced from 15px */
-                margin-top: 10px !important;  /* Increased from 8px */
-                margin-bottom: 12px !important;
-                padding: 0 10px !important;
                 text-align: center !important;
             }
         }
@@ -3352,16 +3341,10 @@
         /* 小屏手机优化 (最大480px) */
         @media (max-width: 480px) {
             .automation-trigger-title {
-                font-size: 20px !important;
+                font-size: 10px !important;
                 margin-top: 8px !important;
                 margin-bottom: 5px !important;
-            }
-
-            .automation-trigger-subtitle {
-                font-size: 13px !important;
-                margin-top: 12px !important;
-                margin-bottom: 5px !important;
-                padding: 0 !important;
+                text-align: center !important;
             }
         }
 
@@ -3441,7 +3424,313 @@
             }
             
             .media-cards {
-                gap: 12px;  /* 从20px减少到12px */
+            gap: 12px;  /* 从20px减少到12px */
+        }
+    }
+    
+    /* 为tab容器添加焦点样式，确保键盘导航可见性 */
+    .feature-carousel {
+        outline: none;
+        transition: box-shadow 0.2s ease;
+    }
+    
+    .feature-carousel:focus {
+        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+        border-radius: 8px;
+    }
+    
+    .feature-carousel:focus-visible {
+        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.7);
+        border-radius: 8px;
+    }
+
+        /* AI自动化+AI悬浮面板模块的tab样式优化 */
+        .automation-feature-carousel {
+            text-align: center;
+            padding-top: 15px;
+        }
+
+        .automation-feature-carousel .feature-tabs {
+            display: inline-flex;
+            justify-content: center;
+            align-items: stretch;
+            gap: 8px;
+            padding: 6px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 18px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+            width: 480px;
+            position: relative;
+        }
+
+        .automation-feature-carousel .feature-tab {
+            position: relative;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 12px 16px;
+            font-size: 14px;
+            border-radius: 14px;
+            z-index: 1;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            background: transparent;
+        }
+
+        .automation-feature-carousel .feature-tab.active {
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .automation-feature-carousel .feature-tab strong {
+            width: 100%;
+            text-align: center;
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 767px) {
+            .automation-feature-carousel .feature-tabs {
+                width: 340px;
+                padding: 4px;
+                gap: 6px;
+            }
+            
+            .automation-feature-carousel .feature-tab {
+                padding: 10px 12px;
+                font-size: 13px;
+            }
+        }
+
+        /* 移除所有旧的伪元素样式 */
+        .automation-feature-carousel .feature-tabs::before,
+        .automation-feature-carousel .feature-tabs::after {
+            content: none;
+        }
+
+        .automation-feature-carousel .feature-tab {
+            position: relative;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 12px 16px;
+            font-size: 14px;
+            border-radius: 14px;
+            z-index: 1;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            background: transparent;
+        }
+
+        .automation-feature-carousel .feature-tab.active {
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* 自动化触发模块优化 */
+        .automation-triggers {
+            padding: 20px 0;
+            align-items: flex-start;
+        }
+
+        .automation-trigger-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .automation-trigger-subtitle {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            font-weight: 400;
+        }
+
+        .trigger-tabs {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .trigger-tab {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 12px;
+            border: 1px solid rgba(52, 152, 219, 0.1);
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .trigger-tab:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.15);
+            border-color: rgba(52, 152, 219, 0.3);
+        }
+
+        .trigger-tab-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.05) 0%, rgba(155, 89, 182, 0.05) 100%);
+            border-bottom: 1px solid rgba(52, 152, 219, 0.1);
+        }
+
+        .trigger-tab-header h4 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        .trigger-tab-icon {
+            font-size: 14px;
+            color: #3498db;
+            transition: transform 0.3s ease;
+        }
+
+        .trigger-tab.active .trigger-tab-icon {
+            transform: rotate(180deg);
+        }
+
+        .trigger-tab-content {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255, 255, 255, 0.6);
+        }
+
+        .trigger-tab.active .trigger-tab-content {
+            max-height: 100px;
+            padding: 15px 20px;
+        }
+
+        .trigger-tab-content p {
+            margin: 0;
+            font-size: 14px;
+            color: #5a6c7d;
+            line-height: 1.5;
+        }
+
+        /* 触发器显示区域优化 */
+        .trigger-display {
+            position: relative;
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.05) 0%, rgba(155, 89, 182, 0.05) 100%);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            overflow: hidden;
+        }
+
+        .trigger-content {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+        }
+
+        .trigger-content.active {
+            opacity: 1;
+            visibility: visible;
+            position: relative;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .trigger-content img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .trigger-content:hover img {
+            transform: scale(1.02);
+        }
+
+        /* 响应式优化 */
+        @media (max-width: 767px) {
+            .automation-triggers {
+                padding: 15px 0;
+            }
+
+            .automation-trigger-title {
+                font-size: 20px;
+                margin-bottom: 10px;
+            }
+
+            .automation-trigger-subtitle {
+                font-size: 13px;
+                margin-bottom: 20px;
+            }
+
+            .trigger-tab-header {
+                padding: 12px 15px;
+            }
+
+            .trigger-tab-header h4 {
+                font-size: 15px;
+            }
+
+            .trigger-tab.active .trigger-tab-content {
+                padding: 12px 15px;
+                max-height: 80px;
+            }
+
+            .trigger-display {
+                margin-top: 20px;
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 575px) {
+            .trigger-tabs {
+                gap: 6px;
+            }
+
+            .trigger-tab-header {
+                padding: 10px 12px;
+            }
+
+            .trigger-tab-header h4 {
+                font-size: 14px;
+            }
+
+            .trigger-tab-content p {
+                font-size: 13px;
+            }
+        }
+
+        /* 强制覆盖trigger-tab内容的padding */
+        .trigger-tab.active .trigger-tab-content {
+            padding: 8px 20px !important;
+            max-height: 100px !important;
+        }
+
+        @media (max-width: 767px) {
+            .trigger-tab.active .trigger-tab-content {
+                padding: 6px 15px !important;
+                max-height: 80px !important;
             }
         }
     </style>
@@ -3536,7 +3825,7 @@
                 </div>
 
                 <!-- 特性轮播组件 - 替换原来的feature-highlights -->
-                <div class="feature-carousel">
+                <div class="feature-carousel main-feature-carousel" tabindex="0">
                     <!-- 始终显示的标题导航 -->
                     <div class="feature-tabs">
                         <div class="feature-tab active" data-tab="tab1">
@@ -3842,95 +4131,320 @@
     <div class="row">
         <div class="col-xs-12 feature-line"></div>
     </div>
-    <div class="row feature-row automation-triggers">
-        <div class="col-xs-12 col-sm-5 description">
-            <h3 class="text-left automation-trigger-title">自动化触发的悬浮面板</h3>
-            <h4 class="text-left automation-trigger-subtitle">可以设置"眨眼抖音翻页、抬手拍照、自动浏览朋友圈"等酷炫功能</h4>
-            
-            <div class="trigger-tabs">
-                <div class="trigger-tab" data-trigger="time">
-                    <div class="trigger-tab-header">
-                        <h4>时间触发</h4>
-                        <div class="trigger-tab-icon">▼</div>
-                    </div>
-                    <div class="trigger-tab-content">
-                        <p>设定时间自动显示悬浮面板，定时提醒重要事项。</p>
-                    </div>
-                </div>
-                <div class="trigger-tab" data-trigger="location">
-                    <div class="trigger-tab-header">
-                        <h4>表情触发</h4>
-                        <div class="trigger-tab-icon">▼</div>
-                    </div>
-                    <div class="trigger-tab-content">
-                        <p>到达指定位置时自动弹出相关功能面板。</p>
-                    </div>
-                </div>
-                <div class="trigger-tab" data-trigger="app">
-                    <div class="trigger-tab-header">
-                        <h4>应用触发</h4>
-                        <div class="trigger-tab-icon">▼</div>
-                    </div>
-                    <div class="trigger-tab-content">
-                        <p>打开特定应用时自动显示相关快捷功能。</p>
-                    </div>
-                </div>
-                <div class="trigger-tab" data-trigger="gesture">
-                    <div class="trigger-tab-header">
-                        <h4>手势触发</h4>
-                        <div class="trigger-tab-icon">▼</div>
-                    </div>
-                    <div class="trigger-tab-content">
-                        <p>通过自定义手势快速调出悬浮面板。</p>
-                    </div>
-                </div>
-                <div class="trigger-tab" data-trigger="event">
-                    <div class="trigger-tab-header">
-                        <h4>事件触发</h4>
-                        <div class="trigger-tab-icon">▼</div>
-                    </div>
-                    <div class="trigger-tab-content">
-                        <p>系统事件（充电、蓝牙连接等）自动触发。</p>
-                    </div>
-                </div>
-                <div class="trigger-tab" data-trigger="smart">
-                    <div class="trigger-tab-header">
-                        <h4>智能触发</h4>
-                        <div class="trigger-tab-icon">▼</div>
-                    </div>
-                    <div class="trigger-tab-content">
-                        <p>AI学习您的使用习惯，智能预测并触发。</p>
-                    </div>
-                </div>
-            </div>
+    
+    <!-- AI自动化+AI悬浮面板模块 -->
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="text-center" style="margin-bottom: 0; color: #333; font-weight: 600;">AI+</h2>
         </div>
-        <div class="col-xs-12 col-sm-offset-1 col-sm-6 screen">
-            <div class="trigger-display">
-                <!-- 默认显示的AI gif -->
-                <div class="trigger-content active" data-trigger="default">
-                    <img src="./resources/img/ai/blink.gif" alt="悬浮捷径SoftCircle AI智能助手动画展示" loading="eager" crossorigin="anonymous">
+    </div>
+    
+    <!-- 新增的多tab横向切换容器 -->
+    <div class="row feature-row no-top-margin">
+        <div class="col-xs-12">
+            <div class="feature-carousel automation-feature-carousel" tabindex="0">
+                <!-- 始终显示的标题导航 -->
+                <div class="feature-tabs">
+                    <div class="feature-tab active" data-tab="tab-auto">
+                        <strong>AI+自动化</strong>
+                    </div>
+                    <div class="feature-tab" data-tab="tab-other">
+                        <strong>AI+悬浮问答</strong>
+                    </div>
+                    <div class="feature-tab" data-tab="tab-search">
+                        <strong>AI+本地搜索</strong>
+                    </div>
                 </div>
-                <div class="trigger-content" data-trigger="time">
-                    <img src="./resources/intr3.png" alt="悬浮捷径SoftCircle时间触发功能展示" loading="lazy" crossorigin="anonymous">
+                
+                <!-- 轮播内容区域 -->
+                <div class="feature-content-wrapper">
+                    <!-- 自动化触发内容 -->
+                    <div class="feature-content active" id="tab-auto">
+                        <div class="row automation-triggers">
+                            <div class="col-xs-12 col-sm-5 description">
+                                <h3 class="text-left automation-trigger-title">自动化触发的悬浮面板</h3>
+                                <h4 class="text-left automation-trigger-subtitle">可以设置"眨眼抖音翻页、抬手拍照、自动浏览朋友圈"等酷炫功能</h4>
+                                
+                                <div class="trigger-tabs">
+                                    <div class="trigger-tab" data-trigger="time">
+                                        <div class="trigger-tab-header">
+                                            <h4>Pose触发</h4>
+                                            <div class="trigger-tab-icon">▼</div>
+                                        </div>
+                                        <div class="trigger-tab-content">
+                                            <p>通过观察手部动作，触发指定功能</p>
+                                        </div>
+                                    </div>
+                                    <div class="trigger-tab" data-trigger="location">
+                                        <div class="trigger-tab-header">
+                                            <h4>表情触发</h4>
+                                            <div class="trigger-tab-icon">▼</div>
+                                        </div>
+                                        <div class="trigger-tab-content">
+                                            <p>通过观察面部表情，触发指定功能</p>
+                                        </div>
+                                    </div>
+                                    <div class="trigger-tab" data-trigger="app">
+                                        <div class="trigger-tab-header">
+                                            <h4>触发模拟手势</h4>
+                                            <div class="trigger-tab-icon">▼</div>
+                                        </div>
+                                        <div class="trigger-tab-content">
+                                            <p>翻页、点击、滑动、双击，以及自定义坐标的点击和双击事件</p>
+                                        </div>
+                                    </div>
+                                    <div class="trigger-tab" data-trigger="gesture">
+                                        <div class="trigger-tab-header">
+                                            <h4>触发系统手势和模拟按键</h4>
+                                            <div class="trigger-tab-icon">▼</div>
+                                        </div>
+                                        <div class="trigger-tab-content">
+                                            <p>Home、多任务、返回、截屏、分屏、电源按键、控制中心等模拟按键</p>
+                                        </div>
+                                    </div>
+                                    <div class="trigger-tab" data-trigger="event">
+                                        <div class="trigger-tab-header">
+                                            <h4>指定应用触发</h4>
+                                            <div class="trigger-tab-icon">▼</div>
+                                        </div>
+                                        <div class="trigger-tab-content">
+                                            <p>在指定应用中生效触发，其他应用不生效</p>
+                                        </div>
+                                    </div>
+                                    <div class="trigger-tab" data-trigger="smart">
+                                        <div class="trigger-tab-header">
+                                            <h4>智能触发</h4>
+                                            <div class="trigger-tab-icon">▼</div>
+                                        </div>
+                                        <div class="trigger-tab-content">
+                                            <p>AI学习您的使用习惯，智能预测并触发。</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-offset-1 col-sm-6 screen">
+                                <div class="trigger-display">
+                                    <!-- 默认显示的AI gif -->
+                                    <div class="trigger-content active" data-trigger="default">
+                                        <img src="./resources/img/ai/blink.gif" alt="悬浮捷径SoftCircle AI智能助手动画展示" loading="eager" crossorigin="anonymous">
+                                    </div>
+                                    <div class="trigger-content" data-trigger="time">
+                                        <img src="./resources/intr3.png" alt="悬浮捷径SoftCircle时间触发功能展示" loading="lazy" crossorigin="anonymous">
+                                    </div>
+                                    <div class="trigger-content" data-trigger="location">
+                                        <img src="./resources/intr3.png" alt="悬浮捷径SoftCircle位置触发功能展示" loading="lazy" crossorigin="anonymous">
+                                    </div>
+                                    <div class="trigger-content" data-trigger="app">
+                                        <img src="./resources/intr3.png" alt="悬浮捷径SoftCircle应用触发功能展示" loading="lazy" crossorigin="anonymous">
+                                    </div>
+                                    <div class="trigger-content" data-trigger="gesture">
+                                        <img src="./resources/intr3.png" alt="悬浮捷径SoftCircle手势触发功能展示" loading="lazy" crossorigin="anonymous">
+                                    </div>
+                                    <div class="trigger-content" data-trigger="event">
+                                        <img src="./resources/intr3.png" alt="悬浮捷径SoftCircle事件触发功能展示" loading="lazy" crossorigin="anonymous">
+                                    </div>
+                                    <div class="trigger-content" data-trigger="smart">
+                                        <img src="./resources/intr3.png" alt="悬浮捷径SoftCircle智能触发功能展示" loading="lazy" crossorigin="anonymous">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- AI+悬浮问答内容 -->
+                    <div class="feature-content" id="tab-other">
+                        <div class="row automation-triggers">
+                            <div class="col-xs-12 col-sm-5 description">
+                                <h3 class="text-left automation-trigger-title">AI+悬浮问答面板</h3>
+                                <h4 class="text-left automation-trigger-subtitle">集成了主流AI问答服务，随时随地获得智能回答</h4>
+                                
+                                <div class="trigger-tabs">
+                                    <div class="trigger-tab" data-trigger="chatgpt">
+                                        <div class="trigger-tab-header">
+                                            <h4>ChatGPT对话</h4>
+                                            <div class="trigger-tab-icon">▼</div>
+                                        </div>
+                                        <div class="trigger-tab-content">
+                                            <p>集成ChatGPT API，支持自然语言对话和问题解答</p>
+                                        </div>
+                                    </div>
+                                    <div class="trigger-tab" data-trigger="claude">
+                                        <div class="trigger-tab-header">
+                                            <h4>Claude助手</h4>
+                                            <div class="trigger-tab-icon">▼</div>
+                                        </div>
+                                        <div class="trigger-tab-content">
+                                            <p>访问Anthropic Claude，获得专业的AI分析和建议</p>
+                                        </div>
+                                    </div>
+                                    <div class="trigger-tab" data-trigger="gemini">
+                                        <div class="trigger-tab-header">
+                                            <h4>Gemini智能助理</h4>
+                                            <div class="trigger-tab-icon">▼</div>
+                                        </div>
+                                        <div class="trigger-tab-content">
+                                            <p>使用Google Gemini进行多模态交互和内容生成</p>
+                                        </div>
+                                    </div>
+                                    <div class="trigger-tab" data-trigger="local">
+                                        <div class="trigger-tab-header">
+                                            <h4>本地AI模型</h4>
+                                            <div class="trigger-tab-icon">▼</div>
+                                        </div>
+                                        <div class="trigger-tab-content">
+                                            <p>支持本地部署的AI模型，保护隐私安全</p>
+                                        </div>
+                                    </div>
+                                    <div class="trigger-tab" data-trigger="voice">
+                                        <div class="trigger-tab-header">
+                                            <h4>语音对话</h4>
+                                            <div class="trigger-tab-icon">▼</div>
+                                        </div>
+                                        <div class="trigger-tab-content">
+                                            <p>支持语音输入和语音回答，解放双手</p>
+                                        </div>
+                                    </div>
+                                    <div class="trigger-tab" data-trigger="custom">
+                                        <div class="trigger-tab-header">
+                                            <h4>自定义API</h4>
+                                            <div class="trigger-tab-icon">▼</div>
+                                        </div>
+                                        <div class="trigger-tab-content">
+                                            <p>支持接入其他AI服务的自定义API端点</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-offset-1 col-sm-6 screen">
+                                <div class="trigger-display">
+                                    <!-- 默认显示的AI问答界面 -->
+                                    <div class="trigger-content active" data-trigger="default">
+                                        <img src="./resources/intr5.png" alt="悬浮捷径SoftCircle AI问答面板展示" loading="eager" crossorigin="anonymous">
+                                    </div>
+                                    <div class="trigger-content" data-trigger="chatgpt">
+                                        <img src="./resources/intr5.png" alt="悬浮捷径SoftCircle ChatGPT对话功能展示" loading="lazy" crossorigin="anonymous">
+                                    </div>
+                                    <div class="trigger-content" data-trigger="claude">
+                                        <img src="./resources/intr5.png" alt="悬浮捷径SoftCircle Claude助手功能展示" loading="lazy" crossorigin="anonymous">
+                                    </div>
+                                    <div class="trigger-content" data-trigger="gemini">
+                                        <img src="./resources/intr5.png" alt="悬浮捷径SoftCircle Gemini功能展示" loading="lazy" crossorigin="anonymous">
+                                    </div>
+                                    <div class="trigger-content" data-trigger="local">
+                                        <img src="./resources/intr5.png" alt="悬浮捷径SoftCircle本地AI模型功能展示" loading="lazy" crossorigin="anonymous">
+                                    </div>
+                                    <div class="trigger-content" data-trigger="voice">
+                                        <img src="./resources/intr5.png" alt="悬浮捷径SoftCircle语音对话功能展示" loading="lazy" crossorigin="anonymous">
+                                    </div>
+                                    <div class="trigger-content" data-trigger="custom">
+                                        <img src="./resources/intr5.png" alt="悬浮捷径SoftCircle自定义API功能展示" loading="lazy" crossorigin="anonymous">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- AI+本地搜索内容 -->
+                    <div class="feature-content" id="tab-search">
+                        <div class="row automation-triggers">
+                            <div class="col-xs-12 col-sm-5 description">
+                                <h3 class="text-left automation-trigger-title">AI+本地搜索面板</h3>
+                                <h4 class="text-left automation-trigger-subtitle">智能搜索本地文件、联系人、应用等，快速定位所需内容</h4>
+                                
+                                <div class="trigger-tabs">
+                                    <div class="trigger-tab" data-trigger="file">
+                                        <div class="trigger-tab-header">
+                                            <h4>文件搜索</h4>
+                                            <div class="trigger-tab-icon">▼</div>
+                                        </div>
+                                        <div class="trigger-tab-content">
+                                            <p>智能搜索手机内的文档、图片、视频等文件</p>
+                                        </div>
+                                    </div>
+                                    <div class="trigger-tab" data-trigger="contact">
+                                        <div class="trigger-tab-header">
+                                            <h4>联系人搜索</h4>
+                                            <div class="trigger-tab-icon">▼</div>
+                                        </div>
+                                        <div class="trigger-tab-content">
+                                            <p>快速查找联系人信息，支持拼音和模糊匹配</p>
+                                        </div>
+                                    </div>
+                                    <div class="trigger-tab" data-trigger="app">
+                                        <div class="trigger-tab-header">
+                                            <h4>应用搜索</h4>
+                                            <div class="trigger-tab-icon">▼</div>
+                                        </div>
+                                        <div class="trigger-tab-content">
+                                            <p>T9快速搜索已安装应用，一键启动</p>
+                                        </div>
+                                    </div>
+                                    <div class="trigger-tab" data-trigger="setting">
+                                        <div class="trigger-tab-header">
+                                            <h4>设置项搜索</h4>
+                                            <div class="trigger-tab-icon">▼</div>
+                                        </div>
+                                        <div class="trigger-tab-content">
+                                            <p>快速定位系统设置项，无需层层点击</p>
+                                        </div>
+                                    </div>
+                                    <div class="trigger-tab" data-trigger="web">
+                                        <div class="trigger-tab-header">
+                                            <h4>网络搜索</h4>
+                                            <div class="trigger-tab-icon">▼</div>
+                                        </div>
+                                        <div class="trigger-tab-content">
+                                            <p>集成多个搜索引擎，快速进行网络搜索</p>
+                                        </div>
+                                    </div>
+                                    <div class="trigger-tab" data-trigger="smart">
+                                        <div class="trigger-tab-header">
+                                            <h4>智能建议</h4>
+                                            <div class="trigger-tab-icon">▼</div>
+                                        </div>
+                                        <div class="trigger-tab-content">
+                                            <p>AI学习使用习惯，提供个性化搜索建议</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-offset-1 col-sm-6 screen">
+                                <div class="trigger-display">
+                                    <!-- 默认显示搜索界面 -->
+                                    <div class="trigger-content active" data-trigger="default">
+                                        <iframe src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" class="feature-media" style="width: 100%; height: 300px; border-radius: 12px;"></iframe>
+                                    </div>
+                                    <div class="trigger-content" data-trigger="file">
+                                        <iframe src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" class="feature-media" style="width: 100%; height: 300px; border-radius: 12px;"></iframe>
+                                    </div>
+                                    <div class="trigger-content" data-trigger="contact">
+                                        <iframe src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" class="feature-media" style="width: 100%; height: 300px; border-radius: 12px;"></iframe>
+                                    </div>
+                                    <div class="trigger-content" data-trigger="app">
+                                        <iframe src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" class="feature-media" style="width: 100%; height: 300px; border-radius: 12px;"></iframe>
+                                    </div>
+                                    <div class="trigger-content" data-trigger="setting">
+                                        <iframe src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" class="feature-media" style="width: 100%; height: 300px; border-radius: 12px;"></iframe>
+                                    </div>
+                                    <div class="trigger-content" data-trigger="web">
+                                        <iframe src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" class="feature-media" style="width: 100%; height: 300px; border-radius: 12px;"></iframe>
+                                    </div>
+                                    <div class="trigger-content" data-trigger="smart">
+                                        <iframe src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" class="feature-media" style="width: 100%; height: 300px; border-radius: 12px;"></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="trigger-content" data-trigger="location">
-                    <img src="./resources/intr3.png" alt="悬浮捷径SoftCircle位置触发功能展示" loading="lazy" crossorigin="anonymous">
-                </div>
-                <div class="trigger-content" data-trigger="app">
-                    <img src="./resources/intr3.png" alt="悬浮捷径SoftCircle应用触发功能展示" loading="lazy" crossorigin="anonymous">
-                </div>
-                <div class="trigger-content" data-trigger="gesture">
-                    <img src="./resources/intr3.png" alt="悬浮捷径SoftCircle手势触发功能展示" loading="lazy" crossorigin="anonymous">
-                </div>
-                <div class="trigger-content" data-trigger="event">
-                    <img src="./resources/intr3.png" alt="悬浮捷径SoftCircle事件触发功能展示" loading="lazy" crossorigin="anonymous">
-                </div>
-                <div class="trigger-content" data-trigger="smart">
-                    <img src="./resources/intr3.png" alt="悬浮捷径SoftCircle智能触发功能展示" loading="lazy" crossorigin="anonymous">
+                
+                <div class="keyboard-nav-hint">
+                    提示：您可以使用键盘左右箭头键切换功能
                 </div>
             </div>
         </div>
     </div>
+    
     <div class="row">
         <div class="col-xs-12 feature-line"></div>
     </div>
@@ -3947,21 +4461,6 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-12 feature-line"></div>
-    </div>
-    <div class="row feature-row">
-        <div class="col-xs-12 col-sm-5 description">
-            <h2>其他捷径</h2>
-            <hr class="separator blue">
-            <p>用户可以自定义添加任意小程序、网址、图片、文件等</p>
-        </div>
-        <div class="col-xs-12 col-sm-offset-1 col-sm-6 screen">
-            <picture>
-                <img src="./resources/intr5.png" alt="悬浮捷径SoftCircle自定义捷径功能展示：小程序、网址、图片、文件等" loading="lazy" crossorigin="anonymous">
-            </picture>
-        </div>
-    </div>
-    <div class="row">
     </div>
     <div class="row">
         <div class="col-xs-12 feature-line"></div>
@@ -3970,9 +4469,7 @@
         <div class="description">
             <h2>悬浮捷径SoftCircle的愿景</h2>
             <hr class="separator blue">
-            <p>悬浮捷径SoftCircle是为了用户更快到达目的界面 <br>
-                包含app、小程序、单个文件、网站、小部件及其子界面 <br>
-                提供悬浮、T9搜索、通知栏、桌面快捷方式等多种入口</p>
+            <p>一步即达、一眼即知</p>
         </div>
     </div>
     <div class="row">
@@ -4123,6 +4620,9 @@
             // 初始化特性轮播功能
             initFeatureCarousel();
             
+            // 初始化新的自动化触发轮播功能
+            initAutomationFeatureCarousel();
+            
             // 设置设备类型检测
             setupDeviceDetection();
         }, 0);
@@ -4270,11 +4770,11 @@
     
     // 特性轮播功能
     function initFeatureCarousel() {
-        // 获取元素
-        const tabs = document.querySelectorAll('.feature-tab');
-        const contents = document.querySelectorAll('.feature-content');
-        const carouselContainer = document.querySelector('.feature-carousel');
-        const tabsContainer = document.querySelector('.feature-tabs');
+        // 获取主要特性轮播容器的元素
+        const tabs = document.querySelectorAll('.main-feature-carousel .feature-tab');
+        const contents = document.querySelectorAll('.main-feature-carousel .feature-content');
+        const carouselContainer = document.querySelector('.main-feature-carousel');
+        const tabsContainer = document.querySelector('.main-feature-carousel .feature-tabs');
         let currentTab = 0;
         
         // 更新滑动指示器位置
@@ -4284,37 +4784,19 @@
             const deviceType = getDeviceType();
             const isDesktop = window.innerWidth >= 768;
             
-            if (isDesktop) {
-                // 桌面端和平板：使用百分比定位
-                const style = document.createElement('style');
-                style.textContent = `
-                    .feature-tabs::before {
-                        transform: translateX(${index * 100}%) !important;
-                    }
-                `;
-                
-                // 移除之前的样式
-                const oldStyle = document.querySelector('#indicator-style');
-                if (oldStyle) oldStyle.remove();
-                
-                style.id = 'indicator-style';
-                document.head.appendChild(style);
-            } else {
-                // 移动端：使用百分比定位，因为现在按钮是等宽的
-                const style = document.createElement('style');
-                style.textContent = `
-                    .feature-tabs::before {
-                        transform: translateX(${index * 100}%) !important;
-                    }
-                `;
-                
-                // 移除之前的样式
-                const oldStyle = document.querySelector('#indicator-style');
-                if (oldStyle) oldStyle.remove();
-                
-                style.id = 'indicator-style';
-                document.head.appendChild(style);
-            }
+            const style = document.createElement('style');
+            style.textContent = `
+                .main-feature-carousel .feature-tabs::before {
+                    transform: translateX(${index * 100}%) !important;
+                }
+            `;
+            
+            // 移除之前的样式
+            const oldStyle = document.querySelector('#main-indicator-style');
+            if (oldStyle) oldStyle.remove();
+            
+            style.id = 'main-indicator-style';
+            document.head.appendChild(style);
         }
         
         // 显示指定标签内容
@@ -4354,11 +4836,13 @@
             });
         });
         
-        // 键盘导航
-        document.addEventListener('keydown', (e) => {
+        // 键盘导航（仅在焦点在特性容器内时生效）
+        carouselContainer.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowLeft') {
+                e.preventDefault();
                 prevTab();
             } else if (e.key === 'ArrowRight') {
+                e.preventDefault();
                 nextTab();
             }
         });
@@ -4439,6 +4923,161 @@
         // 延迟初始化指示器位置，确保DOM完全渲染
         setTimeout(() => {
             updateSlideIndicator(0);
+        }, 100);
+    }
+    
+    // 自动化触发轮播功能
+    function initAutomationFeatureCarousel() {
+        // 获取新容器的元素
+        const automationTabs = document.querySelectorAll('.automation-feature-carousel .feature-tab');
+        const automationContents = document.querySelectorAll('.automation-feature-carousel .feature-content');
+        const automationCarouselContainer = document.querySelector('.automation-feature-carousel');
+        const automationTabsContainer = document.querySelector('.automation-feature-carousel .feature-tabs');
+        let currentAutomationTab = 0;
+        
+        if (!automationTabs.length || !automationContents.length) return;
+        
+        // 更新滑动指示器位置
+        function updateAutomationSlideIndicator(index) {
+            if (!automationTabsContainer) return;
+            
+            const style = document.createElement('style');
+            style.textContent = `
+                .automation-feature-carousel .feature-tabs::before {
+                    transform: translateX(${index * 100}%) !important;
+                    width: calc(50% - 6px) !important;
+                }
+            `;
+            
+            // 移除之前的样式
+            const oldStyle = document.querySelector('#automation-indicator-style');
+            if (oldStyle) oldStyle.remove();
+            
+            style.id = 'automation-indicator-style';
+            document.head.appendChild(style);
+        }
+        
+        // 显示指定标签内容
+        function showAutomationTab(index) {
+            // 更新当前标签索引
+            currentAutomationTab = index;
+            
+            // 移除所有活动类
+            automationTabs.forEach(tab => tab.classList.remove('active'));
+            automationContents.forEach(content => content.classList.remove('active'));
+            
+            // 添加活动类到当前项
+            automationTabs[index].classList.add('active');
+            automationContents[index].classList.add('active');
+            
+            // 更新滑动指示器位置
+            updateAutomationSlideIndicator(index);
+        }
+        
+        // 下一个标签
+        function nextAutomationTab() {
+            showAutomationTab((currentAutomationTab + 1) % automationTabs.length);
+        }
+        
+        // 上一个标签
+        function prevAutomationTab() {
+            showAutomationTab((currentAutomationTab - 1 + automationTabs.length) % automationTabs.length);
+        }
+        
+        // 绑定标签点击事件
+        automationTabs.forEach((tab, index) => {
+            tab.addEventListener('click', () => {
+                showAutomationTab(index);
+            });
+        });
+        
+        // 键盘导航（仅在焦点在自动化容器内时生效）
+        automationCarouselContainer.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevAutomationTab();
+            } else if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                nextAutomationTab();
+            }
+        });
+        
+        // 增强的触摸事件支持
+        let touchStartX = 0;
+        let touchEndX = 0;
+        let touchStartY = 0;
+        let touchEndY = 0;
+        let touchStartTime = 0;
+        
+        if (automationCarouselContainer) {
+            automationCarouselContainer.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+                touchStartY = e.changedTouches[0].screenY;
+                touchStartTime = Date.now();
+            }, {passive: true});
+            
+            automationCarouselContainer.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                touchEndY = e.changedTouches[0].screenY;
+                handleAutomationSwipe();
+            }, {passive: true});
+            
+            // 防止意外的触摸滚动
+            automationCarouselContainer.addEventListener('touchmove', (e) => {
+                const deltaX = Math.abs(e.changedTouches[0].screenX - touchStartX);
+                const deltaY = Math.abs(e.changedTouches[0].screenY - touchStartY);
+                
+                // 如果水平滑动距离大于垂直滑动距离，阻止默认滚动
+                if (deltaX > deltaY && deltaX > 10) {
+                    e.preventDefault();
+                }
+            }, {passive: false});
+        }
+        
+        function handleAutomationSwipe() {
+            const deltaX = touchEndX - touchStartX;
+            const deltaY = touchEndY - touchStartY;
+            const deltaTime = Date.now() - touchStartTime;
+            const threshold = getDeviceType() === 'xs' || getDeviceType() === 'sm' ? 30 : 50;
+            const maxTime = 300; // 最大滑动时间
+            
+            // 确保是水平滑动且时间不超过300ms
+            if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > threshold && deltaTime < maxTime) {
+                if (deltaX < 0) {
+                    // 左滑
+                    nextAutomationTab();
+                } else {
+                    // 右滑
+                    prevAutomationTab();
+                }
+            }
+        }
+        
+        // 窗口大小变化时重新计算指示器位置
+        function handleAutomationResize() {
+            setTimeout(() => {
+                updateAutomationSlideIndicator(currentAutomationTab);
+            }, 100);
+        }
+        
+        // 防抖处理resize事件
+        let automationResizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(automationResizeTimeout);
+            automationResizeTimeout = setTimeout(handleAutomationResize, 150);
+        });
+        
+        // 监听设备方向变化
+        window.addEventListener('orientationchange', () => {
+            setTimeout(handleAutomationResize, 200);
+        });
+        
+        // 初始显示第一个标签内容
+        showAutomationTab(0);
+        
+        // 延迟初始化指示器位置，确保DOM完全渲染
+        setTimeout(() => {
+            updateAutomationSlideIndicator(0);
         }, 100);
     }
     

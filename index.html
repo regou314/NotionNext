@@ -3424,7 +3424,7 @@
             }
             
             .media-cards {
-            gap: 12px;  /* 从20px减少到12px */
+                gap: 12px;  /* 从20px减少到12px */
         }
     }
     
@@ -4141,8 +4141,8 @@
     
     <!-- 新增的多tab横向切换容器 -->
     <div class="row feature-row no-top-margin">
-        <div class="col-xs-12">
-            <div class="feature-carousel automation-feature-carousel" tabindex="0">
+        <div class="col-xs-12" style="padding-top: 0;">
+            <div class="feature-carousel automation-feature-carousel" style="margin-top: 0;" tabindex="0">
                 <!-- 始终显示的标题导航 -->
                 <div class="feature-tabs">
                     <div class="feature-tab active" data-tab="tab-auto">
@@ -4161,94 +4161,96 @@
                     <!-- 自动化触发内容 -->
                     <div class="feature-content active" id="tab-auto">
                         <div class="row automation-triggers">
-                            <div class="col-xs-12 col-sm-5 description">
-                                <h3 class="text-left automation-trigger-title">自动化触发的悬浮面板</h3>
-                                <h4 class="text-left automation-trigger-subtitle">可以设置"眨眼抖音翻页、抬手拍照、自动浏览朋友圈"等酷炫功能</h4>
-                                
-                                <div class="trigger-tabs">
-                                    <div class="trigger-tab" data-trigger="time">
-                                        <div class="trigger-tab-header">
+        <div class="col-xs-12 col-sm-5 description">
+            <h3 class="text-left automation-trigger-title">自动化触发的悬浮面板</h3>
+            <h4 class="text-left automation-trigger-subtitle">可以设置"眨眼抖音翻页、抬手拍照、自动浏览朋友圈"等酷炫功能</h4>
+            
+            <div class="trigger-tabs">
+                <div class="trigger-tab" data-trigger="smart">
+                    <div class="trigger-tab-header">
+                        <h4>智能触发</h4>
+                        <div class="trigger-tab-icon">▼</div>
+                    </div>
+                    <div class="trigger-tab-content">
+                        <p>AI学习您的使用习惯，智能预测并触发。</p>
+                    </div>
+                </div>
+                <div class="trigger-tab" data-trigger="time">
+                    <div class="trigger-tab-header">
                                             <h4>Pose触发</h4>
-                                            <div class="trigger-tab-icon">▼</div>
-                                        </div>
-                                        <div class="trigger-tab-content">
+                        <div class="trigger-tab-icon">▼</div>
+                    </div>
+                    <div class="trigger-tab-content">
                                             <p>通过观察手部动作，触发指定功能</p>
-                                        </div>
-                                    </div>
-                                    <div class="trigger-tab" data-trigger="location">
-                                        <div class="trigger-tab-header">
-                                            <h4>表情触发</h4>
-                                            <div class="trigger-tab-icon">▼</div>
-                                        </div>
-                                        <div class="trigger-tab-content">
+                    </div>
+                </div>
+                <div class="trigger-tab" data-trigger="location">
+                    <div class="trigger-tab-header">
+                        <h4>表情触发</h4>
+                        <div class="trigger-tab-icon">▼</div>
+                    </div>
+                    <div class="trigger-tab-content">
                                             <p>通过观察面部表情，触发指定功能</p>
-                                        </div>
-                                    </div>
-                                    <div class="trigger-tab" data-trigger="app">
-                                        <div class="trigger-tab-header">
+                    </div>
+                </div>
+                <div class="trigger-tab" data-trigger="app">
+                    <div class="trigger-tab-header">
                                             <h4>触发模拟手势</h4>
-                                            <div class="trigger-tab-icon">▼</div>
-                                        </div>
-                                        <div class="trigger-tab-content">
+                        <div class="trigger-tab-icon">▼</div>
+                    </div>
+                    <div class="trigger-tab-content">
                                             <p>翻页、点击、滑动、双击，以及自定义坐标的点击和双击事件</p>
-                                        </div>
-                                    </div>
-                                    <div class="trigger-tab" data-trigger="gesture">
-                                        <div class="trigger-tab-header">
+                    </div>
+                </div>
+                <div class="trigger-tab" data-trigger="gesture">
+                    <div class="trigger-tab-header">
                                             <h4>触发系统手势和模拟按键</h4>
-                                            <div class="trigger-tab-icon">▼</div>
-                                        </div>
-                                        <div class="trigger-tab-content">
+                        <div class="trigger-tab-icon">▼</div>
+                    </div>
+                    <div class="trigger-tab-content">
                                             <p>Home、多任务、返回、截屏、分屏、电源按键、控制中心等模拟按键</p>
-                                        </div>
-                                    </div>
-                                    <div class="trigger-tab" data-trigger="event">
-                                        <div class="trigger-tab-header">
+                    </div>
+                </div>
+                <div class="trigger-tab" data-trigger="event">
+                    <div class="trigger-tab-header">
                                             <h4>指定应用触发</h4>
-                                            <div class="trigger-tab-icon">▼</div>
-                                        </div>
-                                        <div class="trigger-tab-content">
+                        <div class="trigger-tab-icon">▼</div>
+                    </div>
+                    <div class="trigger-tab-content">
                                             <p>在指定应用中生效触发，其他应用不生效</p>
-                                        </div>
-                                    </div>
-                                    <div class="trigger-tab" data-trigger="smart">
-                                        <div class="trigger-tab-header">
-                                            <h4>智能触发</h4>
-                                            <div class="trigger-tab-icon">▼</div>
-                                        </div>
-                                        <div class="trigger-tab-content">
-                                            <p>AI学习您的使用习惯，智能预测并触发。</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-offset-1 col-sm-6 screen">
-                                <div class="trigger-display">
-                                    <!-- 默认显示的AI gif -->
-                                    <div class="trigger-content active" data-trigger="default">
-                                        <img src="./resources/img/ai/blink.gif" alt="悬浮捷径SoftCircle AI智能助手动画展示" loading="eager" crossorigin="anonymous">
-                                    </div>
-                                    <div class="trigger-content" data-trigger="time">
-                                        <img src="./resources/intr3.png" alt="悬浮捷径SoftCircle时间触发功能展示" loading="lazy" crossorigin="anonymous">
-                                    </div>
-                                    <div class="trigger-content" data-trigger="location">
-                                        <img src="./resources/intr3.png" alt="悬浮捷径SoftCircle位置触发功能展示" loading="lazy" crossorigin="anonymous">
-                                    </div>
-                                    <div class="trigger-content" data-trigger="app">
-                                        <img src="./resources/intr3.png" alt="悬浮捷径SoftCircle应用触发功能展示" loading="lazy" crossorigin="anonymous">
-                                    </div>
-                                    <div class="trigger-content" data-trigger="gesture">
-                                        <img src="./resources/intr3.png" alt="悬浮捷径SoftCircle手势触发功能展示" loading="lazy" crossorigin="anonymous">
-                                    </div>
-                                    <div class="trigger-content" data-trigger="event">
-                                        <img src="./resources/intr3.png" alt="悬浮捷径SoftCircle事件触发功能展示" loading="lazy" crossorigin="anonymous">
-                                    </div>
-                                    <div class="trigger-content" data-trigger="smart">
-                                        <img src="./resources/intr3.png" alt="悬浮捷径SoftCircle智能触发功能展示" loading="lazy" crossorigin="anonymous">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-offset-1 col-sm-6 screen">
+            <div class="trigger-display">
+                <!-- 默认显示的AI gif -->
+                <div class="trigger-content active" data-trigger="default">
+                    <img src="./resources/img/ai/blink.gif" alt="悬浮捷径SoftCircle AI智能助手动画展示" loading="eager" crossorigin="anonymous">
+                </div>
+                <div class="trigger-content" data-trigger="smart">
+                    <img src="./resources/img/ai/aito/aito5.png" alt="悬浮捷径SoftCircle智能触发功能展示" loading="lazy" crossorigin="anonymous">
+                </div>
+                <div class="trigger-content" data-trigger="time">
+                    <img src="./resources/img/ai/aito/aito1.png" alt="悬浮捷径SoftCircle时间触发功能展示" loading="lazy" crossorigin="anonymous">
+                </div>
+                <div class="trigger-content" data-trigger="location">
+                    <img src="./resources/img/ai/aito/aito1.png" alt="悬浮捷径SoftCircle位置触发功能展示" loading="lazy" crossorigin="anonymous">
+                </div>
+                <div class="trigger-content" data-trigger="app">
+                    <img src="./resources/img/ai/aito/aito2.png" alt="悬浮捷径SoftCircle应用触发功能展示" loading="lazy" crossorigin="anonymous">
+                </div>
+                <div class="trigger-content" data-trigger="gesture">
+                    <img src="./resources/img/ai/aito/aito3.png" alt="悬浮捷径SoftCircle手势触发功能展示" loading="lazy" crossorigin="anonymous">
+                </div>
+                <div class="trigger-content" data-trigger="event">
+                    <img src="./resources/img/ai/aito/aito4.png" alt="悬浮捷径SoftCircle事件触发功能展示" loading="lazy" crossorigin="anonymous">
+                </div>
+                
+            </div>
+        </div>
+    </div>
                     </div>
                     
                     <!-- AI+悬浮问答内容 -->
@@ -4346,93 +4348,27 @@
                     
                     <!-- AI+本地搜索内容 -->
                     <div class="feature-content" id="tab-search">
-                        <div class="row automation-triggers">
-                            <div class="col-xs-12 col-sm-5 description">
-                                <h3 class="text-left automation-trigger-title">AI+本地搜索面板</h3>
-                                <h4 class="text-left automation-trigger-subtitle">智能搜索本地文件、联系人、应用等，快速定位所需内容</h4>
-                                
-                                <div class="trigger-tabs">
-                                    <div class="trigger-tab" data-trigger="file">
-                                        <div class="trigger-tab-header">
-                                            <h4>文件搜索</h4>
-                                            <div class="trigger-tab-icon">▼</div>
-                                        </div>
-                                        <div class="trigger-tab-content">
-                                            <p>智能搜索手机内的文档、图片、视频等文件</p>
-                                        </div>
-                                    </div>
-                                    <div class="trigger-tab" data-trigger="contact">
-                                        <div class="trigger-tab-header">
-                                            <h4>联系人搜索</h4>
-                                            <div class="trigger-tab-icon">▼</div>
-                                        </div>
-                                        <div class="trigger-tab-content">
-                                            <p>快速查找联系人信息，支持拼音和模糊匹配</p>
-                                        </div>
-                                    </div>
-                                    <div class="trigger-tab" data-trigger="app">
-                                        <div class="trigger-tab-header">
-                                            <h4>应用搜索</h4>
-                                            <div class="trigger-tab-icon">▼</div>
-                                        </div>
-                                        <div class="trigger-tab-content">
-                                            <p>T9快速搜索已安装应用，一键启动</p>
-                                        </div>
-                                    </div>
-                                    <div class="trigger-tab" data-trigger="setting">
-                                        <div class="trigger-tab-header">
-                                            <h4>设置项搜索</h4>
-                                            <div class="trigger-tab-icon">▼</div>
-                                        </div>
-                                        <div class="trigger-tab-content">
-                                            <p>快速定位系统设置项，无需层层点击</p>
-                                        </div>
-                                    </div>
-                                    <div class="trigger-tab" data-trigger="web">
-                                        <div class="trigger-tab-header">
-                                            <h4>网络搜索</h4>
-                                            <div class="trigger-tab-icon">▼</div>
-                                        </div>
-                                        <div class="trigger-tab-content">
-                                            <p>集成多个搜索引擎，快速进行网络搜索</p>
-                                        </div>
-                                    </div>
-                                    <div class="trigger-tab" data-trigger="smart">
-                                        <div class="trigger-tab-header">
-                                            <h4>智能建议</h4>
-                                            <div class="trigger-tab-icon">▼</div>
-                                        </div>
-                                        <div class="trigger-tab-content">
-                                            <p>AI学习使用习惯，提供个性化搜索建议</p>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 feature-text">
+                                <h3>AI+本地搜索内容</h3>
+                                <p>支持模糊搜索和T9首字母搜索，智能搜索本地文件、功能、捷径等多样化的搜索类型</p>
+                                <ul class="features-list">
+                                    <li class="feature-item">App</li>
+                                    <li class="feature-item">一步</li>
+                                    <li class="feature-item">网站</li>
+                                    <li class="feature-item">联系人</li>
+                                    <li class="feature-item">图片</li>
+                                    <li class="feature-item">文件</li>
+                                    <li class="feature-item">QQ好友</li>
+                                    <li class="feature-item">QQ群</li>
+                                    <li class="feature-item">小程序</li>
+                                    <li class="feature-item">设置项</li>
+                                    <li class="feature-item">内置功能</li>
+                                </ul>
+                                <p>搜索结果智能化排序和分类</p>
                             </div>
-                            <div class="col-xs-12 col-sm-offset-1 col-sm-6 screen">
-                                <div class="trigger-display">
-                                    <!-- 默认显示搜索界面 -->
-                                    <div class="trigger-content active" data-trigger="default">
-                                        <iframe src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" class="feature-media" style="width: 100%; height: 300px; border-radius: 12px;"></iframe>
-                                    </div>
-                                    <div class="trigger-content" data-trigger="file">
-                                        <iframe src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" class="feature-media" style="width: 100%; height: 300px; border-radius: 12px;"></iframe>
-                                    </div>
-                                    <div class="trigger-content" data-trigger="contact">
-                                        <iframe src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" class="feature-media" style="width: 100%; height: 300px; border-radius: 12px;"></iframe>
-                                    </div>
-                                    <div class="trigger-content" data-trigger="app">
-                                        <iframe src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" class="feature-media" style="width: 100%; height: 300px; border-radius: 12px;"></iframe>
-                                    </div>
-                                    <div class="trigger-content" data-trigger="setting">
-                                        <iframe src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" class="feature-media" style="width: 100%; height: 300px; border-radius: 12px;"></iframe>
-                                    </div>
-                                    <div class="trigger-content" data-trigger="web">
-                                        <iframe src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" class="feature-media" style="width: 100%; height: 300px; border-radius: 12px;"></iframe>
-                                    </div>
-                                    <div class="trigger-content" data-trigger="smart">
-                                        <iframe src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" class="feature-media" style="width: 100%; height: 300px; border-radius: 12px;"></iframe>
-                                    </div>
-                                </div>
+                            <div class="col-xs-12 col-sm-6 feature-video">
+                                <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=114538825388544&bvid=BV1YYJtzAE27&cid=30053041927&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" class="feature-media"></iframe>
                             </div>
                         </div>
                     </div>
@@ -4784,19 +4720,19 @@
             const deviceType = getDeviceType();
             const isDesktop = window.innerWidth >= 768;
             
-            const style = document.createElement('style');
-            style.textContent = `
+                const style = document.createElement('style');
+                style.textContent = `
                 .main-feature-carousel .feature-tabs::before {
-                    transform: translateX(${index * 100}%) !important;
-                }
-            `;
-            
-            // 移除之前的样式
+                        transform: translateX(${index * 100}%) !important;
+                    }
+                `;
+                
+                // 移除之前的样式
             const oldStyle = document.querySelector('#main-indicator-style');
-            if (oldStyle) oldStyle.remove();
-            
+                if (oldStyle) oldStyle.remove();
+                
             style.id = 'main-indicator-style';
-            document.head.appendChild(style);
+                document.head.appendChild(style);
         }
         
         // 显示指定标签内容

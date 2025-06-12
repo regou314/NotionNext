@@ -3733,6 +3733,493 @@
                 max-height: 80px !important;
             }
         }
+
+        /* 优雅酷炫的设计交互模块样式 */
+        .design-interaction-section {
+            padding: 50px 0; /* 减少上下间距 */
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            position: relative;
+            overflow: visible; /* 改为visible，确保卡片放大时不被截断 */
+        }
+
+        .design-interaction-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="0.5" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
+            pointer-events: none;
+        }
+
+        .design-interaction-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: #1d1d1f;
+            margin-bottom: 12px; /* 减少标题底部间距 */
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .design-interaction-subtitle {
+            font-size: 21px;
+            color: #86868b;
+            margin-bottom: 30px; /* 减少副标题底部间距 */
+            font-weight: 400;
+            line-height: 1.4;
+        }
+
+        .design-gallery {
+            display: flex;
+            gap: 54px; /* 增大35%：40px * 1.35 = 54px */
+            padding: 40px 0 60px 0; /* 减少上下内边距 */
+            margin: 0; /* 移除负边距 */
+            overflow-x: auto;
+            overflow-y: visible; /* 确保垂直方向可见 */
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            width: 100vw; /* 使用视口宽度 */
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+        }
+
+        .design-gallery::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* 使用伪元素创建左右边距 */
+        .design-gallery::before {
+            content: '';
+            flex: 0 0 135px; /* 桌面端左边距 */
+        }
+
+        .design-gallery::after {
+            content: '';
+            flex: 0 0 68px; /* 桌面端右边距 */
+        }
+
+        .design-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 49px; /* 增大35%：36px * 1.35 = 49px */
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            flex: 0 0 675px; /* 增大35%：500px * 1.35 = 675px */
+            min-height: 709px; /* 增大35%：525px * 1.35 = 709px */
+            cursor: pointer;
+            transform-origin: center;
+            scroll-snap-align: start;
+        }
+
+
+
+        .design-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        /* 卡片悬停效果（轻微） */
+        .design-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .design-card:hover::before {
+            opacity: 0.8;
+        }
+
+        /* 卡片选中状态样式 */
+        .design-card.selected {
+            border-color: #007AFF;
+            border-width: 2px;
+            transform: translateY(-6px);
+            box-shadow: 0 16px 50px rgba(0, 122, 255, 0.2);
+        }
+
+        .design-card.selected::before {
+            opacity: 0.9;
+            background: linear-gradient(135deg, rgba(0, 122, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%);
+        }
+
+        /* 滚动指示器样式 */
+        .design-scroll-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 30px;
+            padding-bottom: 20px;
+        }
+
+        .scroll-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .scroll-indicator:hover {
+            background: rgba(0, 0, 0, 0.4);
+            transform: scale(1.2);
+        }
+
+        .scroll-indicator.active {
+            background: #007AFF;
+            transform: scale(1.3);
+        }
+
+        .scroll-indicator.active::after {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border-radius: 50%;
+            background: rgba(0, 122, 255, 0.2);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            gap: 32px; /* 增大35%：24px * 1.35 = 32px */
+            align-items: flex-start;
+        }
+
+        .card-text {
+            flex: 1;
+            min-width: 0; /* 允许文字区域收缩 */
+        }
+
+        .card-media {
+            flex: 0 0 324px; /* 增大35%：240px * 1.35 = 324px */
+        }
+
+        .design-card h3 {
+            font-size: 32px; /* 增大35%：24px * 1.35 = 32px */
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 16px; /* 增大35%：12px * 1.35 = 16px */
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+        }
+
+        .design-card p {
+            font-size: 22px; /* 增大35%：16px * 1.35 = 22px */
+            color: #515154;
+            margin-bottom: 32px; /* 增大35%：24px * 1.35 = 32px */
+            line-height: 1.5;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 9/16; /* 设置9:16比例（竖屏） */
+            border-radius: 12px;
+            overflow: hidden;
+            background: #f5f5f7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+
+        .video-container video,
+        .video-container img,
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            border: none;
+        }
+
+        .design-card:hover .video-container video,
+        .design-card:hover .video-container img,
+        .design-card:hover .video-container iframe {
+            transform: scale(1.05);
+        }
+
+        /* 特定卡片的渐变背景和文字颜色 */
+        .glass-blur-card {
+            background: linear-gradient(135deg, rgba(74, 144, 226, 0.1) 0%, rgba(255, 255, 255, 0.8) 100%);
+        }
+
+        .glass-blur-card h3 {
+            color: #3B82F6; /* 现代蓝色，年轻有活力 */
+        }
+
+        .glass-blur-card p {
+            color: #60A5FA; /* 浅蓝色，比主标题更浅 */
+        }
+
+        .trajectory-card {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, rgba(255, 255, 255, 0.8) 100%);
+        }
+
+        .trajectory-card h3 {
+            color: #EF4444; /* 现代红色，充满活力 */
+        }
+
+        .trajectory-card p {
+            color: #F87171; /* 浅红色，比主标题更浅 */
+        }
+
+        .floating-interaction-card {
+            background: linear-gradient(135deg, rgba(106, 90, 205, 0.1) 0%, rgba(255, 255, 255, 0.8) 100%);
+        }
+
+        .floating-interaction-card h3 {
+            color: #8B5CF6; /* 现代紫色，时尚年轻 */
+        }
+
+        .floating-interaction-card p {
+            color: #A78BFA; /* 浅紫色，比主标题更浅 */
+        }
+
+        .morphing-card {
+            background: linear-gradient(135deg, rgba(72, 187, 120, 0.1) 0%, rgba(255, 255, 255, 0.8) 100%);
+        }
+
+        .morphing-card h3 {
+            color: #10B981; /* 现代绿色，清新年轻 */
+        }
+
+        .morphing-card p {
+            color: #34D399; /* 浅绿色，比主标题更浅 */
+        }
+
+        .controls-card {
+            background: linear-gradient(135deg, rgba(237, 137, 54, 0.1) 0%, rgba(255, 255, 255, 0.8) 100%);
+        }
+
+        .controls-card h3 {
+            color: #F59E0B; /* 现代橙色，活力四射 */
+        }
+
+        .controls-card p {
+            color: #FBBF24; /* 浅橙色，比主标题更浅 */
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .design-interaction-section {
+                padding: 40px 0; /* 移动端进一步减少间距 */
+                overflow: visible; /* 确保移动端也不截断卡片 */
+            }
+            
+            .design-interaction-title {
+                font-size: 36px;
+            }
+            
+            .design-interaction-subtitle {
+                font-size: 18px;
+                margin-bottom: 25px; /* 减少移动端副标题底部间距 */
+            }
+            
+            .design-gallery {
+                gap: 30px; /* 适中的卡片间距 */
+                padding: 30px 0 50px 0; /* 减少移动端上下内边距 */
+                margin: 0;
+                overflow-x: auto;
+                overflow-y: visible; /* 确保垂直方向可见 */
+                scroll-snap-type: x mandatory;
+                width: 100vw; /* 使用视口宽度 */
+                position: relative;
+                left: 50%;
+                right: 50%;
+                margin-left: -50vw;
+                margin-right: -50vw;
+            }
+            
+            .design-card {
+                padding: 20px; /* 减小内边距适应小屏幕 */
+                flex: 0 0 calc(100vw - 120px); /* 屏幕宽度减去左右边距 */
+                min-width: calc(100vw - 120px);
+                max-width: 400px; /* 限制最大宽度 */
+                min-height: auto; /* 移除最小高度限制 */
+                scroll-snap-align: center;
+            }
+
+            /* 移动端改为上下布局 */
+            .card-content {
+                flex-direction: column;
+                gap: 16px; /* 减小上下布局间距 */
+            }
+
+            .card-media {
+                flex: none;
+                width: 60%; /* 移动端视频区域占60%宽度 */
+                align-self: center; /* 居中显示 */
+            }
+
+            /* 移动端伪元素边距 */
+            .design-gallery::before {
+                flex: 0 0 40px; /* 移动端左边距 */
+            }
+
+            .design-gallery::after {
+                flex: 0 0 40px; /* 移动端右边距 */
+            }
+
+
+            
+            /* 移动端卡片悬停效果 */
+            .design-card:hover {
+                transform: translateY(-2px);
+            }
+            
+            .design-scroll-indicators {
+                margin-top: 20px;
+                padding-bottom: 15px;
+            }
+            
+            .scroll-indicator {
+                width: 10px;
+                height: 10px;
+            }
+            
+            /* 移动端选中状态样式 */
+            .design-card.selected {
+                border-color: #007AFF;
+                border-width: 2px;
+                transform: translateY(-4px);
+                box-shadow: 0 12px 30px rgba(0, 122, 255, 0.2);
+            }
+            
+            .design-card h3 {
+                font-size: 18px; /* 适应移动端的字体大小 */
+                margin-bottom: 6px; /* 减小标题底部边距 */
+            }
+
+            .design-card p {
+                font-size: 14px; /* 适应移动端的字体大小 */
+                margin-bottom: 0; /* 移除段落底部边距 */
+            }
+            
+            .video-container {
+                aspect-ratio: 9/16; /* 移动端也保持9:16比例（竖屏） */
+                margin: 0; /* 确保视频容器没有外边距 */
+            }
+
+            /* 确保移动端卡片高度自适应内容 */
+            .design-card {
+                height: auto !important;
+                min-height: auto !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .design-interaction-title {
+                font-size: 28px;
+            }
+            
+            .design-interaction-subtitle {
+                font-size: 16px;
+                margin-bottom: 20px; /* 小屏幕副标题底部间距 */
+            }
+            
+            .design-card {
+                padding: 16px; /* 小屏幕进一步减小内边距 */
+                flex: 0 0 calc(100vw - 80px); /* 屏幕宽度减去左右边距 */
+                min-width: calc(100vw - 80px);
+                max-width: 320px; /* 限制最大宽度 */
+                min-height: auto; /* 移除最小高度限制 */
+            }
+
+            .design-card h3 {
+                font-size: 16px; /* 小屏幕字体大小 */
+                margin-bottom: 4px; /* 减小标题底部边距 */
+            }
+
+            .design-card p {
+                font-size: 12px; /* 小屏幕字体大小 */
+                margin-bottom: 0; /* 移除段落底部边距 */
+            }
+
+            .video-container {
+                aspect-ratio: 9/16; /* 小屏幕也保持9:16比例（竖屏） */
+            }
+        }
+
+        /* 超小屏幕适配 (360px以下) */
+        @media (max-width: 360px) {
+            .design-gallery {
+                gap: 20px; /* 减小卡片间距 */
+                padding: 25px 0 40px 0; /* 进一步减小上下内边距 */
+            }
+
+            .design-card {
+                padding: 12px; /* 进一步减小内边距 */
+                flex: 0 0 calc(100vw - 60px); /* 屏幕宽度减去更小的边距 */
+                min-width: calc(100vw - 60px);
+                max-width: 280px;
+                min-height: auto; /* 移除最小高度限制 */
+            }
+
+            .design-card h3 {
+                font-size: 14px;
+                margin-bottom: 3px; /* 减小标题底部边距 */
+            }
+
+            .design-card p {
+                font-size: 11px;
+                margin-bottom: 0; /* 移除段落底部边距 */
+            }
+
+            .card-content {
+                gap: 8px; /* 进一步减小上下布局间距 */
+            }
+
+            /* 超小屏幕伪元素边距 */
+            .design-gallery::before {
+                flex: 0 0 20px;
+            }
+
+            .design-gallery::after {
+                flex: 0 0 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -3925,6 +4412,95 @@
          </div>-->
     </div>
     </div>
+    <!-- 优雅酷炫的设计交互模块 -->
+    <section class="design-interaction-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <h2 class="design-interaction-title">优雅酷炫的设计交互</h2>
+                </div>
+            </div>
+        </div>
+        <!-- 将design-gallery移出container，使其能够贴边 -->
+        <div class="design-gallery" id="designGallery">
+                <div class="design-card glass-blur-card">
+                    <div class="card-content">
+                        <div class="card-text">
+                            <h3>全局实时玻璃模糊效果</h3>
+                            <p>包括所有的Activity、Dialog、Window、悬浮窗、Toast等</p>
+                        </div>
+                        <div class="card-media">
+                            <div class="video-container">
+                                <iframe src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" class="feature-media"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="design-card trajectory-card">
+                    <div class="card-content">
+                        <div class="card-text">
+                            <h3>独家甩动轨迹算法</h3>
+                            <p>反弹轨迹与屏幕相切、优雅的减速曲线、高阶贝塞尔曲线结合微积分约束保证终点贴边的同时也刚好减速到0</p>
+                        </div>
+                        <div class="card-media">
+                            <div class="video-container">
+                                <iframe src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" class="feature-media"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="design-card floating-interaction-card">
+                    <div class="card-content">
+                        <div class="card-text">
+                            <h3>独特的悬浮球交互效果</h3>
+                            <p>扇形菜单展开、甩动、拖拽、变速</p>
+                        </div>
+                        <div class="card-media">
+                            <div class="video-container">
+                                <iframe src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" class="feature-media"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="design-card morphing-card">
+                    <div class="card-content">
+                        <div class="card-text">
+                            <h3>融合形变效果</h3>
+                            <p>类似MacOS窗口的神奇效果</p>
+                        </div>
+                        <div class="card-media">
+                            <div class="video-container">
+                                <iframe src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" class="feature-media"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="design-card controls-card">
+                    <div class="card-content">
+                        <div class="card-text">
+                            <h3>独特的开关和Tab切换效果</h3>
+                            <p>精心设计的动画过渡和交互反馈</p>
+                        </div>
+                        <div class="card-media">
+                            <div class="video-container">
+                                <iframe src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" class="feature-media"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- 滚动指示器保留在容器内 -->
+        <div class="container">
+            <div class="design-scroll-indicators">
+                <div class="scroll-indicator active" data-index="0"></div>
+                <div class="scroll-indicator" data-index="1"></div>
+                <div class="scroll-indicator" data-index="2"></div>
+                <div class="scroll-indicator" data-index="3"></div>
+                <div class="scroll-indicator" data-index="4"></div>
+            </div>
+        </div>
+    </section>
+
     <div class="container features">
         <!-- <div class="row feature-row">
             <div class="col-xs-12 col-sm-5 description">
@@ -5653,6 +6229,115 @@
         // 默认不选中任何tab，显示默认内容
         // 不需要调用showTriggerTab，因为默认内容已经在HTML中设置为active
     }
+    
+    // 设计交互模块滚动指示器功能
+    function initDesignScrollIndicators() {
+        const gallery = document.getElementById('designGallery');
+        const indicators = document.querySelectorAll('.scroll-indicator');
+        const cards = document.querySelectorAll('.design-card');
+        let selectedCardIndex = -1;
+        
+        if (!gallery || !indicators.length || !cards.length) return;
+        
+        // 更新指示器状态和卡片选中状态
+        function updateIndicators() {
+            const galleryRect = gallery.getBoundingClientRect();
+            const galleryCenterX = galleryRect.left + galleryRect.width / 2;
+            let closestIndex = 0;
+            let closestDistance = Infinity;
+
+            // 找到最接近中心的卡片
+            cards.forEach((card, index) => {
+                const cardRect = card.getBoundingClientRect();
+                const cardCenterX = cardRect.left + cardRect.width / 2;
+                const distance = Math.abs(cardCenterX - galleryCenterX);
+
+                if (distance < closestDistance) {
+                    closestDistance = distance;
+                    closestIndex = index;
+                }
+            });
+
+            // 更新指示器
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === closestIndex);
+            });
+
+            // 更新卡片选中状态
+            if (selectedCardIndex !== closestIndex) {
+                updateCardSelection(closestIndex);
+            }
+        }
+        
+        // 更新卡片选中状态
+        function updateCardSelection(selectedIndex) {
+            cards.forEach((card, index) => {
+                card.classList.toggle('selected', index === selectedIndex);
+            });
+            selectedCardIndex = selectedIndex;
+        }
+        
+        // 滚动到指定卡片并居中
+        function scrollToCard(index) {
+            const card = cards[index];
+            if (!card) return;
+
+            const cardLeft = card.offsetLeft;
+            const cardWidth = card.offsetWidth;
+            const galleryWidth = gallery.offsetWidth;
+
+            // 计算居中位置（考虑左边距占位元素）
+            const targetScrollLeft = cardLeft - (galleryWidth - cardWidth) / 2;
+
+            gallery.scrollTo({
+                left: Math.max(0, targetScrollLeft),
+                behavior: 'smooth'
+            });
+        }
+        
+        // 防抖函数
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // 监听滚动事件（防抖）
+        gallery.addEventListener('scroll', debounce(updateIndicators, 50));
+
+        // 点击指示器跳转
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                updateCardSelection(index);
+                scrollToCard(index);
+            });
+        });
+
+        // 点击卡片选中并居中
+        cards.forEach((card, index) => {
+            card.addEventListener('click', () => {
+                updateCardSelection(index);
+                scrollToCard(index);
+            });
+        });
+
+        // 初始化：选中第一张卡片并居中
+        updateCardSelection(0);
+        scrollToCard(0);
+        updateIndicators();
+    }
+    
+    // 页面加载完成后初始化
+    document.addEventListener('DOMContentLoaded', function() {
+        initDesignScrollIndicators();
+    });
+
 </script>
 <!-- 延迟加载非关键JS资源 -->
 <script src="https://cdn.staticfile.org/jquery/1.12.4/jquery.min.js" defer crossorigin="anonymous"></script>

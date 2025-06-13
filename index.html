@@ -1762,6 +1762,49 @@
         .carousel-arrow-next {
             right: 10px;
         }
+
+        /* 懒加载图片样式 */
+        .lazy-load {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .lazy-load.loaded {
+            opacity: 1;
+        }
+
+        /* 轮播图片加载占位符 */
+        .carousel-slide {
+            background: #f5f5f5;
+            min-height: 320px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-slide::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border: 3px solid #ddd;
+            border-top: 3px solid #007AFF;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            opacity: 0;
+        }
+
+        .carousel-slide.loading::before {
+            opacity: 1;
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
         
         .carousel-arrow:before {
             content: '';
@@ -4580,22 +4623,22 @@
                             <img src="./resources/img/shortcut/shortcut-onestep.png" alt="悬浮捷径SoftCircle一步直达功能展示" loading="eager" crossorigin="anonymous">
                         </div>
                         <div class="carousel-slide" aria-roledescription="幻灯片" aria-label="小部件功能">
-                            <img src="./resources/img/shortcut/shortcut-widget.png" alt="悬浮捷径SoftCircle小部件功能展示" loading="lazy" crossorigin="anonymous">
+                            <img data-src="./resources/img/shortcut/shortcut-widget.png" alt="悬浮捷径SoftCircle小部件功能展示" loading="lazy" crossorigin="anonymous" class="lazy-load">
                         </div>
                         <div class="carousel-slide" aria-roledescription="幻灯片" aria-label="小程序功能">
-                            <img src="./resources/img/shortcut/shortcut-wxjs.png" alt="悬浮捷径SoftCircle微信小程序直达功能展示" loading="lazy" crossorigin="anonymous">
+                            <img data-src="./resources/img/shortcut/shortcut-wxjs.png" alt="悬浮捷径SoftCircle微信小程序直达功能展示" loading="lazy" crossorigin="anonymous" class="lazy-load">
                         </div>
                         <div class="carousel-slide" aria-roledescription="幻灯片" aria-label="内置功能">
-                            <img src="./resources/img/shortcut/shortcut-func.png" alt="悬浮捷径SoftCircle内置功能展示" loading="lazy" crossorigin="anonymous">
+                            <img data-src="./resources/img/shortcut/shortcut-func.png" alt="悬浮捷径SoftCircle内置功能展示" loading="lazy" crossorigin="anonymous" class="lazy-load">
                         </div>
                         <div class="carousel-slide" aria-roledescription="幻灯片" aria-label="本地资源功能">
-                            <img src="./resources/img/shortcut/shortcut-local.png" alt="悬浮捷径SoftCircle本地资源访问功能展示" loading="lazy" crossorigin="anonymous">
+                            <img data-src="./resources/img/shortcut/shortcut-local.png" alt="悬浮捷径SoftCircle本地资源访问功能展示" loading="lazy" crossorigin="anonymous" class="lazy-load">
                         </div>
                         <div class="carousel-slide" aria-roledescription="幻灯片" aria-label="网站直达功能">
-                            <img src="./resources/img/shortcut/shortcut-web.png" alt="悬浮捷径SoftCircle网站直达功能展示" loading="lazy" crossorigin="anonymous">
+                            <img data-src="./resources/img/shortcut/shortcut-web.png" alt="悬浮捷径SoftCircle网站直达功能展示" loading="lazy" crossorigin="anonymous" class="lazy-load">
                         </div>
                         <div class="carousel-slide" aria-roledescription="幻灯片" aria-label="应用直达功能">
-                            <img src="./resources/img/shortcut/shortcut-app.png" alt="悬浮捷径SoftCircle应用直达功能展示" loading="lazy" crossorigin="anonymous">
+                            <img data-src="./resources/img/shortcut/shortcut-app.png" alt="悬浮捷径SoftCircle应用直达功能展示" loading="lazy" crossorigin="anonymous" class="lazy-load">
                         </div>
                     </div>
                     <div class="carousel-dots">
@@ -5808,25 +5851,28 @@
         function showSlide(index) {
             // 保存当前索引
             currentSlide = index;
-            
+
             // 移除所有文字的active类
             textSlides.forEach(textSlide => {
                 textSlide.classList.remove('active');
             });
-            
+
             // 移除所有导航点的active类
             dots.forEach(dot => {
                 dot.classList.remove('active');
             });
-            
+
             // 设置幻灯片状态类
             setSlideClasses();
-            
+
             // 给当前文字添加active类
             textSlides[index].classList.add('active');
-            
+
             // 给当前导航点添加active类
             dots[index].classList.add('active');
+
+            // 预加载当前和相邻图片
+            setTimeout(preloadAdjacentImages, 100);
         }
         
         // 切换到下一张幻灯片
@@ -5882,6 +5928,41 @@
         // 开始自动播放
         function startAutoPlay() {
             slideInterval = setInterval(nextSlide, 5000); // 增加到5秒，给用户更多时间查看每张幻灯片
+        }
+
+        // 懒加载图片函数
+        function lazyLoadImage(img) {
+            if (img.dataset.src && !img.src) {
+                const slide = img.closest('.carousel-slide');
+                if (slide) slide.classList.add('loading');
+
+                img.onload = function() {
+                    img.classList.add('loaded');
+                    if (slide) slide.classList.remove('loading');
+                };
+
+                img.onerror = function() {
+                    if (slide) slide.classList.remove('loading');
+                    console.warn('图片加载失败:', img.dataset.src);
+                };
+
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+            }
+        }
+
+        // 预加载当前和相邻的图片
+        function preloadAdjacentImages() {
+            const currentSlideEl = slides[currentSlide];
+            const prevSlideEl = slides[currentSlide === 0 ? slides.length - 1 : currentSlide - 1];
+            const nextSlideEl = slides[currentSlide === slides.length - 1 ? 0 : currentSlide + 1];
+
+            [currentSlideEl, prevSlideEl, nextSlideEl].forEach(slide => {
+                if (slide) {
+                    const img = slide.querySelector('.lazy-load');
+                    if (img) lazyLoadImage(img);
+                }
+            });
         }
         
         // 页面不可见时暂停轮播，提高性能
@@ -5951,9 +6032,19 @@
         // 初始显示第一张幻灯片
         setSlideClasses();
         showSlide(0);
-        
-        // 开始自动播放
-        startAutoPlay();
+
+        // 立即加载第一张图片
+        const firstSlide = slides[0];
+        if (firstSlide) {
+            const firstImg = firstSlide.querySelector('.lazy-load');
+            if (firstImg) lazyLoadImage(firstImg);
+        }
+
+        // 延迟预加载相邻图片
+        setTimeout(preloadAdjacentImages, 1000);
+
+        // 延迟开始自动播放，提高初始加载性能
+        setTimeout(startAutoPlay, 2000);
     }
     
     // 设备类型检测

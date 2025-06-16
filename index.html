@@ -1637,7 +1637,33 @@
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             min-height: 320px;
-            background: transparent;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        /* 轮播容器初始状态 */
+        .carousel-container:not(.loaded) .carousel-slides {
+            opacity: 0;
+        }
+
+        .carousel-container.loaded .carousel-slides {
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        /* 轮播占位符 */
+        .carousel-placeholder {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .carousel-slide.has-image .carousel-placeholder {
+            opacity: 0;
+            pointer-events: none;
         }
         
         .carousel-slides {
@@ -1775,35 +1801,46 @@
 
         /* 轮播图片加载占位符 */
         .carousel-slide {
-            background: #f5f5f5;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             min-height: 320px;
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
         }
 
+        /* 轻量级占位符图标 */
         .carousel-slide::before {
+            content: '📱';
+            font-size: 48px;
+            opacity: 0.3;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .carousel-slide.has-image::before {
+            display: none;
+        }
+
+        /* 简化的加载动画 */
+        .carousel-slide.loading::after {
             content: '';
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 40px;
-            height: 40px;
-            border: 3px solid #ddd;
-            border-top: 3px solid #007AFF;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #007AFF;
             border-radius: 50%;
-            animation: spin 1s linear infinite;
-            opacity: 0;
-        }
-
-        .carousel-slide.loading::before {
-            opacity: 1;
+            border-top-color: transparent;
+            animation: spin 0.8s linear infinite;
         }
 
         @keyframes spin {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
         }
         
         .carousel-arrow:before {
@@ -4620,7 +4657,11 @@
                     <div class="carousel-arrow carousel-arrow-next" aria-label="下一张"></div>
                     <div class="carousel-slides">
                         <div class="carousel-slide active" aria-roledescription="幻灯片" aria-label="一步直达功能">
-                            <img src="./resources/img/shortcut/shortcut-onestep.png" alt="悬浮捷径SoftCircle一步直达功能展示" loading="eager" crossorigin="anonymous">
+                            <div class="carousel-placeholder">
+                                <div style="font-size: 48px; margin-bottom: 16px;">📱</div>
+                                <div style="color: #666; font-size: 16px;">功能特性加载中...</div>
+                            </div>
+                            <img data-src="./resources/img/shortcut/shortcut-onestep.png" alt="悬浮捷径SoftCircle一步直达功能展示" loading="lazy" crossorigin="anonymous" class="lazy-load">
                         </div>
                         <div class="carousel-slide" aria-roledescription="幻灯片" aria-label="小部件功能">
                             <img data-src="./resources/img/shortcut/shortcut-widget.png" alt="悬浮捷径SoftCircle小部件功能展示" loading="lazy" crossorigin="anonymous" class="lazy-load">
@@ -5870,9 +5911,6 @@
 
             // 给当前导航点添加active类
             dots[index].classList.add('active');
-
-            // 预加载当前和相邻图片
-            setTimeout(preloadAdjacentImages, 100);
         }
         
         // 切换到下一张幻灯片
@@ -5930,37 +5968,63 @@
             slideInterval = setInterval(nextSlide, 5000); // 增加到5秒，给用户更多时间查看每张幻灯片
         }
 
-        // 懒加载图片函数
-        function lazyLoadImage(img) {
-            if (img.dataset.src && !img.src) {
-                const slide = img.closest('.carousel-slide');
-                if (slide) slide.classList.add('loading');
+        // 创建Intersection Observer进行懒加载
+        const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const container = entry.target;
+                    loadCarouselImages(container);
+                    imageObserver.unobserve(container);
+                }
+            });
+        }, {
+            rootMargin: '50px'
+        });
 
-                img.onload = function() {
-                    img.classList.add('loaded');
-                    if (slide) slide.classList.remove('loading');
-                };
-
-                img.onerror = function() {
-                    if (slide) slide.classList.remove('loading');
-                    console.warn('图片加载失败:', img.dataset.src);
-                };
-
-                img.src = img.dataset.src;
-                img.removeAttribute('data-src');
-            }
+        // 观察轮播容器
+        const carouselContainerForObserver = document.querySelector('.carousel-container');
+        if (carouselContainerForObserver) {
+            imageObserver.observe(carouselContainerForObserver);
         }
 
-        // 预加载当前和相邻的图片
-        function preloadAdjacentImages() {
-            const currentSlideEl = slides[currentSlide];
-            const prevSlideEl = slides[currentSlide === 0 ? slides.length - 1 : currentSlide - 1];
-            const nextSlideEl = slides[currentSlide === slides.length - 1 ? 0 : currentSlide + 1];
+        // 加载轮播图片
+        function loadCarouselImages(container) {
+            const images = container.querySelectorAll('.lazy-load');
+            let loadedCount = 0;
 
-            [currentSlideEl, prevSlideEl, nextSlideEl].forEach(slide => {
-                if (slide) {
-                    const img = slide.querySelector('.lazy-load');
-                    if (img) lazyLoadImage(img);
+            images.forEach((img, index) => {
+                if (img.dataset.src) {
+                    const slide = img.closest('.carousel-slide');
+
+                    // 优先加载第一张图片
+                    const delay = index === 0 ? 0 : index * 200;
+
+                    setTimeout(() => {
+                        if (slide) slide.classList.add('loading');
+
+                        img.onload = function() {
+                            img.classList.add('loaded');
+                            if (slide) {
+                                slide.classList.remove('loading');
+                                slide.classList.add('has-image');
+                            }
+                            loadedCount++;
+
+                            // 第一张图片加载完成后显示轮播并启动自动播放
+                            if (index === 0) {
+                                container.classList.add('loaded');
+                                setTimeout(startAutoPlay, 300);
+                            }
+                        };
+
+                        img.onerror = function() {
+                            if (slide) slide.classList.remove('loading');
+                            console.warn('图片加载失败:', img.dataset.src);
+                        };
+
+                        img.src = img.dataset.src;
+                        img.removeAttribute('data-src');
+                    }, delay);
                 }
             });
         }
@@ -6033,18 +6097,8 @@
         setSlideClasses();
         showSlide(0);
 
-        // 立即加载第一张图片
-        const firstSlide = slides[0];
-        if (firstSlide) {
-            const firstImg = firstSlide.querySelector('.lazy-load');
-            if (firstImg) lazyLoadImage(firstImg);
-        }
-
-        // 延迟预加载相邻图片
-        setTimeout(preloadAdjacentImages, 1000);
-
-        // 延迟开始自动播放，提高初始加载性能
-        setTimeout(startAutoPlay, 2000);
+        // 不立即启动自动播放，等待图片加载完成
+        // startAutoPlay 将在第一张图片加载完成后调用
     }
     
     // 设备类型检测

@@ -34,6 +34,14 @@
     <link rel="preload" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" as="style">
     <link rel="preload" href="./resources/img/shortcut/shortcut-onestep.png" as="image" fetchpriority="high">
     
+    <!-- 预加载横向滚动组件的关键图片 -->
+    <link rel="preload" href="./resources/img/shortcut/shortcut-widget.png" as="image">
+    <link rel="preload" href="./resources/img/shortcut/shortcut-wxjs.png" as="image">
+    <link rel="preload" href="./resources/img/shortcut/shortcut-func.png" as="image">
+    <link rel="preload" href="./resources/img/shortcut/shortcut-local.png" as="image">
+    <link rel="preload" href="./resources/img/shortcut/shortcut-web.png" as="image">
+    <link rel="preload" href="./resources/img/shortcut/shortcut-app.png" as="image">
+    
     <link rel="shortcut icon" href="./resources/app_icon.png" type="image/x-icon">
 
     <link rel="stylesheet"
@@ -1637,33 +1645,7 @@
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             min-height: 320px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        }
-
-        /* 轮播容器初始状态 */
-        .carousel-container:not(.loaded) .carousel-slides {
-            opacity: 0;
-        }
-
-        .carousel-container.loaded .carousel-slides {
-            opacity: 1;
-            transition: opacity 0.5s ease;
-        }
-
-        /* 轮播占位符 */
-        .carousel-placeholder {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            z-index: 1;
-            transition: opacity 0.3s ease;
-        }
-
-        .carousel-slide.has-image .carousel-placeholder {
-            opacity: 0;
-            pointer-events: none;
+            background: transparent;
         }
         
         .carousel-slides {
@@ -1788,60 +1770,6 @@
         .carousel-arrow-next {
             right: 10px;
         }
-
-        /* 懒加载图片样式 */
-        .lazy-load {
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .lazy-load.loaded {
-            opacity: 1;
-        }
-
-        /* 轮播图片加载占位符 */
-        .carousel-slide {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            min-height: 320px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        /* 轻量级占位符图标 */
-        .carousel-slide::before {
-            content: '📱';
-            font-size: 48px;
-            opacity: 0.3;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .carousel-slide.has-image::before {
-            display: none;
-        }
-
-        /* 简化的加载动画 */
-        .carousel-slide.loading::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 20px;
-            height: 20px;
-            border: 2px solid #007AFF;
-            border-radius: 50%;
-            border-top-color: transparent;
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: translate(-50%, -50%) rotate(360deg); }
-        }
         
         .carousel-arrow:before {
             content: '';
@@ -1959,6 +1887,23 @@
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            min-height: 120px; /* 设置最小高度避免布局跳动 */
+        }
+        
+        /* 图片加载中的骨架屏效果 */
+        .scroll-item img:not([src*="shortcut"]) {
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 25%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.1) 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+        
+        .scroll-item img[src*="shortcut"] {
+            animation: none;
+        }
+        
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
         
         .scroll-item:hover img {
@@ -4657,29 +4602,25 @@
                     <div class="carousel-arrow carousel-arrow-next" aria-label="下一张"></div>
                     <div class="carousel-slides">
                         <div class="carousel-slide active" aria-roledescription="幻灯片" aria-label="一步直达功能">
-                            <div class="carousel-placeholder">
-                                <div style="font-size: 48px; margin-bottom: 16px;">📱</div>
-                                <div style="color: #666; font-size: 16px;">功能特性加载中...</div>
-                            </div>
-                            <img data-src="./resources/img/shortcut/shortcut-onestep.png" alt="悬浮捷径SoftCircle一步直达功能展示" loading="lazy" crossorigin="anonymous" class="lazy-load">
+                            <img src="./resources/img/shortcut/shortcut-onestep.png" alt="悬浮捷径SoftCircle一步直达功能展示" loading="eager" crossorigin="anonymous">
                         </div>
                         <div class="carousel-slide" aria-roledescription="幻灯片" aria-label="小部件功能">
-                            <img data-src="./resources/img/shortcut/shortcut-widget.png" alt="悬浮捷径SoftCircle小部件功能展示" loading="lazy" crossorigin="anonymous" class="lazy-load">
+                            <img src="./resources/img/shortcut/shortcut-widget.png" alt="悬浮捷径SoftCircle小部件功能展示" loading="lazy" crossorigin="anonymous">
                         </div>
                         <div class="carousel-slide" aria-roledescription="幻灯片" aria-label="小程序功能">
-                            <img data-src="./resources/img/shortcut/shortcut-wxjs.png" alt="悬浮捷径SoftCircle微信小程序直达功能展示" loading="lazy" crossorigin="anonymous" class="lazy-load">
+                            <img src="./resources/img/shortcut/shortcut-wxjs.png" alt="悬浮捷径SoftCircle微信小程序直达功能展示" loading="lazy" crossorigin="anonymous">
                         </div>
                         <div class="carousel-slide" aria-roledescription="幻灯片" aria-label="内置功能">
-                            <img data-src="./resources/img/shortcut/shortcut-func.png" alt="悬浮捷径SoftCircle内置功能展示" loading="lazy" crossorigin="anonymous" class="lazy-load">
+                            <img src="./resources/img/shortcut/shortcut-func.png" alt="悬浮捷径SoftCircle内置功能展示" loading="lazy" crossorigin="anonymous">
                         </div>
                         <div class="carousel-slide" aria-roledescription="幻灯片" aria-label="本地资源功能">
-                            <img data-src="./resources/img/shortcut/shortcut-local.png" alt="悬浮捷径SoftCircle本地资源访问功能展示" loading="lazy" crossorigin="anonymous" class="lazy-load">
+                            <img src="./resources/img/shortcut/shortcut-local.png" alt="悬浮捷径SoftCircle本地资源访问功能展示" loading="lazy" crossorigin="anonymous">
                         </div>
                         <div class="carousel-slide" aria-roledescription="幻灯片" aria-label="网站直达功能">
-                            <img data-src="./resources/img/shortcut/shortcut-web.png" alt="悬浮捷径SoftCircle网站直达功能展示" loading="lazy" crossorigin="anonymous" class="lazy-load">
+                            <img src="./resources/img/shortcut/shortcut-web.png" alt="悬浮捷径SoftCircle网站直达功能展示" loading="lazy" crossorigin="anonymous">
                         </div>
                         <div class="carousel-slide" aria-roledescription="幻灯片" aria-label="应用直达功能">
-                            <img data-src="./resources/img/shortcut/shortcut-app.png" alt="悬浮捷径SoftCircle应用直达功能展示" loading="lazy" crossorigin="anonymous" class="lazy-load">
+                            <img src="./resources/img/shortcut/shortcut-app.png" alt="悬浮捷径SoftCircle应用直达功能展示" loading="lazy" crossorigin="anonymous">
                         </div>
                     </div>
                     <div class="carousel-dots">
@@ -5244,6 +5185,10 @@
         const scrollContent = document.getElementById('scroll-content');
         if (!scrollContent) return;
         
+        // 立即显示容器，不等待图片加载
+        scrollContent.style.visibility = 'visible';
+        scrollContent.style.opacity = '1';
+        
         // 使用Intersection Observer优化图片加载
         if ('IntersectionObserver' in window) {
             const imageObserver = new IntersectionObserver((entries, observer) => {
@@ -5258,52 +5203,24 @@
                     }
                 });
             }, {
-                rootMargin: '200px 0px' // 预加载视口外200px的图片
+                rootMargin: '500px 0px' // 增加预加载范围到500px
             });
             
-            // 只对懒加载的图片应用观察器
+            // 对所有懒加载图片应用观察器，但不清空第一组的src
             const lazyImages = scrollContent.querySelectorAll('img[loading="lazy"]');
             lazyImages.forEach(img => {
                 // 保存原始src到data-src
                 if (!img.dataset.src && img.src) {
                     img.dataset.src = img.src;
-                    // 清空src以避免立即加载，但保留第一组图片的src以确保可见
-                    if (!img.closest('.scroll-item:nth-child(-n+7)')) {
-                        img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"%3E%3C/svg%3E';
-                    }
+                    // 不清空任何图片的src，让浏览器自然加载
                 }
                 imageObserver.observe(img);
             });
         }
         
-        // 强制预加载第一组图片
-        const firstGroupImages = scrollContent.querySelectorAll('.scroll-item:nth-child(-n+7) img');
-        let loadedCount = 0;
-        const totalFirstGroupImages = firstGroupImages.length;
-        
-        // 检查是否所有图片都已加载
-        function checkAllImagesLoaded() {
-            loadedCount++;
-            if (loadedCount >= totalFirstGroupImages) {
-                // 第一组图片加载完成，激活动画
-                scrollContent.style.visibility = 'visible';
-                scrollContent.style.opacity = '1';
-                
-                // 优化动画性能
-                requestAnimationFrame(() => {
-                    scrollContent.style.transform = 'translateZ(0)'; // 硬件加速
-                });
-            }
-        }
-        
-        // 第一组图片加载监听
-        firstGroupImages.forEach(img => {
-            if (img.complete) {
-                checkAllImagesLoaded();
-            } else {
-                img.onload = checkAllImagesLoaded;
-                img.onerror = checkAllImagesLoaded;
-            }
+        // 移除等待图片加载的逻辑，直接启用硬件加速
+        requestAnimationFrame(() => {
+            scrollContent.style.transform = 'translateZ(0)'; // 硬件加速
         });
         
         // 动画迭代优化
@@ -5892,23 +5809,23 @@
         function showSlide(index) {
             // 保存当前索引
             currentSlide = index;
-
+            
             // 移除所有文字的active类
             textSlides.forEach(textSlide => {
                 textSlide.classList.remove('active');
             });
-
+            
             // 移除所有导航点的active类
             dots.forEach(dot => {
                 dot.classList.remove('active');
             });
-
+            
             // 设置幻灯片状态类
             setSlideClasses();
-
+            
             // 给当前文字添加active类
             textSlides[index].classList.add('active');
-
+            
             // 给当前导航点添加active类
             dots[index].classList.add('active');
         }
@@ -5966,67 +5883,6 @@
         // 开始自动播放
         function startAutoPlay() {
             slideInterval = setInterval(nextSlide, 5000); // 增加到5秒，给用户更多时间查看每张幻灯片
-        }
-
-        // 创建Intersection Observer进行懒加载
-        const imageObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const container = entry.target;
-                    loadCarouselImages(container);
-                    imageObserver.unobserve(container);
-                }
-            });
-        }, {
-            rootMargin: '50px'
-        });
-
-        // 观察轮播容器
-        const carouselContainerForObserver = document.querySelector('.carousel-container');
-        if (carouselContainerForObserver) {
-            imageObserver.observe(carouselContainerForObserver);
-        }
-
-        // 加载轮播图片
-        function loadCarouselImages(container) {
-            const images = container.querySelectorAll('.lazy-load');
-            let loadedCount = 0;
-
-            images.forEach((img, index) => {
-                if (img.dataset.src) {
-                    const slide = img.closest('.carousel-slide');
-
-                    // 优先加载第一张图片
-                    const delay = index === 0 ? 0 : index * 200;
-
-                    setTimeout(() => {
-                        if (slide) slide.classList.add('loading');
-
-                        img.onload = function() {
-                            img.classList.add('loaded');
-                            if (slide) {
-                                slide.classList.remove('loading');
-                                slide.classList.add('has-image');
-                            }
-                            loadedCount++;
-
-                            // 第一张图片加载完成后显示轮播并启动自动播放
-                            if (index === 0) {
-                                container.classList.add('loaded');
-                                setTimeout(startAutoPlay, 300);
-                            }
-                        };
-
-                        img.onerror = function() {
-                            if (slide) slide.classList.remove('loading');
-                            console.warn('图片加载失败:', img.dataset.src);
-                        };
-
-                        img.src = img.dataset.src;
-                        img.removeAttribute('data-src');
-                    }, delay);
-                }
-            });
         }
         
         // 页面不可见时暂停轮播，提高性能
@@ -6096,9 +5952,9 @@
         // 初始显示第一张幻灯片
         setSlideClasses();
         showSlide(0);
-
-        // 不立即启动自动播放，等待图片加载完成
-        // startAutoPlay 将在第一张图片加载完成后调用
+        
+        // 开始自动播放
+        startAutoPlay();
     }
     
     // 设备类型检测

@@ -5,7 +5,7 @@
     <title>悬浮捷径-安卓系统的瑞士军刀</title>
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
     <meta name="format-detection" content="telephone=no">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -15,7 +15,7 @@
     <meta name="keywords" content="悬浮捷径,SoftCircle,安卓工具,快捷方式,悬浮球,负一屏">
     <meta name="author" content="深圳市途马贸易有限公司">
     
-    <!-- Open Graph / 社交媒体标签 -->
+    <!-- Open Graph / 社交媒体标签（OG 用 PNG，兼容性更好） -->
     <meta property="og:title" content="悬浮捷径SoftCircle">
     <meta property="og:description" content="安卓系统的瑞士军刀，全局负一屏、悬浮球、一键直达等功能">
     <meta property="og:image" content="./resources/app_icon.png">
@@ -25,24 +25,18 @@
     <!-- DNS预解析和预连接，提高资源加载速度 -->
     <link rel="dns-prefetch" href="//cdn.staticfile.org">
     <link rel="preconnect" href="//cdn.staticfile.org" crossorigin>
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="preconnect" href="//fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="//player.bilibili.com">
-    <link rel="preconnect" href="//player.bilibili.com" crossorigin>
     
-    <!-- 预加载关键资源 -->
-    <link rel="preload" href="./resources/app_icon.png" as="image" fetchpriority="high">
+    <!-- 仅预加载首屏关键资源，避免抢占带宽 -->
+    <link rel="preload" href="./resources/app_icon.webp" as="image" fetchpriority="high">
     <link rel="preload" href="./resources/txtlogo.png" as="image" fetchpriority="high">
     <link rel="preload" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" as="style">
-    <link rel="preload" href="./resources/img/shortcut/shortcut-onestep.png" as="image" fetchpriority="high">
+    <link rel="preload" href="./resources/img/shortcut/shortcut-onestep.webp" as="image">
     
-    <!-- 预加载横向滚动组件的关键图片 -->
-    <link rel="preload" href="./resources/img/shortcut/shortcut-widget.png" as="image">
-    <link rel="preload" href="./resources/img/shortcut/shortcut-wxjs.png" as="image">
-    <link rel="preload" href="./resources/img/shortcut/shortcut-func.png" as="image">
-    <link rel="preload" href="./resources/img/shortcut/shortcut-local.png" as="image">
-    <link rel="preload" href="./resources/img/shortcut/shortcut-web.png" as="image">
-    <link rel="preload" href="./resources/img/shortcut/shortcut-app.png" as="image">
-    
-    <link rel="shortcut icon" href="./resources/app_icon.png" type="image/x-icon">
+    <link rel="icon" href="./resources/app_icon.webp" type="image/webp">
+    <link rel="shortcut icon" href="./resources/app_icon.png" type="image/png">
 
     <link rel="stylesheet"
           href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css"
@@ -110,6 +104,9 @@
                 /* 柔和基础渐变 */
                 linear-gradient(125deg, #f0f9ff 0%, #f5f3ff 20%, #ecfdf5 40%, #fffbeb 60%, #fefce8 80%, #f0fdf4 100%);
             position: relative;
+            /* 字体渲染优化 */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
     
         /* 重置导航栏基础样式并添加毛玻璃效果和智能固定 */
@@ -127,15 +124,14 @@
             z-index: 10000;
             width: 100%;
             margin-bottom: 0;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            transform: translateY(0);
+            transition: background 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-radius 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), min-height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             min-height: 70px; /* 设置原始最小高度 */
         }
         
         /* 保持Bootstrap默认布局，只优化垂直居中 */
         .navbar-default .container {
             min-height: 70px !important;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: min-height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         
         .navbar-scrolled .container {
@@ -147,7 +143,7 @@
             line-height: 70px !important;
             height: 70px !important;
             padding: 0 15px !important;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: line-height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         
         /* 重写导航栏链接样式 - 保持Bootstrap兼容性 */
@@ -157,19 +153,19 @@
             padding-top: 0 !important;
             padding-bottom: 0 !important;
             font-size: 15px !important;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: line-height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), font-size 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         
         /* 导航栏logo原始尺寸 */
         .navbar-default #site-logo {
             width: 40px;
             height: 40px;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         
         .navbar-default #site-txt {
             height: 32px;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         
         /* 滚动时的紧凑状态 */
@@ -342,7 +338,7 @@
         }
         
         /* 移动设备优化 (481px - 767px) */
-        @media (min-width: 481px) and (max-width: 767px) {
+        @media (min-width: 481px) and (max-width: 767.98px) {
             body {
                 padding-top: 75px !important;
                 /* 移动端防滚动优化 */
@@ -422,7 +418,7 @@
                 padding: 12px 16px !important;
                 color: #2c3e50 !important;
                 font-weight: 500 !important;
-                transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+                transition: background 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important, border-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important, transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
                 border: 1px solid rgba(255, 255, 255, 0.4) !important;
                 text-align: center !important;
                 line-height: 1.4 !important;
@@ -502,7 +498,7 @@
                 border: 1px solid rgba(255, 255, 255, 0.3) !important;
                 border-radius: 8px !important;
                 padding: 8px 10px !important;
-                transition: all 0.3s ease !important;
+                transition: background 0.3s ease !important, border-color 0.3s ease !important;
             }
             
             .navbar-toggle:hover,
@@ -515,7 +511,7 @@
             .navbar-toggle .icon-bar {
                 background-color: rgba(255, 255, 255, 0.9) !important;
                 border-radius: 1px !important;
-                transition: all 0.3s ease !important;
+                transition: background-color 0.3s ease !important, transform 0.3s ease !important;
             }
             
             .navbar-default #site-logo {
@@ -749,7 +745,7 @@
                 border: 1px solid rgba(255, 255, 255, 0.3) !important;
                 background: rgba(255, 255, 255, 0.15) !important;
                 border-radius: 8px !important;
-                transition: all 0.3s ease !important;
+                transition: background 0.3s ease !important, border-color 0.3s ease !important;
             }
             
             .navbar-toggle:hover,
@@ -764,7 +760,7 @@
                 height: 2px !important;
                 background-color: rgba(255, 255, 255, 0.9) !important;
                 border-radius: 1px !important;
-                transition: all 0.3s ease !important;
+                transition: background-color 0.3s ease !important, transform 0.3s ease !important;
             }
             
             /* 导航栏折叠菜单优化 */
@@ -807,7 +803,7 @@
                 padding: 10px 14px !important;
                 color: #2c3e50 !important;
                 font-weight: 500 !important;
-                transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+                transition: background 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important, border-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important, transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
                 border: 1px solid rgba(255, 255, 255, 0.4) !important;
                 text-align: center !important;
                 line-height: 1.3 !important;
@@ -1166,7 +1162,7 @@
                 border: 1px solid rgba(255, 255, 255, 0.3) !important;
                 background: rgba(255, 255, 255, 0.15) !important;
                 border-radius: 6px !important;
-                transition: all 0.3s ease !important;
+                transition: background 0.3s ease !important, border-color 0.3s ease !important;
             }
             
             .navbar-toggle:hover,
@@ -1206,7 +1202,7 @@
                 padding: 8px 12px !important;
                 color: #2c3e50 !important;
                 font-weight: 500 !important;
-                transition: all 0.3s ease !important;
+                transition: background 0.3s ease !important, border-color 0.3s ease !important, transform 0.3s ease !important;
                 border: 1px solid rgba(255, 255, 255, 0.4) !important;
                 text-align: center !important;
                 line-height: 1.2 !important;
@@ -1430,17 +1426,25 @@
         
         /* 减少动画的用户偏好支持 */
         @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
+            .scroll-content,
+            .carousel-slide,
+            .carousel-text,
+            .auto-scroll-container .scroll-content,
+            .design-card,
+            .feature-content,
+            .trigger-content,
+            .scroll-item img {
+                animation-duration: 0.001ms !important;
                 animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
+                transition-duration: 0.001ms !important;
             }
             
             .scroll-content {
                 animation: none !important;
+            }
+
+            html {
+                scroll-behavior: auto !important;
             }
         }
         
@@ -1517,7 +1521,7 @@
         }
         
         /* 移动端特殊优化 */
-        @media (max-width: 767px) {
+        @media (max-width: 767.98px) {
             .touch-device .feature-tab {
                 min-height: 40px;
                 min-width: 80px;
@@ -1631,10 +1635,28 @@
             width: 100%;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            background-image: url('./resources/intr1.png');
+            background-image: url('./resources/intr1.webp');
             background-size: cover;
             background-position: center;
             position: relative;
+        }
+        
+        /* 功能截图样式 - 防止CLS，预留宽高比（排除轮播图内的图片） */
+        .screen > picture,
+        .screen > img {
+            display: block;
+            width: 100%;
+            max-width: 350px;
+            margin: 0 auto;
+            aspect-ratio: 1200 / 2022; /* intr系列图片实际比例 */
+            height: auto;
+        }
+        /* Safari 14- fallback: 用 padding-top 撑高度 */
+        @supports not (aspect-ratio: 1) {
+            .screen > picture,
+            .screen > img {
+                min-height: 500px;
+            }
         }
         
         /* 轮播图样式增强 */
@@ -1696,7 +1718,8 @@
             display: block;
             margin: 0 auto; /* 居中显示 */
             box-shadow: none; /* 移除图片阴影 */
-            transition: all 0.8s ease;
+            aspect-ratio: 9 / 19.5; /* 防止CLS */
+            transition: opacity 0.8s ease, transform 0.8s ease;
             background: transparent; /* 确保背景透明 */
         }
         
@@ -1704,7 +1727,7 @@
         .carousel-text {
             display: none;
             opacity: 0;
-            transition: all 0.8s ease;
+            transition: opacity 0.8s ease, transform 0.8s ease;
             transform: translateY(10px);
         }
         
@@ -1732,7 +1755,7 @@
             border-radius: 50%;
             background-color: rgba(255,255,255,0.5);
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
         
         .carousel-dot.active {
@@ -1755,7 +1778,7 @@
             cursor: pointer;
             z-index: 10;
             opacity: 0;
-            transition: all 0.3s ease;
+            transition: opacity 0.3s ease, background-color 0.3s ease;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         
@@ -1798,7 +1821,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('./resources/intr1.png');
+            background-image: url('./resources/intr1.webp');
             background-size: cover;
             background-position: center;
             border-radius: 8px;
@@ -1879,26 +1902,25 @@
         .scroll-item img {
             width: 260px;
             height: auto;
+            aspect-ratio: 9 / 16; /* 防止CLS，预留高度 */
             border-radius: 20px;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
             padding: 15px;
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
             min-height: 120px; /* 设置最小高度避免布局跳动 */
         }
         
-        /* 图片加载中的骨架屏效果 */
-        .scroll-item img:not([src*="shortcut"]) {
-            background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 25%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.1) 75%);
+        /* 图片加载中的骨架屏占位；加载完成后由 .is-loaded 停止动画 */
+        .scroll-item img:not(.is-loaded) {
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.08) 25%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.08) 75%);
             background-size: 200% 100%;
             animation: loading 1.5s infinite;
         }
-        
-        .scroll-item img[src*="shortcut"] {
+        .scroll-item img.is-loaded {
             animation: none;
+            background: rgba(255, 255, 255, 0.1);
         }
         
         @keyframes loading {
@@ -1912,7 +1934,6 @@
             border: 1px solid rgba(255, 255, 255, 0.3);
             transform: scale(1.02);
         }
-        
         .scroll-caption {
             margin-top: 10px;
             font-weight: bold;
@@ -1970,6 +1991,11 @@
             vertical-align: middle;
         }
 
+        /* 标题居中 */
+        h1#title {
+            text-align: center;
+        }
+
         #site-logo {
             width: 40px;
             height: 40px;
@@ -2018,7 +2044,7 @@
             width: calc(33.333% - 20px);
             min-width: 200px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), background 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             text-decoration: none;
             color: #333;
             border: 1px solid rgba(255, 255, 255, 0.3);
@@ -2058,7 +2084,7 @@
             border: 1px solid rgba(255, 255, 255, 0.5);
             text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
             transform: scale(1);
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         
         .years-badge:hover {
@@ -2125,7 +2151,7 @@
             border-radius: 16px;
             border: 1px solid rgba(255, 255, 255, 0.6);
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             z-index: 1;
             pointer-events: none;
         }
@@ -2134,7 +2160,7 @@
             padding: 16px 24px;
             cursor: pointer;
             text-align: center;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), background 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
             flex: 1;
             font-size: 15px;
@@ -2309,7 +2335,7 @@
         }
         
         /* 移动设备优化 (481px - 767px) */
-        @media (min-width: 481px) and (max-width: 767px) {
+        @media (min-width: 481px) and (max-width: 767.98px) {
             .feature-carousel {
                 margin: 40px 0 50px;
                 padding: 30px 20px;
@@ -2536,7 +2562,7 @@
             min-width: 44px;
         }
         
-        @media (max-width: 767px) {
+        @media (max-width: 767.98px) {
             .touch-device .feature-tab {
                 min-height: 40px;
                 min-width: 80px;
@@ -2624,7 +2650,7 @@
             border-radius: 10px; /* 减小圆角 */
             border: 1px solid rgba(255, 255, 255, 0.12);
             overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: background 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             cursor: pointer;
         }
 
@@ -2667,7 +2693,7 @@
             justify-content: center;
             font-size: 9px; /* 减小字体 */
             color: #007aff;
-            transition: all 0.3s ease;
+            transition: background 0.3s ease, transform 0.3s ease;
             font-weight: 600;
         }
 
@@ -2886,7 +2912,7 @@
         }
 
         /* 移动端优化 (最大767px) - 垂直布局 */
-        @media (max-width: 767px) {
+        @media (max-width: 767.98px) {
             .automation-triggers .description {
                 text-align: center;
                 margin-bottom: 30px;
@@ -3083,7 +3109,7 @@
         }
 
         /* 移动端优化 (最大767px) */
-        @media (max-width: 767px) {
+        @media (max-width: 767.98px) {
             .feature-overview .description {
                 text-align: center;
                 margin-bottom: 30px;
@@ -3241,7 +3267,7 @@
         }
 
         /* 移动端优化 (最大767px) */
-        @media (max-width: 767px) {
+        @media (max-width: 767.98px) {
             .feature-overview-title {
                 font-size: 24px !important;
                 margin-top: 0 !important;
@@ -3354,7 +3380,7 @@
         }
 
         /* 移动端优化 (最大767px) */
-        @media (max-width: 767px) {
+        @media (max-width: 767.98px) {
             .automation-trigger-title {
                 font-size: 12px !important;
                 margin-top: 0 !important;
@@ -3501,7 +3527,7 @@
             border-radius: 14px;
             z-index: 1;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
             white-space: nowrap;
             background: transparent;
         }
@@ -3518,7 +3544,7 @@
             white-space: nowrap;
         }
 
-        @media (max-width: 767px) {
+        @media (max-width: 767.98px) {
             .automation-feature-carousel .feature-tabs {
                 width: 340px;
                 padding: 4px;
@@ -3537,27 +3563,10 @@
             content: none;
         }
 
-        .automation-feature-carousel .feature-tab {
-            position: relative;
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 12px 16px;
-            font-size: 14px;
-            border-radius: 14px;
-            z-index: 1;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-            background: transparent;
-        }
-
         .automation-feature-carousel .feature-tab.active {
             background: #fff;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         /* 自动化触发模块优化 */
@@ -3593,7 +3602,7 @@
             border-radius: 12px;
             border: 1px solid rgba(52, 152, 219, 0.1);
             overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
         }
 
@@ -3633,7 +3642,7 @@
             padding: 0 20px;
             max-height: 0;
             overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             background: rgba(255, 255, 255, 0.6);
         }
 
@@ -3663,7 +3672,7 @@
         .trigger-content {
             opacity: 0;
             visibility: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: absolute;
             top: 20px;
             left: 20px;
@@ -3694,7 +3703,7 @@
         }
 
         /* 响应式优化 */
-        @media (max-width: 767px) {
+        @media (max-width: 767.98px) {
             .automation-triggers {
                 padding: 15px 0;
             }
@@ -3752,7 +3761,7 @@
             max-height: 100px !important;
         }
 
-        @media (max-width: 767px) {
+        @media (max-width: 767.98px) {
             .trigger-tab.active .trigger-tab-content {
                 padding: 6px 15px !important;
                 max-height: 80px !important;
@@ -3837,7 +3846,7 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 20px;
             padding: 49px; /* 增大35%：36px * 1.35 = 49px */
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
             overflow: hidden;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
@@ -3901,7 +3910,7 @@
             border-radius: 50%;
             background: rgba(0, 0, 0, 0.2);
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
         }
 
@@ -4247,6 +4256,28 @@
                 flex: 0 0 20px;
             }
         }
+
+        /* 触摸动作优化 */
+        .carousel-container,
+        .feature-tabs,
+        .trigger-tabs,
+        .design-gallery { touch-action: pan-y pinch-zoom; }
+
+        /* === 浏览器兼容性 fallback === */
+        /* Safari 14- 不支持 aspect-ratio，用 min-height 防止布局塌陷 */
+        @supports not (aspect-ratio: 1) {
+            .carousel-slide img { min-height: 600px; }
+            .scroll-item img { min-height: 200px; }
+            .video-container { min-height: 400px; }
+        }
+        /* Firefox < 103 默认不启用 backdrop-filter，已有 rgba 背景降级 */
+        @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+            .navbar-default { background: rgba(255, 255, 255, 0.85); }
+            .navbar-collapse.in,
+            .navbar-collapse.collapsing { background: rgba(255, 255, 255, 0.98); }
+            .media-recommendations { background: rgba(255, 255, 255, 0.9); }
+            .design-card { background: rgba(255, 255, 255, 0.95); }
+        }
     </style>
 </head>
 <body>
@@ -4261,10 +4292,10 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="https://softcircle.cn">
-                <img src="./resources/app_icon.png" class="app-icon" alt="悬浮捷径SoftCircle应用图标" id="site-logo" width="40" height="40">
+                <img src="./resources/app_icon.webp" class="app-icon" alt="悬浮捷径SoftCircle应用图标" id="site-logo" width="40" height="40">
             </a>
             <a class="navbar-brand" href="https://softcircle.cn">
-                <img src="./resources/txtlogo.png" class="app-icon" alt="悬浮捷径SoftCircle文字标志" id="site-txt">
+                <img src="./resources/txtlogo.png" class="app-icon" alt="悬浮捷径SoftCircle文字标志" id="site-txt" width="120" height="32">
             </a>
 
         </div>
@@ -4369,7 +4400,7 @@
                                     </ul>
                                 </div>
                                 <div class="col-xs-12 col-sm-6 feature-video">
-                                    <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=114515437950044&bvid=BV1XREpzUEQa&cid=29983441841&p=1&autoplay=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" class="feature-media"></iframe>
+                                    <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=114515437950044&bvid=BV1XREpzUEQa&cid=29983441841&p=1&autoplay=1&muted=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen loading="lazy" class="feature-media"></iframe>
                                 </div>
                             </div>
                         </div>
@@ -4390,7 +4421,7 @@
                                     <p>无论您在使用哪个应用，随时可以快速调用常用功能。</p>
                                 </div>
                                 <div class="col-xs-12 col-sm-6 feature-video">
-                                    <iframe src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1&autoplay=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" class="feature-media"></iframe>
+                                    <iframe src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1&autoplay=1&muted=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen loading="lazy" class="feature-media"></iframe>
                                 </div>
                             </div>
                         </div>
@@ -4411,7 +4442,7 @@
                                     <p>为您提供多样化的访问方式，提高您的工作效率。</p>
                                 </div>
                                 <div class="col-xs-12 col-sm-6 feature-video">
-                                    <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=114538825388544&bvid=BV1YYJtzAE27&cid=30053041927&p=1&autoplay=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" class="feature-media"></iframe>
+                                    <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=114538825388544&bvid=BV1YYJtzAE27&cid=30053041927&p=1&autoplay=1&muted=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen loading="lazy" class="feature-media"></iframe>
                                 </div>
                             </div>
                         </div>
@@ -4429,13 +4460,13 @@
              <picture class="bigger">
                   <source type="image/webp"
                           srcset="./resources/site_large.png!originwebp">
-                  <img src="./resources/site_large.png" crossorigin="anonymous" alt="悬浮捷径SoftCircle记账">
+                  <img src="./resources/site_large.png" alt="悬浮捷径SoftCircle记账">
               </picture>
 
               <picture class="smaller">
                   <source type="image/webp"
                           srcset="./resources/site_large-small.png!originwebp">
-                  <img src="./resources/site_large-small.png" crossorigin="anonymous" alt="悬浮捷径SoftCircle记账">
+                  <img src="./resources/site_large-small.png" alt="悬浮捷径SoftCircle记账">
               </picture>
          </div>-->
     </div>
@@ -4459,7 +4490,7 @@
                         </div>
                         <div class="card-media">
                             <div class="video-container">
-                                <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=114674989276488&bvid=BV1fLMgzhEn6&cid=30472146059&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" class="feature-media"></iframe>
+                                <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=114674989276488&bvid=BV1fLMgzhEn6&cid=30472146059&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen loading="lazy" class="feature-media"></iframe>
                             </div>
                         </div>
                     </div>
@@ -4472,7 +4503,7 @@
                         </div>
                         <div class="card-media">
                             <div class="video-container">
-                                <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=114673412283080&bvid=BV1pcMKzxEWV&cid=30466182094&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" class="feature-media"></iframe>
+                                <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=114673412283080&bvid=BV1pcMKzxEWV&cid=30466182094&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen loading="lazy" class="feature-media"></iframe>
                             </div>
                         </div>
                     </div>
@@ -4485,7 +4516,7 @@
                         </div>
                         <div class="card-media">
                             <div class="video-container">
-                                <iframe src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1&autoplay=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" class="feature-media"></iframe>
+                                <iframe src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1&autoplay=1&muted=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen loading="lazy" class="feature-media"></iframe>
                             </div>
                         </div>
                     </div>
@@ -4498,7 +4529,7 @@
                         </div>
                         <div class="card-media">
                             <div class="video-container">
-                                <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=114674871835827&bvid=BV1NwMgz3ECs&cid=30471751632&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" class="feature-media"></iframe>
+                                <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=114674871835827&bvid=BV1NwMgz3ECs&cid=30471751632&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen loading="lazy" class="feature-media"></iframe>
                             </div>
                         </div>
                     </div>
@@ -4511,7 +4542,7 @@
                         </div>
                         <div class="card-media">
                             <div class="video-container">
-                                <iframe src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1&autoplay=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" class="feature-media"></iframe>
+                                <iframe src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1&autoplay=1&muted=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen loading="lazy" class="feature-media"></iframe>
                             </div>
                         </div>
                     </div>
@@ -4537,7 +4568,7 @@
                 <p>超多捷径、快捷功能 <br> 设计巧妙、操作有趣 <br> 简约强大、不占内存</p>
             </div>
             <div class="col-xs-12 col-sm-offset-1 col-sm-6 screen">
-                <iframe src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1&autoplay=1&high_quality=1&danmaku=0" class="video" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="width:100%;" loading="lazy"> </iframe>
+                <iframe src="//player.bilibili.com/player.html?aid=369206235&bvid=BV1GZ4y1n7Yj&cid=1418866634&p=1&autoplay=1&muted=1&high_quality=1&danmaku=0" class="video" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen style="width:100%;" loading="lazy"> </iframe>
             </div>
         </div> -->
         <div class="row">
@@ -4603,25 +4634,25 @@
                     <div class="carousel-arrow carousel-arrow-next" aria-label="下一张"></div>
                     <div class="carousel-slides">
                         <div class="carousel-slide active" aria-roledescription="幻灯片" aria-label="一步直达功能">
-                            <img src="./resources/img/shortcut/shortcut-onestep.png" alt="悬浮捷径SoftCircle一步直达功能展示" loading="eager" crossorigin="anonymous">
+                            <img src="./resources/img/shortcut/shortcut-onestep.webp" alt="悬浮捷径SoftCircle一步直达功能展示" loading="eager" >
                         </div>
                         <div class="carousel-slide" aria-roledescription="幻灯片" aria-label="小部件功能">
-                            <img src="./resources/img/shortcut/shortcut-widget.png" alt="悬浮捷径SoftCircle小部件功能展示" loading="lazy" crossorigin="anonymous">
+                            <img src="./resources/img/shortcut/shortcut-widget.webp" alt="悬浮捷径SoftCircle小部件功能展示" loading="lazy" >
                         </div>
                         <div class="carousel-slide" aria-roledescription="幻灯片" aria-label="小程序功能">
-                            <img src="./resources/img/shortcut/shortcut-wxjs.png" alt="悬浮捷径SoftCircle微信小程序直达功能展示" loading="lazy" crossorigin="anonymous">
+                            <img src="./resources/img/shortcut/shortcut-wxjs.webp" alt="悬浮捷径SoftCircle微信小程序直达功能展示" loading="lazy" >
                         </div>
                         <div class="carousel-slide" aria-roledescription="幻灯片" aria-label="内置功能">
-                            <img src="./resources/img/shortcut/shortcut-func.png" alt="悬浮捷径SoftCircle内置功能展示" loading="lazy" crossorigin="anonymous">
+                            <img src="./resources/img/shortcut/shortcut-func.webp" alt="悬浮捷径SoftCircle内置功能展示" loading="lazy" >
                         </div>
                         <div class="carousel-slide" aria-roledescription="幻灯片" aria-label="本地资源功能">
-                            <img src="./resources/img/shortcut/shortcut-local.png" alt="悬浮捷径SoftCircle本地资源访问功能展示" loading="lazy" crossorigin="anonymous">
+                            <img src="./resources/img/shortcut/shortcut-local.webp" alt="悬浮捷径SoftCircle本地资源访问功能展示" loading="lazy" >
                         </div>
                         <div class="carousel-slide" aria-roledescription="幻灯片" aria-label="网站直达功能">
-                            <img src="./resources/img/shortcut/shortcut-web.png" alt="悬浮捷径SoftCircle网站直达功能展示" loading="lazy" crossorigin="anonymous">
+                            <img src="./resources/img/shortcut/shortcut-web.webp" alt="悬浮捷径SoftCircle网站直达功能展示" loading="lazy" >
                         </div>
                         <div class="carousel-slide" aria-roledescription="幻灯片" aria-label="应用直达功能">
-                            <img src="./resources/img/shortcut/shortcut-app.png" alt="悬浮捷径SoftCircle应用直达功能展示" loading="lazy" crossorigin="anonymous">
+                            <img src="./resources/img/shortcut/shortcut-app.webp" alt="悬浮捷径SoftCircle应用直达功能展示" loading="lazy" >
                         </div>
                     </div>
                     <div class="carousel-dots">
@@ -4643,89 +4674,89 @@
             <div class="scroll-content" id="scroll-content">
                 <!-- 第一组 -->
                 <div class="scroll-item">
-                    <img src="./resources/img/shortcut/shortcut-onestep.png" alt="悬浮捷径SoftCircle一步直达功能" loading="eager" crossorigin="anonymous">
+                    <img src="./resources/img/shortcut/shortcut-onestep.webp" alt="悬浮捷径SoftCircle一步直达功能" loading="eager" >
                     <div class="scroll-caption">一步直达</div>
                 </div>
                 <div class="scroll-item">
-                    <img src="./resources/img/shortcut/shortcut-widget.png" alt="悬浮捷径SoftCircle小部件功能" loading="eager" crossorigin="anonymous">
+                    <img src="./resources/img/shortcut/shortcut-widget.webp" alt="悬浮捷径SoftCircle小部件功能" loading="eager" >
                     <div class="scroll-caption">小部件</div>
                 </div>
                 <div class="scroll-item">
-                    <img src="./resources/img/shortcut/shortcut-wxjs.png" alt="悬浮捷径SoftCircle小程序功能" loading="eager" crossorigin="anonymous">
+                    <img src="./resources/img/shortcut/shortcut-wxjs.webp" alt="悬浮捷径SoftCircle小程序功能" loading="eager" >
                     <div class="scroll-caption">小程序</div>
                 </div>
                 <div class="scroll-item">
-                    <img src="./resources/img/shortcut/shortcut-func.png" alt="悬浮捷径SoftCircle内置功能" loading="eager" crossorigin="anonymous">
+                    <img src="./resources/img/shortcut/shortcut-func.webp" alt="悬浮捷径SoftCircle内置功能" loading="eager" >
                     <div class="scroll-caption">内置功能</div>
                 </div>
                 <div class="scroll-item">
-                    <img src="./resources/img/shortcut/shortcut-local.png" alt="悬浮捷径SoftCircle联系人、图片、文件功能" loading="eager" crossorigin="anonymous">
+                    <img src="./resources/img/shortcut/shortcut-local.webp" alt="悬浮捷径SoftCircle联系人、图片、文件功能" loading="eager" >
                     <div class="scroll-caption">联系人、图片、文件</div>
                 </div>
                 <div class="scroll-item">
-                    <img src="./resources/img/shortcut/shortcut-web.png" alt="悬浮捷径SoftCircle网站功能" loading="eager" crossorigin="anonymous">
+                    <img src="./resources/img/shortcut/shortcut-web.webp" alt="悬浮捷径SoftCircle网站功能" loading="eager" >
                     <div class="scroll-caption">网站</div>
                 </div>
                 <div class="scroll-item">
-                    <img src="./resources/img/shortcut/shortcut-app.png" alt="悬浮捷径SoftCircle应用App功能" loading="eager" crossorigin="anonymous">
+                    <img src="./resources/img/shortcut/shortcut-app.webp" alt="悬浮捷径SoftCircle应用App功能" loading="eager" >
                     <div class="scroll-caption">应用App</div>
                 </div>
                 <!-- 第二组（确保无缝滚动） -->
                 <div class="scroll-item">
-                    <img src="./resources/img/shortcut/shortcut-onestep.png" alt="悬浮捷径SoftCircle一步直达功能" loading="lazy" crossorigin="anonymous">
+                    <img src="./resources/img/shortcut/shortcut-onestep.webp" alt="悬浮捷径SoftCircle一步直达功能" loading="lazy" >
                     <div class="scroll-caption">一步直达</div>
                 </div>
                 <div class="scroll-item">
-                    <img src="./resources/img/shortcut/shortcut-widget.png" alt="悬浮捷径SoftCircle小部件功能" loading="lazy" crossorigin="anonymous">
+                    <img src="./resources/img/shortcut/shortcut-widget.webp" alt="悬浮捷径SoftCircle小部件功能" loading="lazy" >
                     <div class="scroll-caption">小部件</div>
                 </div>
                 <div class="scroll-item">
-                    <img src="./resources/img/shortcut/shortcut-wxjs.png" alt="悬浮捷径SoftCircle小程序功能" loading="lazy" crossorigin="anonymous">
+                    <img src="./resources/img/shortcut/shortcut-wxjs.webp" alt="悬浮捷径SoftCircle小程序功能" loading="lazy" >
                     <div class="scroll-caption">小程序</div>
                 </div>
                 <div class="scroll-item">
-                    <img src="./resources/img/shortcut/shortcut-func.png" alt="悬浮捷径SoftCircle内置功能" loading="lazy" crossorigin="anonymous">
+                    <img src="./resources/img/shortcut/shortcut-func.webp" alt="悬浮捷径SoftCircle内置功能" loading="lazy" >
                     <div class="scroll-caption">内置功能</div>
                 </div>
                 <div class="scroll-item">
-                    <img src="./resources/img/shortcut/shortcut-local.png" alt="悬浮捷径SoftCircle联系人、图片、文件功能" loading="lazy" crossorigin="anonymous">
+                    <img src="./resources/img/shortcut/shortcut-local.webp" alt="悬浮捷径SoftCircle联系人、图片、文件功能" loading="lazy" >
                     <div class="scroll-caption">联系人、图片、文件</div>
                 </div>
                 <div class="scroll-item">
-                    <img src="./resources/img/shortcut/shortcut-web.png" alt="悬浮捷径SoftCircle网站功能" loading="lazy" crossorigin="anonymous">
+                    <img src="./resources/img/shortcut/shortcut-web.webp" alt="悬浮捷径SoftCircle网站功能" loading="lazy" >
                     <div class="scroll-caption">网站</div>
                 </div>
                 <div class="scroll-item">
-                    <img src="./resources/img/shortcut/shortcut-app.png" alt="悬浮捷径SoftCircle应用App功能" loading="lazy" crossorigin="anonymous">
+                    <img src="./resources/img/shortcut/shortcut-app.webp" alt="悬浮捷径SoftCircle应用App功能" loading="lazy" >
                     <div class="scroll-caption">应用App</div>
                 </div>
                 <!-- 第三组（额外保险） -->
                 <div class="scroll-item">
-                    <img src="./resources/img/shortcut/shortcut-onestep.png" alt="悬浮捷径SoftCircle一步直达功能" loading="lazy" crossorigin="anonymous">
+                    <img src="./resources/img/shortcut/shortcut-onestep.webp" alt="悬浮捷径SoftCircle一步直达功能" loading="lazy" >
                     <div class="scroll-caption">一步直达</div>
                 </div>
                 <div class="scroll-item">
-                    <img src="./resources/img/shortcut/shortcut-widget.png" alt="悬浮捷径SoftCircle小部件功能" loading="lazy" crossorigin="anonymous">
+                    <img src="./resources/img/shortcut/shortcut-widget.webp" alt="悬浮捷径SoftCircle小部件功能" loading="lazy" >
                     <div class="scroll-caption">小部件</div>
                 </div>
                 <div class="scroll-item">
-                    <img src="./resources/img/shortcut/shortcut-wxjs.png" alt="悬浮捷径SoftCircle小程序功能" loading="lazy" crossorigin="anonymous">
+                    <img src="./resources/img/shortcut/shortcut-wxjs.webp" alt="悬浮捷径SoftCircle小程序功能" loading="lazy" >
                     <div class="scroll-caption">小程序</div>
                 </div>
                 <div class="scroll-item">
-                    <img src="./resources/img/shortcut/shortcut-func.png" alt="悬浮捷径SoftCircle内置功能" loading="lazy" crossorigin="anonymous">
+                    <img src="./resources/img/shortcut/shortcut-func.webp" alt="悬浮捷径SoftCircle内置功能" loading="lazy" >
                     <div class="scroll-caption">内置功能</div>
                 </div>
                 <div class="scroll-item">
-                    <img src="./resources/img/shortcut/shortcut-local.png" alt="悬浮捷径SoftCircle联系人、图片、文件功能" loading="lazy" crossorigin="anonymous">
+                    <img src="./resources/img/shortcut/shortcut-local.webp" alt="悬浮捷径SoftCircle联系人、图片、文件功能" loading="lazy" >
                     <div class="scroll-caption">联系人、图片、文件</div>
                 </div>
                 <div class="scroll-item">
-                    <img src="./resources/img/shortcut/shortcut-web.png" alt="悬浮捷径SoftCircle网站功能" loading="lazy" crossorigin="anonymous">
+                    <img src="./resources/img/shortcut/shortcut-web.webp" alt="悬浮捷径SoftCircle网站功能" loading="lazy" >
                     <div class="scroll-caption">网站</div>
                 </div>
                 <div class="scroll-item">
-                    <img src="./resources/img/shortcut/shortcut-app.png" alt="悬浮捷径SoftCircle应用App功能" loading="lazy" crossorigin="anonymous">
+                    <img src="./resources/img/shortcut/shortcut-app.webp" alt="悬浮捷径SoftCircle应用App功能" loading="lazy" >
                     <div class="scroll-caption">应用App</div>
                 </div>
             </div>
@@ -4831,7 +4862,7 @@
             <div class="trigger-display">
                 <!-- 默认显示的AI gif -->
                 <div class="trigger-content active" data-trigger="default">
-                    <img src="./resources/img/ai/blink.gif" alt="悬浮捷径SoftCircle AI智能助手动画展示" loading="eager" crossorigin="anonymous">
+                    <img src="./resources/img/ai/blink.webp" alt="悬浮捷径SoftCircle AI智能助手动画展示" loading="eager" >
                 </div>
                 <div class="trigger-content" data-trigger="smart">
                     <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=114047571792800&bvid=BV1VaPuemEJx&cid=28524022067&p=1" 
@@ -4839,24 +4870,24 @@
                             border="0" 
                             frameborder="no" 
                             framespacing="0" 
-                            allowfullscreen="true" 
+                            allowfullscreen 
                             style="width: 100%; max-width: 770px; height: 440px; border-radius: 8px; aspect-ratio: 16/9;">
                     </iframe>
                 </div>
                 <div class="trigger-content" data-trigger="time">
-                    <img src="./resources/img/ai/aito/aito1.png" alt="悬浮捷径SoftCircle时间触发功能展示" loading="lazy" crossorigin="anonymous">
+                    <img src="./resources/img/ai/aito/aito1.webp" alt="悬浮捷径SoftCircle时间触发功能展示" loading="lazy" >
                 </div>
                 <div class="trigger-content" data-trigger="location">
-                    <img src="./resources/img/ai/aito/aito1.png" alt="悬浮捷径SoftCircle位置触发功能展示" loading="lazy" crossorigin="anonymous">
+                    <img src="./resources/img/ai/aito/aito1.webp" alt="悬浮捷径SoftCircle位置触发功能展示" loading="lazy" >
                 </div>
                 <div class="trigger-content" data-trigger="app">
-                    <img src="./resources/img/ai/aito/aito2.png" alt="悬浮捷径SoftCircle应用触发功能展示" loading="lazy" crossorigin="anonymous">
+                    <img src="./resources/img/ai/aito/aito2.webp" alt="悬浮捷径SoftCircle应用触发功能展示" loading="lazy" >
                 </div>
                 <div class="trigger-content" data-trigger="gesture">
-                    <img src="./resources/img/ai/aito/aito3.png" alt="悬浮捷径SoftCircle手势触发功能展示" loading="lazy" crossorigin="anonymous">
+                    <img src="./resources/img/ai/aito/aito3.webp" alt="悬浮捷径SoftCircle手势触发功能展示" loading="lazy" >
                 </div>
                 <div class="trigger-content" data-trigger="event">
-                    <img src="./resources/img/ai/aito/aito4.png" alt="悬浮捷径SoftCircle事件触发功能展示" loading="lazy" crossorigin="anonymous">
+                    <img src="./resources/img/ai/aito/aito4.webp" alt="悬浮捷径SoftCircle事件触发功能展示" loading="lazy" >
                 </div>
                 
             </div>
@@ -4905,16 +4936,16 @@
                                 <div class="trigger-display">
                                     <!-- 默认显示的AI问答界面 -->
                                     <div class="trigger-content active" data-trigger="default">
-                                        <img src="./resources/img/ai/talkai.png" alt="悬浮捷径SoftCircle AI问答面板展示" loading="eager" crossorigin="anonymous">
+                                        <img src="./resources/img/ai/talkai.webp" alt="悬浮捷径SoftCircle AI问答面板展示" loading="eager" >
                                     </div>
                                     <div class="trigger-content" data-trigger="floating">
-                                        <img src="./resources/img/ai/talkai2.png" alt="悬浮捷径SoftCircle 悬浮AI对话窗口展示" loading="lazy" crossorigin="anonymous">
+                                        <img src="./resources/img/ai/talkai2.webp" alt="悬浮捷径SoftCircle 悬浮AI对话窗口展示" loading="lazy" >
                                     </div>
                                     <div class="trigger-content" data-trigger="diverse">
-                                        <img src="./resources/img/ai/talkai.png" alt="悬浮捷径SoftCircle 多样化AI大模型对话展示" loading="lazy" crossorigin="anonymous">
+                                        <img src="./resources/img/ai/talkai.webp" alt="悬浮捷径SoftCircle 多样化AI大模型对话展示" loading="lazy" >
                                     </div>
                                     <div class="trigger-content" data-trigger="unlimited">
-                                        <img src="./resources/img/ai/talkai.png" alt="悬浮捷径SoftCircle 不限AI对话次数展示" loading="lazy" crossorigin="anonymous">
+                                        <img src="./resources/img/ai/talkai.webp" alt="悬浮捷径SoftCircle 不限AI对话次数展示" loading="lazy" >
                                     </div>
                                 </div>
                             </div>
@@ -4943,7 +4974,7 @@
                                 <p>支持模糊搜索和T9首字母搜索，搜索结果智能化排序和分类</p>
                             </div>
                             <div class="col-xs-12 col-sm-6 feature-video">
-                                <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=114511059097452&bvid=BV1P3EyzbEvA&cid=29971776087&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" class="feature-media"></iframe>
+                                <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=114511059097452&bvid=BV1P3EyzbEvA&cid=29971776087&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen loading="lazy" class="feature-media"></iframe>
                             </div>
                         </div>
                     </div>
@@ -4967,7 +4998,7 @@
         </div>
         <div class="col-xs-12 col-sm-6 col-sm-pull-5 screen">
             <picture>
-                <img src="./resources/intr4.png" alt="悬浮捷径SoftCircle桌面插件功能展示：音乐、天气、便签等可点击插件" loading="lazy" crossorigin="anonymous">
+                <img src="./resources/intr4.webp" alt="悬浮捷径SoftCircle桌面插件功能展示：音乐、天气、便签等可点击插件" loading="lazy" >
             </picture>
         </div>
     </div>
@@ -5160,56 +5191,17 @@
         // 立即显示容器，不等待图片加载
         scrollContent.style.visibility = 'visible';
         scrollContent.style.opacity = '1';
-        
-        // 使用Intersection Observer优化图片加载
-        if ('IntersectionObserver' in window) {
-            const imageObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        if (img.dataset.src) {
-                            img.src = img.dataset.src;
-                            img.removeAttribute('data-src');
-                        }
-                        observer.unobserve(img);
-                    }
-                });
-            }, {
-                rootMargin: '500px 0px' // 增加预加载范围到500px
-            });
-            
-            // 对所有懒加载图片应用观察器，但不清空第一组的src
-            const lazyImages = scrollContent.querySelectorAll('img[loading="lazy"]');
-            lazyImages.forEach(img => {
-                // 保存原始src到data-src
-                if (!img.dataset.src && img.src) {
-                    img.dataset.src = img.src;
-                    // 不清空任何图片的src，让浏览器自然加载
-                }
-                imageObserver.observe(img);
-            });
-        }
-        
-        // 移除等待图片加载的逻辑，直接启用硬件加速
-        requestAnimationFrame(() => {
-            scrollContent.style.transform = 'translateZ(0)'; // 硬件加速
-        });
-        
-        // 动画迭代优化
-        scrollContent.addEventListener('animationiteration', () => {
-            // 使用requestIdleCallback在浏览器空闲时间处理图片加载
-            if ('requestIdleCallback' in window) {
-                requestIdleCallback(() => {
-                    const pendingImages = scrollContent.querySelectorAll('img[data-src]');
-                    if (pendingImages.length > 0) {
-                        pendingImages.forEach(img => {
-                            img.src = img.dataset.src;
-                            img.removeAttribute('data-src');
-                        });
-                    }
-                });
+
+        // 图片加载完成后停止骨架屏动画（原生 lazy 已足够，不再重复 IO/data-src）
+        const markLoaded = (img) => {
+            if (img.complete && img.naturalWidth > 0) {
+                img.classList.add('is-loaded');
+            } else {
+                img.addEventListener('load', () => img.classList.add('is-loaded'), { once: true });
+                img.addEventListener('error', () => img.classList.add('is-loaded'), { once: true });
             }
-        });
+        };
+        scrollContent.querySelectorAll('img').forEach(markLoaded);
         
         // 滚动容器事件委托优化
         const scrollContainer = document.querySelector('.auto-scroll-container');
@@ -5230,29 +5222,34 @@
         document.addEventListener('visibilitychange', handleVisibilityChange);
     }
     
-    // 优化iframe加载
+    // 优化iframe加载（缓存宽高比，避免每次 resize 重新拉图）
+    let cachedVideoAspectRatio = null;
     function setIframeHeight() {
         const iframe = document.querySelector('.video');
         if (!iframe) return;
         
-        // 获取iframe实际宽度
         const width = iframe.offsetWidth;
-        
-        // 使用参考图片的宽高比，而不是固定的16:9
-        const img = new Image();
-        img.src = './resources/intr2.png';
-        
-        // 设置临时高度以避免布局偏移
-        iframe.style.height = (width * 0.75) + 'px'; // 临时设置一个合理比例
-        
-        img.onload = function() {
-            // 根据图片的原始宽高比计算iframe高度
-            const imgRatio = img.width / img.height;
-            const height = width / imgRatio;
-            
-            // 设置iframe高度
-            iframe.style.height = height + 'px';
+        if (!width) return;
+
+        const applyHeight = (ratio) => {
+            iframe.style.height = (width / ratio) + 'px';
         };
+
+        // 临时高度，避免布局跳动
+        if (!cachedVideoAspectRatio) {
+            iframe.style.height = (width * 0.75) + 'px';
+            const img = new Image();
+            img.src = './resources/intr2.webp';
+            img.onload = function() {
+                if (img.width && img.height) {
+                    cachedVideoAspectRatio = img.width / img.height;
+                    applyHeight(cachedVideoAspectRatio);
+                }
+            };
+            return;
+        }
+
+        applyHeight(cachedVideoAspectRatio);
     }
     
     // 特性轮播功能
@@ -6337,7 +6334,7 @@
         "name": "深圳市途马贸易有限公司",
         "url": "https://softcircle.cn"
     },
-    "screenshot": "./resources/intr1.png",
+    "screenshot": "./resources/intr1.webp",
     "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "4.8",

@@ -94,10 +94,13 @@
         </div>
     </div>
 
-    <!-- 异步加载JavaScript -->
-    <script src="https://cdn.staticfile.org/bootstrap/5.3.2/js/bootstrap.bundle.min.js" defer></script>
-    <script src="https://cdn.staticfile.org/marked/11.1.1/marked.min.js" defer></script>
-    <script src="https://cdn.staticfile.org/highlight.js/11.9.0/highlight.min.js" defer></script>
+    <!-- 异步加载JavaScript（CDN 失败时回退到 bootcdn / jsDelivr，降低华为等机型外链失败概率） -->
+    <script src="https://cdn.staticfile.org/bootstrap/5.3.2/js/bootstrap.bundle.min.js" defer
+        onerror="this.onerror=null;this.src='https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js'"></script>
+    <script src="https://cdn.staticfile.org/marked/11.1.1/marked.min.js" defer
+        onerror="this.onerror=null;this.src='https://cdn.bootcdn.net/ajax/libs/marked/11.1.1/marked.min.js'"></script>
+    <script src="https://cdn.staticfile.org/highlight.js/11.9.0/highlight.min.js" defer
+        onerror="this.onerror=null;this.src='https://cdn.bootcdn.net/ajax/libs/highlight.js/11.9.0/highlight.min.js'"></script>
     <script src="js/app.js" defer></script>
 </body>
 </html>

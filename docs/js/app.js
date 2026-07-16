@@ -1,5 +1,64 @@
 // 文档配置
 let config = { menu: [] };
+let markedConfigured = false;
+
+function configureMarked() {
+    if (markedConfigured || typeof marked === 'undefined') return;
+    marked.use({
+        renderer: {
+            link(href, title, text) {
+                // marked@11: (href, title, text)；兼容后续 token 对象写法
+                if (href && typeof href === 'object') {
+                    title = href.title;
+                    text = href.text;
+                    href = href.href;
+                }
+                if (!href) {
+                    return text || '';
+                }
+                // 仅将站内相对 md 链接转为 hash 导航；mailto/协议链接保持原样
+                const isExternal =
+                    /^(https?:|mailto:|tel:|javascript:)/i.test(href) ||
+                    href.startsWith('#');
+                if (!isExternal) {
+                    const safePath = String(href).replace(/'/g, "\\'");
+                    return `<a href="#${href}" onclick="event.preventDefault(); loadContent('${safePath}');">${text}</a>`;
+                }
+                return `<a href="${href}"${title ? ` title="${title}"` : ''}>${text}</a>`;
+            }
+        }
+    });
+    markedConfigured = true;
+}
+
+function normalizeDocPath(path) {
+    if (!path) return 'quick-start.md';
+    try {
+        path = decodeURIComponent(path);
+    } catch (e) {
+        /* ignore */
+    }
+    return String(path).replace(/^\/+/, '').split('?')[0];
+}
+
+function waitForMarked(timeoutMs = 8000) {
+    return new Promise((resolve, reject) => {
+        if (typeof marked !== 'undefined') {
+            resolve();
+            return;
+        }
+        const start = Date.now();
+        const timer = setInterval(() => {
+            if (typeof marked !== 'undefined') {
+                clearInterval(timer);
+                resolve();
+            } else if (Date.now() - start > timeoutMs) {
+                clearInterval(timer);
+                reject(new Error('Markdown 引擎未加载，请检查网络后重试'));
+            }
+        }, 50);
+    });
+}
 
 // 加载目录配置
 async function loadConfig() {
@@ -73,8 +132,10 @@ function generateMenu(menuItems, parent = document.getElementById('sidebar-menu'
                 // 在移动端视图下收起导航栏
                 if (window.innerWidth < 768) {
                     const sidebar = document.querySelector('.sidebar');
-                    if (sidebar.classList.contains('show')) {
-                        bootstrap.Collapse.getInstance(sidebar).hide();
+                    if (sidebar && sidebar.classList.contains('show') && typeof bootstrap !== 'undefined') {
+                        const collapse = bootstrap.Collapse.getInstance(sidebar);
+                        if (collapse) collapse.hide();
+                        else sidebar.classList.remove('show');
                     }
                 }
             };
@@ -135,24 +196,19 @@ function updatePageNavActive() {
 
 // 加载Markdown内容
 async function loadContent(path) {
+    path = normalizeDocPath(path);
     try {
-        const response = await fetch(`content/${path}`);
-        if (!response.ok) throw new Error('文档加载失败');
+        await waitForMarked();
+        configureMarked();
+
+        const response = await fetch(`content/${path}`, { cache: 'no-cache' });
+        if (!response.ok) throw new Error(`文档加载失败 (${response.status})`);
         
         const markdown = await response.text();
-        // 配置marked以处理相对链接
-        marked.use({
-            renderer: {
-                link(href, title, text) {
-                    if (href && !href.startsWith('http') && !href.startsWith('#')) {
-                        // 处理相对路径链接
-                        return `<a href="#${href}" onclick="event.preventDefault(); loadContent('${href}');">${text}</a>`;
-                    }
-                    return `<a href="${href}"${title ? ` title="${title}"` : ''}>${text}</a>`;
-                }
-            }
-        });
-        
+        if (!markdown || !markdown.trim()) {
+            throw new Error('文档内容为空');
+        }
+
         const html = marked.parse(markdown);
         document.getElementById('content').innerHTML = html;
         
@@ -164,13 +220,21 @@ async function loadContent(path) {
         // 生成页内导航
         generatePageNav();
         
-        // 代码高亮
-        document.querySelectorAll('pre code').forEach((block) => {
-            hljs.highlightBlock(block);
-        });
+        // 代码高亮（可选依赖）
+        if (typeof hljs !== 'undefined') {
+            document.querySelectorAll('pre code').forEach((block) => {
+                if (typeof hljs.highlightElement === 'function') {
+                    hljs.highlightElement(block);
+                } else if (typeof hljs.highlightBlock === 'function') {
+                    hljs.highlightBlock(block);
+                }
+            });
+        }
         
         // 更新URL hash
-        window.location.hash = path;
+        if (window.location.hash.slice(1) !== path) {
+            window.location.hash = path;
+        }
         
         // 滚动到文档顶部
         window.scrollTo({
@@ -181,8 +245,10 @@ async function loadContent(path) {
         // 初始更新导航激活状态
         updatePageNavActive();
     } catch (error) {
-        console.error('加载文档失败:', error);
-        document.getElementById('content').innerHTML = `<div class="alert alert-danger">文档加载失败</div>`;
+        console.error('加载文档失败:', path, error);
+        const message = (error && error.message) ? error.message : '文档加载失败';
+        document.getElementById('content').innerHTML =
+            `<div class="alert alert-danger">${message}</div>`;
     }
 }
 
@@ -195,7 +261,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     generateMenu(config.menu);
     
     // 根据URL hash加载初始内容
-    const initialPath = window.location.hash.slice(1) || 'quick-start.md';
+    const initialPath = normalizeDocPath(window.location.hash.slice(1)) || 'quick-start.md';
     loadContent(initialPath);
     
     // 添加滚动监听

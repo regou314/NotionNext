@@ -34,6 +34,7 @@
     <link rel="preload" href="./resources/txtlogo.png" as="image" fetchpriority="high">
     <link rel="preload" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" as="style">
     <link rel="preload" href="./resources/img/shortcut/shortcut-onestep.webp" as="image">
+    <link rel="preload" href="./resources/img/opensource/softcircle-intro-float.webp" as="image" type="image/webp">
     
     <link rel="icon" href="./resources/app_icon.webp" type="image/webp">
     <link rel="shortcut icon" href="./resources/app_icon.png" type="image/png">
@@ -4925,7 +4926,7 @@
                                             <div class="opensource-media-frame">
                                                 <picture>
                                                     <source type="image/webp" srcset="./resources/img/opensource/softcircle-intro-float.webp">
-                                                    <img src="./resources/img/opensource/softcircle-intro-float.jpg" alt="开源第三方面板：FloatYourApp / FloatYourWeb / FloatYourWidget" loading="lazy" width="810" height="1693" decoding="async">
+                                                    <img src="./resources/img/opensource/softcircle-intro-float.jpg" alt="开源第三方面板：FloatYourApp / FloatYourWeb / FloatYourWidget" width="720" height="1505" decoding="async" fetchpriority="low">
                                                 </picture>
                                             </div>
                                         </div>
@@ -5968,8 +5969,8 @@
             if (videoIframe) videoIframe.style.height = portraitHeight + 'px';
             frame.style.height = portraitHeight + 'px';
 
-            const iw = img.naturalWidth || Number(img.getAttribute('width')) || 810;
-            const ih = img.naturalHeight || Number(img.getAttribute('height')) || 1693;
+            const iw = img.naturalWidth || Number(img.getAttribute('width')) || 720;
+            const ih = img.naturalHeight || Number(img.getAttribute('height')) || 1505;
             const fittedWidth = Math.round(portraitHeight * (iw / ih));
             const maxWidth = root.getBoundingClientRect().width || fittedWidth;
             frame.style.width = Math.min(fittedWidth, Math.round(maxWidth)) + 'px';

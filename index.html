@@ -2580,6 +2580,12 @@
                 0 2px 6px rgba(15, 23, 42, 0.05);
         }
 
+        #tab1 .opensource-media-frame picture {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
         #tab1 .opensource-media-frame img {
             width: 100%;
             height: 100%;
@@ -2598,11 +2604,11 @@
 
             #tab1 .tab1-overview {
                 margin-bottom: 14px;
-                text-align: left;
+                text-align: center;
             }
 
             #tab1 .panel-family {
-                justify-content: flex-start;
+                justify-content: center;
                 gap: 6px;
             }
 
@@ -2629,6 +2635,7 @@
             #tab1 .tab1-meta-left {
                 order: 1;
                 margin: 0;
+                justify-content: center;
             }
 
             #tab1 .tab1-media-left {
@@ -2639,6 +2646,7 @@
             #tab1 .tab1-meta-right {
                 order: 3;
                 margin-top: 6px;
+                justify-content: center;
             }
 
             #tab1 .tab1-media-right {
@@ -2649,14 +2657,14 @@
 
             #tab1 .tab1-video-caption {
                 max-width: none;
-                align-items: flex-start;
-                text-align: left;
+                align-items: center;
+                text-align: center;
                 gap: 4px;
             }
 
             #tab1 .tab1-video-caption-label,
             #tab1 .tab1-video-caption-text {
-                text-align: left;
+                text-align: center;
             }
 
             #tab1 .tab1-video-frame {
@@ -2666,12 +2674,14 @@
 
             #tab1 .opensource-header {
                 gap: 5px;
+                align-items: center;
             }
 
             #tab1 .opensource-title {
                 flex-wrap: wrap;
-                justify-content: flex-start;
+                justify-content: center;
                 white-space: normal;
+                text-align: center;
                 row-gap: 2px;
                 column-gap: 0;
             }
@@ -2679,6 +2689,7 @@
             #tab1 .opensource-eyebrow {
                 white-space: normal;
                 font-size: 14px;
+                text-align: center;
             }
 
             #tab1 .opensource-title-sep {
@@ -2694,6 +2705,7 @@
             #tab1 .opensource-link-note {
                 font-size: 12px;
                 line-height: 1.55;
+                text-align: center;
             }
 
             #tab1 .opensource-media {
@@ -4911,7 +4923,10 @@
                                     <div class="tab1-media-right">
                                         <div class="opensource-media" id="opensourceMedia" aria-label="开源第三方面板展示">
                                             <div class="opensource-media-frame">
-                                                <img src="./resources/img/opensource/softcircle-intro-float.jpg" alt="开源第三方面板：FloatYourApp / FloatYourWeb / FloatYourWidget" loading="lazy" width="540" height="1130">
+                                                <picture>
+                                                    <source type="image/webp" srcset="./resources/img/opensource/softcircle-intro-float.webp">
+                                                    <img src="./resources/img/opensource/softcircle-intro-float.jpg" alt="开源第三方面板：FloatYourApp / FloatYourWeb / FloatYourWidget" loading="lazy" width="810" height="1693" decoding="async">
+                                                </picture>
                                             </div>
                                         </div>
                                     </div>
@@ -5953,8 +5968,8 @@
             if (videoIframe) videoIframe.style.height = portraitHeight + 'px';
             frame.style.height = portraitHeight + 'px';
 
-            const iw = img.naturalWidth || Number(img.getAttribute('width')) || 540;
-            const ih = img.naturalHeight || Number(img.getAttribute('height')) || 1130;
+            const iw = img.naturalWidth || Number(img.getAttribute('width')) || 810;
+            const ih = img.naturalHeight || Number(img.getAttribute('height')) || 1693;
             const fittedWidth = Math.round(portraitHeight * (iw / ih));
             const maxWidth = root.getBoundingClientRect().width || fittedWidth;
             frame.style.width = Math.min(fittedWidth, Math.round(maxWidth)) + 'px';
